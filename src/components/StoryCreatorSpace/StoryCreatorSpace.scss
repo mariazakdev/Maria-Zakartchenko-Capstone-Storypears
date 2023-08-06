@@ -2,8 +2,10 @@
     border: burlywood 4px solid;
     background-color: beige;
 &__thread{
-    border: black 2px solid;
-    height: 20rem;
+    p{
+        background-color: aliceblue;
+    }
+
 }
 &__add{
     display: flex;

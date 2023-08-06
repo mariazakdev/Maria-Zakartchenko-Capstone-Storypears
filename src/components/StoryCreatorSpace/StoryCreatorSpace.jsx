@@ -18,9 +18,12 @@ function StoryCreatorSpace (){
  
     return (
       <div className="storywriter">
+        <p>Working on short stories in pairs area</p>
         <section className='storywriter__thread'>
             <h2>Placeholder Title </h2>
-            <p></p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed libero urna, elementum sed erat at, porttitor congue justo. Fusce convallis varius maximus. Etiam non mauris ac dolor elementum pellentesque. Etiam vel venenatis tellus. Ut convallis volutpat magna, id semper odio finibus in. Nunc eu euismod felis. Integer venenatis, diam vel commodo vestibulum, augue odio scelerisque nulla, posuere pretium purus magna id erat. Vestibulum cursus arcu a efficitur facilisis. Quisque semper, nibh a tincidunt efficitur, urna nisl pretium enim, non gravida sapien ipsum iaculis diam. Curabitur at molestie dolor, vitae dapibus neque. Pellentesque quis purus eu velit ultrices finibus. Mauris rutrum justo non mauris scelerisque tincidunt. Nullam ante lorem, condimentum eget dolor eu, ultrices rhoncus diam. Donec at mattis libero. Nullam vel elit odio.
+
+Aenean vehicula sit amet leo ut maximus. Nam nibh lectus, accumsan et ex a, rhoncus cursus orci. Sed non nunc sollicitudin, pretium metus sit amet, iaculis quam. Quisque in massa velit. Etiam dui urna, mattis eu accumsan eget, scelerisque non elit. Nunc eget leo at magna pulvinar euismod id non risus. Integer tempor, enim eget ultrices fringilla, neque magna fermentum justo, quis elementum elit ipsum ut ex. Cras varius cursus diam, vitae blandit elit consectetur vulputate.</p>
         </section>
         <section className='storywriter__add'>
             <h2>Start a story seed</h2>
