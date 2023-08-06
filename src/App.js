@@ -1,20 +1,28 @@
 import './App.css';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
-import StoryStarter from './components/StoryStarter/StoryStarter';
-import StoryCreatorSpace from './components/StoryCreatorSpace/StoryCreatorSpace';
-import Profile from './components/Profile/Profile';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route,} from 'react-router-dom';
+import StoryListPage from './pages/StoryListPage/StoryListPage';
+import StoryPromptPage from './pages/StoryPromptPage/StoryPromptPage';
+import StoryWriterPage from './pages/StoryWriterPage/StoryWriterPage';
+import ProfilePage from './pages/ProfilePage/ProfilePage';
+import StoryPage from './pages/StoryPage/StoryPage';
+import HomePage from './pages/HomePage/HomePage';
 
 function App() {
   return (
-    <div className="App">
- <Header />
- <StoryStarter />
- <StoryCreatorSpace />
- <Profile/>
- <Footer />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/story/prompt" element={<StoryPromptPage />} />
+        <Route path="/story/new" element={<StoryWriterPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/story/:id" element={<StoryPage />} />
+        <Route path="/stories" element={<StoryListPage />} />
+      </Routes>
+    </Router>
   );
 }
+
 
 export default App;
