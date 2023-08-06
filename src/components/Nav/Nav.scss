@@ -1,10 +1,22 @@
-
-.nav{
-    &-list{
-          display: flex;
-          text-decoration: none;
-          list-style: none;
+.nav {
+    height:3rem;
+    &-list {
+      display: flex;
+      height: 2rem;
+      text-decoration: none;
+      list-style: none;
+      font-weight: bold;
+      justify-content: space-between; 
+      align-items: center; 
+      padding: 0; 
+      margin: 0;
+  
+      li {
+        margin-left: 1rem; 
+          padding: 0.5rem 1rem;
+        text-decoration: none;          
+          cursor: pointer;
+      }
     }
     background-color: aliceblue;
-  
-}
+  }

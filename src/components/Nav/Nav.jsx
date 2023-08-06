@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const NavBar = () => {
   return (
     <nav className="nav">
-      <ul onCanPlay="nav-list">
+      <ul className="nav-list">
         <li>
           <Link to="/">Home</Link>
         </li>
