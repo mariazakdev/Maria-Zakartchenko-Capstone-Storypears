@@ -9,11 +9,11 @@ function StoryListPage() {
   const [stories, setStories] = useState([]);
   const apiURL = process.env.REACT_APP_API_URL;
   useEffect(() => {
+
     axios
-      .get(`${apiURL}/stories`)
+      .get(`http://localhost:8080/stories`)
       .then(response => {
         setStories(response.data);
-        console.log("where is data", response.data);
       })
       .catch(error => {
         console.error('Error fetching stories:', error);
@@ -23,7 +23,7 @@ console.log(stories);
   return (
     <div>
  <Header />
- <StoryList stories={stories} /> 
+ {stories.length > 0 ? <StoryList stories={stories} /> : <p>Loading...</p>}
  <Footer />
     </div>
   );
