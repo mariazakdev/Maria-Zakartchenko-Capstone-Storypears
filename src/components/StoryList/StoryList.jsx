@@ -1,30 +1,20 @@
+import './StoryList.scss';
 import Avatar from "../Avatar/Avatar";
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-function StoryList() {
-  const [storyTitles, setStorytitles] = useState([]);
 
-  useEffect(() => {
-    fetchStoryTitles();
-  }, []);
-
-  async function fetchStoryTitles() {
-    try {
-      const response = await axios.get('https://shortstories-api.onrender.com/stories');
-      setStorytitles(response.data);
-    } catch (error) {
-      console.error('Error fetching stories:', error);
-    }
-  }
-
+function StoryList({stories}) {
+ 
   return (
     <div>
       <h2>The Pear Tree Stories</h2>
-      <ul>
-        {storyTitles.map(story => (
-          <li key={story._id}>
-            {story.title} <span>with <Avatar className='avatar__image-sm' /></span>
+      <ul className="story-list">
+      {stories && stories.map(story => (
+          <li className="story-list__item" key={story.id}>
+            <Link to={`/story/${story.id}`}>
+              <p>{story.title}</p>
+            </Link> 
+            <Avatar className='avatar__image-sm' />
           </li>
         ))}
       </ul>

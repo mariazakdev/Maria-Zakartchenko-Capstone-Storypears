@@ -17,7 +17,7 @@ function App() {
         <Route path="/story/prompt" element={<StoryPromptPage />} />
         <Route path="/story/new" element={<StoryWriterPage />} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/story" element={<StoryPage />} />
+        <Route path="/story/:id" element={<StoryPage />} /> 
         <Route path="/stories" element={<StoryListPage />} />
       </Routes>
     </Router>
