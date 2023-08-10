@@ -1,47 +1,51 @@
 import "./ProfileAdd.scss";
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import { v4 as uuidv4 } from "uuid";
+
 
 function ProfileAdd() {
+const navigate = useNavigate();
 
-  const history = useHistory();
-  //Inputs
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-    password2: "",
-    email: "",
-    first_name: "",
-    last_name: "",
-    pen_first_name: "",
-    pen_last_name: "",
-    bio: "",
+const [formData, setFormData] = useState({
+  username: "",
+  password: "",
+  password2: "",
+  email: "",
+  first_name: "",
+  last_name: "",
+  pen_first_name: "",
+  pen_last_name: "",
+  bio: "",
+});
+
+// Updating forms
+const handleInputChange = (event) => {
+  const { name, value } = event.target;
+  setFormData({
+    ...formData,
+    [name]: value,
   });
-  //Updating forms
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-  //Submit form
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+};
 
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/users",
-        formData
-      );
-      console.log("Profile created successfully:", response.data);
-      history.push(`/profile/${response.data.id}`);
-    } catch (error) {
-      console.error("Error creating profile:", error);
-    }
-  };
+// Submit form
+const handleSubmit = async (event) => {
+  event.preventDefault();
+
+  try {
+    const newId = uuidv4(); 
+    const response = await axios.post(
+      "http://localhost:8080/users",
+      { ...formData, id: newId } 
+    );
+    console.log("Profile created successfully:", response.data);
+    navigate(`/profile/${response.data.id}`);
+  } catch (error) {
+    console.error("Error creating profile:", error);
+  }
+};
 
   return (
     <div className="create-profile">
@@ -56,7 +60,7 @@ function ProfileAdd() {
           method="post"
           onSubmit={handleSubmit}
         >
-          <label for="username">Username:</label>
+          <label htmlFor="username">Username:</label>
           <input
             type="text"
             id="username"
@@ -68,7 +72,7 @@ function ProfileAdd() {
           />
           <ErrorMessage />
 
-          <label for="password">Password:</label>
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
             id="password"
@@ -79,7 +83,7 @@ function ProfileAdd() {
             required
           />
             <ErrorMessage />
-          <label for="password2">Password:</label>
+          <label htmlFor="password2">Password:</label>
           <input
               type="password"
               id="password2"
@@ -90,7 +94,7 @@ function ProfileAdd() {
               required
           />
               <ErrorMessage />
-          <label for="email">Email:</label>
+          <label htmlFor="email">Email:</label>
           <input
             type="email"
             id="email"
@@ -101,7 +105,7 @@ function ProfileAdd() {
             required
           />
               <ErrorMessage />
-          <label for="first_name">First Name:</label>
+          <label htmlFor="first_name">First Name:</label>
           <input
             type="text"
             id="first_name"
@@ -112,7 +116,7 @@ function ProfileAdd() {
             required
           />
               <ErrorMessage />
-          <label for="last_name">Last Name:</label>
+          <label htmlFor="last_name">Last Name:</label>
           <input
             type="text"
             id="last_name"
@@ -123,7 +127,7 @@ function ProfileAdd() {
             required
           />
               <ErrorMessage />
-          <label for="pen_first_name">Pen First Name:</label>
+          <label htmlFor="pen_first_name">Pen First Name:</label>
           <input
             type="text"
             id="pen_first_name"
@@ -134,7 +138,7 @@ function ProfileAdd() {
             required
           />
               <ErrorMessage />
-          <label for="pen_last_name">Pen Last Name:</label>
+          <label htmlFor="pen_last_name">Pen Last Name:</label>
           <input
             type="text"
             id="pen_last_name"
@@ -145,7 +149,7 @@ function ProfileAdd() {
             required
           />
 
-          <label for="bio">Bio:</label>
+          <label htmlFor="bio">Bio:</label>
           <div className="form__count">
                           <textarea
                             id="bio"

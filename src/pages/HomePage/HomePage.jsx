@@ -8,6 +8,7 @@ function HomePage(){
         <Header/>
         <h1>Welcome to Story Pears</h1>
         <h2>A fun space to write stories in pairs</h2>
+        <p>For building of the site, data is not encrypted, currently exists to test backend</p>
         <StoryList/>
         <Footer/>
         </>
