@@ -5,47 +5,54 @@ import axios from "axios";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { v4 as uuidv4 } from "uuid";
 
-
 function ProfileAdd() {
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
-const [formData, setFormData] = useState({
-  username: "",
-  password: "",
-  password2: "",
-  email: "",
-  first_name: "",
-  last_name: "",
-  pen_first_name: "",
-  pen_last_name: "",
-  bio: "",
-});
-
-// Updating forms
-const handleInputChange = (event) => {
-  const { name, value } = event.target;
-  setFormData({
-    ...formData,
-    [name]: value,
+  const [bioCharacterCount, setBioCharacterCount] = useState(0);
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    password2: "",
+    email: "",
+    first_name: "",
+    last_name: "",
+    pen_first_name: "",
+    pen_last_name: "",
+    bio: "",
   });
-};
 
-// Submit form
-const handleSubmit = async (event) => {
-  event.preventDefault();
+  // Updating forms
+  const handleInputChange = (event) => {
+    // All inputs
+    const { name, value } = event.target;
 
-  try {
-    const newId = uuidv4(); 
-    const response = await axios.post(
-      "http://localhost:8080/users",
-      { ...formData, id: newId } 
-    );
-    console.log("Profile created successfully:", response.data);
-    navigate(`/profile/${response.data.id}`);
-  } catch (error) {
-    console.error("Error creating profile:", error);
-  }
-};
+    // Bio input counter
+    if (name === "bio") {
+      setBioCharacterCount(value.length);
+    }
+ 
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  // Submit form
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const newId = uuidv4();
+      const response = await axios.post("http://localhost:8080/users", {
+        ...formData,
+        id: newId,
+      });
+      console.log("Profile created successfully:", response.data);
+      navigate(`/profile/${response.data.id}`);
+    } catch (error) {
+      console.error("Error creating profile:", error);
+    }
+  };
 
   return (
     <div className="create-profile">
@@ -82,18 +89,18 @@ const handleSubmit = async (event) => {
             placeholder="Create a password"
             required
           />
-            <ErrorMessage />
+          <ErrorMessage />
           <label htmlFor="password2">Password:</label>
           <input
-              type="password"
-              id="password2"
-              name="password2"
-              value={formData.password2}
-              onChange={handleInputChange}
-              placeholder="Repeat a password"
-              required
+            type="password"
+            id="password2"
+            name="password2"
+            value={formData.password2}
+            onChange={handleInputChange}
+            placeholder="Repeat a password"
+            required
           />
-              <ErrorMessage />
+          <ErrorMessage />
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -104,7 +111,7 @@ const handleSubmit = async (event) => {
             placeholder="Email for login"
             required
           />
-              <ErrorMessage />
+          <ErrorMessage />
           <label htmlFor="first_name">First Name:</label>
           <input
             type="text"
@@ -115,7 +122,7 @@ const handleSubmit = async (event) => {
             placeholder="Not visible on site"
             required
           />
-              <ErrorMessage />
+          <ErrorMessage />
           <label htmlFor="last_name">Last Name:</label>
           <input
             type="text"
@@ -126,24 +133,24 @@ const handleSubmit = async (event) => {
             placeholder="Not visible on site"
             required
           />
-              <ErrorMessage />
+          <ErrorMessage />
           <label htmlFor="pen_first_name">Pen First Name:</label>
           <input
             type="text"
             id="pen_first_name"
             name="pen_first_name"
-            value={formData. pen_first_name}
+            value={formData.pen_first_name}
             onChange={handleInputChange}
             placeholder="Name to be used on site"
             required
           />
-              <ErrorMessage />
+          <ErrorMessage />
           <label htmlFor="pen_last_name">Pen Last Name:</label>
           <input
             type="text"
             id="pen_last_name"
             name="pen_last_name"
-            value={formData. pen_last_name}
+            value={formData.pen_last_name}
             onChange={handleInputChange}
             placeholder="Last name optional"
             required
@@ -151,24 +158,33 @@ const handleSubmit = async (event) => {
 
           <label htmlFor="bio">Bio:</label>
           <div className="form__count">
-                          <textarea
-                            id="bio"
-                            name="bio"
-                            value={formData.bio}
-                            onChange={handleInputChange}
-                            placeholder="Tell us something about yourself"
-                            rows="4"
-                            cols="50"
-                            maxlength="1000"
-                            autoFocus
-                          />
-          <div className="form__count-num">
-           <span id="current">0</span>
-           <span id="maximum">/500</span>
+            <textarea
+              id="bio"
+              name="bio"
+              value={formData.bio}
+              onChange={handleInputChange}
+              placeholder="Tell us something about yourself"
+              rows="4"
+              cols="50"
+              maxLength={500}
+              autoFocus
+            />
+            <div className="form__count-num">
+              <span 
+                id="current"
+                className = {bioCharacterCount >= 400 ? "form__count-num--warning" : ""}
+                >
+                {bioCharacterCount}
+              </span>
+              <span id="maximum"> / 500</span>
+            </div>
           </div>
-             </div>
-            <ErrorMessage />
-          <input className="form__button" type="submit" value="Create Profile" />
+          <ErrorMessage />
+          <input
+            className ="form__button"
+            type="submit"
+            value="Create Profile"
+          />
         </form>
       </section>
     </div>

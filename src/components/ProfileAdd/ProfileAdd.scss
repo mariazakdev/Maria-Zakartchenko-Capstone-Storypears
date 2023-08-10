@@ -58,6 +58,10 @@
           right:.5rem;
           bottom: -0.5em;
           font-size: 0.7rem;
+          &--warning{
+            color: lightpink;
+            font-weight: bold;
+          }
         }
       }
       .form__button{
