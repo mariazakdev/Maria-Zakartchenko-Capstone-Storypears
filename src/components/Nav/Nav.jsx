@@ -21,6 +21,9 @@ const NavBar = () => {
         <li>
           <Link to="/story">Story</Link>
         </li>
+        <li>
+          <Link to="/create-profile">Create Profile</Link>
+        </li>
       </ul>
     </nav>
   );
