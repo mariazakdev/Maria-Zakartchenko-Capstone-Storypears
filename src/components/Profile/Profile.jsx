@@ -2,24 +2,22 @@ import React from 'react';
 import "./Profile.scss";
 import Avatar from "../Avatar/Avatar";
 
-function Profile() {
+function Profile({ userData, setUserData}) {
+  if (!userData) {
+    return <div>Loading this profile ...</div>;
+}
   return (
     <div className="profile">
-      <h2>My name</h2>
-      <Avatar className='avatar__image-med' />
+      <h2>Writer Profile</h2>
       <div>
-        <h3>
-          Bio:</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
-            elementum nec sem quis finibus. Sed lorem magna, placerat vitae
-            consequat in, blandit a odio. Maecenas condimentum eros ac leo
-            lacinia, eget consectetur quam fermentum. Aliquam nec odio dui.
-            Etiam nec massa id est dignissim rutrum consectetur a lorem. Mauris
-            tristique bibendum ligula, eu malesuada orci dignissim ut. Donec
-            tempor lectus tempor nulla ultrices pharetra.
-          </p>
-        
+        <h3>{userData && userData.pen_first_name} {userData.pen_last_name}</h3>
+        <Avatar className='avatar__image-med' />
+      </div>
+      <div>
+        <h3>Bio:</h3>
+        <p>{userData.bio}</p>
+        <h3>Links:</h3>
+        <p>{userData.links}</p>
       </div>
       <div>
         <h3>Pear Tree</h3>
@@ -27,7 +25,6 @@ function Profile() {
         <p>Placeholder story2<span>with <Avatar className='avatar__image-sm' /></span> </p>
         <p>Placeholder story3<span>with <Avatar className='avatar__image-sm' /></span> </p>
       </div>
-    
     </div>
   );
 }

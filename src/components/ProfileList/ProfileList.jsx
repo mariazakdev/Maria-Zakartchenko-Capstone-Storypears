@@ -1,4 +1,6 @@
 import Avatar from "../Avatar/Avatar";
+import { Link } from "react-router-dom"
+
 
 function ProfileList({profileData}){
     return(
@@ -7,10 +9,10 @@ function ProfileList({profileData}){
         <ul>
           {profileData.map(profile => (
             <li key={profile.id}>
-                <link to={`/profile/${profile.id}`}>
+                <Link to={`/profile/${profile.id}`}>
                 <Avatar className="avatar__image-bg"/>
               <p>{profile.pen_first_name}{profile.pen_last_name}</p>
-              </link>
+              </Link>
             </li>
           ))}
         </ul>
