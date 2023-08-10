@@ -1,8 +1,12 @@
 import "./ProfileAdd.scss";
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 function ProfileAdd() {
+
+  const history = useHistory();
   //Inputs
   const [formData, setFormData] = useState({
     username: "",
@@ -33,6 +37,7 @@ function ProfileAdd() {
         formData
       );
       console.log("Profile created successfully:", response.data);
+      history.push(`/profile/${response.data.id}`);
     } catch (error) {
       console.error("Error creating profile:", error);
     }
@@ -61,6 +66,7 @@ function ProfileAdd() {
             placeholder="Name for login"
             required
           />
+          <ErrorMessage />
 
           <label for="password">Password:</label>
           <input
@@ -72,7 +78,7 @@ function ProfileAdd() {
             placeholder="Create a password"
             required
           />
-
+            <ErrorMessage />
           <label for="password2">Password:</label>
           <input
               type="password"
@@ -83,7 +89,7 @@ function ProfileAdd() {
               placeholder="Repeat a password"
               required
           />
-
+              <ErrorMessage />
           <label for="email">Email:</label>
           <input
             type="email"
@@ -94,7 +100,7 @@ function ProfileAdd() {
             placeholder="Email for login"
             required
           />
-
+              <ErrorMessage />
           <label for="first_name">First Name:</label>
           <input
             type="text"
@@ -105,7 +111,7 @@ function ProfileAdd() {
             placeholder="Not visible on site"
             required
           />
-
+              <ErrorMessage />
           <label for="last_name">Last Name:</label>
           <input
             type="text"
@@ -116,7 +122,7 @@ function ProfileAdd() {
             placeholder="Not visible on site"
             required
           />
-
+              <ErrorMessage />
           <label for="pen_first_name">Pen First Name:</label>
           <input
             type="text"
@@ -127,7 +133,7 @@ function ProfileAdd() {
             placeholder="Name to be used on site"
             required
           />
-
+              <ErrorMessage />
           <label for="pen_last_name">Pen Last Name:</label>
           <input
             type="text"
@@ -154,10 +160,10 @@ function ProfileAdd() {
                           />
           <div className="form__count-num">
            <span id="current">0</span>
-           <span id="maximum">/ 1000</span>
+           <span id="maximum">/500</span>
           </div>
              </div>
-          
+            <ErrorMessage />
           <input className="form__button" type="submit" value="Create Profile" />
         </form>
       </section>

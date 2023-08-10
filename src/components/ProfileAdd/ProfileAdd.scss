@@ -1,5 +1,4 @@
 .create-profile {
-  border: red solid 2px;
   width: 30rem;
   display: flex;
   flex-direction: column;
@@ -56,7 +55,6 @@
         position: relative;
         &-num{
           position: absolute;
-          border: red solid 2px;
           right:.5rem;
           bottom: -0.5em;
           font-size: 0.7rem;

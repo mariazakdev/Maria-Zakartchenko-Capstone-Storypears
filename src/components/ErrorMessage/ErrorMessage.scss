@@ -1,0 +1,17 @@
+.error {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+
+  &__icon {
+    height: 1rem;
+    padding-right: 0.25rem;
+  }
+
+  &__msg {
+    color: lightpink;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+  }
+}
