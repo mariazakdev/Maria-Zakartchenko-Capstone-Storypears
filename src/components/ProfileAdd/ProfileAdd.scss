@@ -1,4 +1,6 @@
 .create-profile {
+  border: red solid 2px;
+  width: 30rem;
   display: flex;
   flex-direction: column;
 
@@ -28,18 +30,19 @@
         padding: 10px;
         margin-bottom: 10px;
         border: 1px solid #ccc;
-        border-radius: 4px;
-        ::placeholder {
-          color: #999;
-        }
-      }
-
-      textarea {
+        border-radius: 4px; 
         font-family: inherit;
         font-size: .9rem;
         resize: none;
+        ::placeholder {
+          color: #999;
+        }
+         &:focus {
+          outline: none;
+          border: 1px solid darken(#ddd, 5%);
+          box-shadow: inset 0 0 0.5rem darken(#ddd, 5%);
+        }
       }
-
       input[type="submit"] {
         background-color: #c4c3a7;
         color: white;
@@ -48,6 +51,19 @@
         padding: 10px;
         cursor: pointer;
         font-weight: bold;
+      }
+      .form__count{
+        position: relative;
+        &-num{
+          position: absolute;
+          border: red solid 2px;
+          right:.5rem;
+          bottom: -0.5em;
+          font-size: 0.7rem;
+        }
+      }
+      .form__button{
+        margin-top: 1rem;
       }
     }
   }
