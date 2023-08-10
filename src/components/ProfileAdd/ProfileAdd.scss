@@ -50,6 +50,13 @@
         padding: 10px;
         cursor: pointer;
         font-weight: bold;
+        &:hover, &:focus {
+          background: rgb(238,174,202);
+          background: linear-gradient(90deg, rgba(138,217,223,1) 21%, rgba(250,236,123,0.20772058823529416) 55%, rgba(224,200,150,1) 72%);          
+          transition: background-color .5s;
+          color: gray;
+          transition: color 1s;
+        }
       }
       .form__count{
         position: relative;
