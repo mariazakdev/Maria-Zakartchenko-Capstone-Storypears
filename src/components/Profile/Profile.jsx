@@ -4,7 +4,7 @@ import Avatar from "../Avatar/Avatar";
 
 function Profile({ userData, setUserData}) {
   if (!userData) {
-    return <div>Loading this profile ...</div>;
+    return <div>🤷‍♀️ Couldn't find the data...</div>;
 }
   return (
     <div className="profile">

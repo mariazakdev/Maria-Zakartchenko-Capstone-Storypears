@@ -5,23 +5,23 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Profile from '../../components/Profile/Profile';
 
-function ProfilePage({match}) {
+function ProfilePage() {
     const [userData, setUserData] = useState(null);
     const apiURL = process.env.REACT_APP_API_URL;
-    const { id: userId } = useParams();
+    const {id} = useParams();
   
     useEffect(() => {
-      axios
-        .get(`http://localhost:8080/users/${userId}`)
-        .then(response => {
+      const fetchUserData = async () => {
+        try {
+          const response = await axios.get(`http://localhost:8080/users/${id}`);
           setUserData(response.data);
-          console.log(response.data);
-        })
-        .catch(error => {
-          console.error('Error fetching story:', error);
-        });
-    }, [apiURL, userId]);
+        } catch (error) {
+          console.error("Error fetching profile data:", error);
+        }
+      };
   
+      fetchUserData();
+    }, [id]);
     return (
         <div className="App">
             <Header />

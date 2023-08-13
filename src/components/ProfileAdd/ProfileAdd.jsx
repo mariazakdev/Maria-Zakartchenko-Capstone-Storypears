@@ -7,9 +7,10 @@ import { v4 as uuidv4 } from "uuid";
 
 function ProfileAdd() {
   const navigate = useNavigate();
-
+  const newId = uuidv4();
   const [bioCharacterCount, setBioCharacterCount] = useState(0);
   const [formData, setFormData] = useState({
+    id: newId,
     username: "",
     password: "",
     password2: "",
@@ -48,7 +49,7 @@ function ProfileAdd() {
         id: newId,
       });
       console.log("Profile created successfully:", response.data);
-      navigate(`/profile/${response.data.id}`);
+      navigate(`/profile/${newId}`);
     } catch (error) {
       console.error("Error creating profile:", error);
     }
@@ -77,7 +78,7 @@ function ProfileAdd() {
             placeholder="Name for login"
             required
           />
-          <ErrorMessage />
+          {/* <ErrorMessage /> */}
 
           <label htmlFor="password">Password:</label>
           <input
@@ -89,7 +90,7 @@ function ProfileAdd() {
             placeholder="Create a password"
             required
           />
-          <ErrorMessage />
+          {/* <ErrorMessage /> */}
           <label htmlFor="password2">Password:</label>
           <input
             type="password"
@@ -100,7 +101,7 @@ function ProfileAdd() {
             placeholder="Repeat a password"
             required
           />
-          <ErrorMessage />
+          {/* <ErrorMessage /> */}
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -111,7 +112,7 @@ function ProfileAdd() {
             placeholder="Email for login"
             required
           />
-          <ErrorMessage />
+          {/* <ErrorMessage /> */}
           <label htmlFor="first_name">First Name:</label>
           <input
             type="text"
@@ -122,7 +123,7 @@ function ProfileAdd() {
             placeholder="Not visible on site"
             required
           />
-          <ErrorMessage />
+          {/* <ErrorMessage /> */}
           <label htmlFor="last_name">Last Name:</label>
           <input
             type="text"
@@ -133,7 +134,7 @@ function ProfileAdd() {
             placeholder="Not visible on site"
             required
           />
-          <ErrorMessage />
+          {/* <ErrorMessage /> */}
           <label htmlFor="pen_first_name">Pen First Name:</label>
           <input
             type="text"
@@ -144,7 +145,7 @@ function ProfileAdd() {
             placeholder="Name to be used on site"
             required
           />
-          <ErrorMessage />
+          {/* <ErrorMessage /> */}
           <label htmlFor="pen_last_name">Pen Last Name:</label>
           <input
             type="text"
@@ -179,7 +180,7 @@ function ProfileAdd() {
               <span id="maximum"> / 500</span>
             </div>
           </div>
-          <ErrorMessage />
+          {/* <ErrorMessage /> */}
           <input
             className ="form__button"
             type="submit"
