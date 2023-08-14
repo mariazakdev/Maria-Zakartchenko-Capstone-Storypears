@@ -18,12 +18,13 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/story/prompt" element={<StoryPromptPage />} />
         <Route path="/story/new" element={<StoryWriterPage />} />
+        <Route path="/story/:id" element={<StoryWriterPage />} />
+
         <Route path="/profile" element={<ProfileListPage />} />
         <Route path="/profile/:id" element={<ProfilePage />} />
         <Route path="/story/:id" element={<StoryPage />} /> 
         <Route path="/stories" element={<StoryListPage />} />
         <Route path="/create-profile" element={<ProfileAddPage />} />
-
       </Routes>
     </Router>
   );

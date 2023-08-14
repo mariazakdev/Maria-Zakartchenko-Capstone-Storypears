@@ -7,13 +7,18 @@ function StoryStarter({ prompts, feelings }) {
   const [activeContent, setActiveContent] = useState("prompts"); // Prompts is open by default
   const navigate = useNavigate();
 
-  const handleItemClick = (id) => {
-    const selectedItemData = getDataById(id);
-    navigate("/story/new", { state: { data: selectedItemData } });
+  const handleItemClick = (id, type) => {
+    const selectedItemData = getDataById(id, type);
+    navigate(`/story/${id}`, { state: { data: selectedItemData } });
   };
 
-  const getDataById = (id) => {
-    return prompts.find((prompt) => prompt.id === id) || feelings.find((feeling) => feeling.id === id);
+  const getDataById = (id, type) => {
+    if (type === "prompts") {
+      return prompts.find((prompt) => prompt.id === id);
+    } else if (type === "feelings") {
+      return feelings.find((feeling) => feeling.id === id);
+    }
+    return null;
   };
 
   return (

@@ -6,12 +6,13 @@ import StoryCreatorSpace from '../../components/StoryCreatorSpace/StoryCreatorSp
 
 function StoryWriterPage() {
   const location = useLocation();
-  const passedData = JSON.stringify(location.state?.data) || '';
+  const passedData = location.state?.data || {};
+  const content = passedData.sentence || passedData.expression || '';
 
   return (
     <div className="App">
       <Header />
-      <StoryCreatorSpace passedData={passedData} />
+      <StoryCreatorSpace passedData={content} />
       <Footer />
     </div>
   );

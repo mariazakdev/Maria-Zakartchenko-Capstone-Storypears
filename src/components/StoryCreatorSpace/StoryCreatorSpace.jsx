@@ -17,7 +17,7 @@ import React, { useState } from "react";
 
 // if data from prompts, load it.if no data leave empty
 function StoryCreatorSpace({ passedData }) {
-  const [storyContent, setStoryContent] = useState(passedData || '');
+  const [storyContent, setStoryContent] = useState(passedData);
 
   const handleInputChange = (event) => {
     setStoryContent(event.target.value);
@@ -25,7 +25,6 @@ function StoryCreatorSpace({ passedData }) {
 
   return (
     <div>
- 
       <textarea
         rows="10"
         cols="50"
