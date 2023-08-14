@@ -23,6 +23,11 @@ const NavBar = () => {
         </li>
         <li>
           <Link to="/create-profile">Create Profile</Link>
+
+        </li>
+        <li>
+          <Link to="/story/new">Writing space</Link>
+          
         </li>
       </ul>
     </nav>
