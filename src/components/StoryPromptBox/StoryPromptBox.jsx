@@ -1,4 +1,5 @@
 import "./StoryPromptBox.scss";
+import axios from "axios";
 
 // Backend will fill each box with a String
 // purpose: to get inspiration to start a story
@@ -9,6 +10,8 @@ import "./StoryPromptBox.scss";
 //                add new box functionality. Authentication - person with profile 
 
 function StoryPromptBox(){
+
+
 return(
 <div className="story-prompt">
     <section>
