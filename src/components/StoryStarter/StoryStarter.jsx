@@ -12,13 +12,8 @@ function StoryStarter({ prompts, feelings }) {
     navigate(`/story/${id}`, { state: { data: selectedItemData } });
   };
 
-  const getDataById = (id, type) => {
-    if (type === "prompts") {
-      return prompts.find((prompt) => prompt.id === id);
-    } else if (type === "feelings") {
-      return feelings.find((feeling) => feeling.id === id);
-    }
-    return null;
+  const getDataById = (id) => {
+    return prompts.find((prompt) => prompt.id === id) || feelings.find((feeling) => feeling.id === id);
   };
 
   return (
