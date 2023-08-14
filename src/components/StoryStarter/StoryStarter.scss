@@ -1,4 +1,114 @@
-.story-starter{
-    border: lightblue 4px solid;
-    background-color: rgb(101, 192, 192); // Temp color to see blocks
-}
+/* StoryStarter.scss */
+
+.story-starter {
+    padding: 20px;
+    
+    p {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    
+    &__heading {
+      h2 {
+        font-size: 24px;
+        margin-bottom: 5px;
+      }
+      
+      p {
+        font-size: 14px;
+        color: #888;
+      }
+    }
+    
+    &__container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+      
+      &--toggler {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 20px;
+        
+        button {
+          background-color: #faf2d6;
+          color: gray;
+          width:50%;
+          border: none;
+          padding: 8px 16px;
+          margin: 0.5rem;
+          border-radius: 3px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          
+          &:hover {
+            background-color: #c4d351;
+          }
+        }
+      }
+      
+      &--content {
+        width: 100%;
+        
+        h3 {
+          font-size: 20px;
+          margin-bottom: 10px;
+        }
+        
+        ul {
+          list-style: none;
+          padding-left: 0;
+          
+          li {
+            background-color: white;
+            padding: 2rem 0.5rem ;
+            border-radius: .25rem;
+            margin-bottom: 10px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, 
+                        rgba(0, 0, 0, 0.12) 0px -12px 30px,
+                        rgba(0, 0, 0, 0.12) 0px 4px 6px, 
+                        rgba(0, 0, 0, 0.17) 0px 12px 13px,
+                        rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            
+            &:hover {
+              transform: translateY(-4px);
+              box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            }
+          }
+        }
+      }
+    }
+    
+    &-form {
+      margin-top: 20px;
+      
+      form {
+        label {
+          display: block;
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+        
+        textarea {
+          width: 100%;
+          padding: 5px;
+          border: 1px solid #ccc;
+          border-radius: 3px;
+          margin-bottom: 10px;
+        }
+        
+        input[type="submit"] {
+          background-color: #007bff;
+          color: white;
+          border: none;
+          padding: 5px 10px;
+          border-radius: 3px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  
