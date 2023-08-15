@@ -7,7 +7,7 @@ import StoryCreatorSpace from '../../components/StoryCreatorSpace/StoryCreatorSp
 function StoryWriterPage() {
   const location = useLocation();
   const passedData = location.state?.data || {};
-  const content = passedData.sentence || passedData.expression || '';
+  const content = passedData.sentence || '';
 
   return (
     <div className="App">

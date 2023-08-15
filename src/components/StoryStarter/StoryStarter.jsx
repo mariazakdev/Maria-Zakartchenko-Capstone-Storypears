@@ -59,7 +59,7 @@ function StoryStarter({ prompts, feelings }) {
                     key={feeling.id}
                     onClick={() => handleItemClick(feeling.id)}
                   >
-                    {feeling.expression}
+                    {feeling.sentence}
                   </li>
                 ))}
               </ul>
