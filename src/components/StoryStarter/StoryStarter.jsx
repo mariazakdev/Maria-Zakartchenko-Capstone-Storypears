@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router-dom";
 import "./StoryStarter.scss";
 
 function StoryStarter({ prompts, feelings }) {
   const [activeContent, setActiveContent] = useState("prompts"); // Prompts is open by default
   const navigate = useNavigate();
 
-  const handleItemClick = (id, type) => {
-    const selectedItemData = getDataById(id, type);
-    navigate(`/story/${id}`, { state: { data: selectedItemData } });
+  const handleItemClick = (id) => {
+    const selectedItemData = getDataById(id);
+    navigate(`/story/new/${id}`, { state: { data: selectedItemData } });
   };
 
   const getDataById = (id) => {
@@ -39,7 +38,7 @@ function StoryStarter({ prompts, feelings }) {
             <div>
               <h3>Prompts:</h3>
               <ul className="story-item">
-                {prompts.map((prompt) => (
+                {prompts && prompts.map((prompt) => (
                   <li
                     key={prompt.id}
                     onClick={() => handleItemClick(prompt.id)}
@@ -54,7 +53,7 @@ function StoryStarter({ prompts, feelings }) {
             <div>
               <h3>Feelings:</h3>
               <ul className="feeling-item">
-                {feelings.map((feeling) => (
+                {feelings && feelings.map((feeling) => (
                   <li
                     key={feeling.id}
                     onClick={() => handleItemClick(feeling.id)}

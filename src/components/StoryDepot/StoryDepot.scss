@@ -1,0 +1,54 @@
+.story-starter {
+    padding: 20px;
+    
+    p {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    
+    &__heading {
+      h2 {
+        font-size: 24px;
+        margin-bottom: 5px;
+      }
+      
+      p {
+        font-size: 14px;
+        color: #888;
+      }
+    }
+  
+      &--content {
+        width: 100%;
+        
+        h3 {
+          font-size: 20px;
+          margin-bottom: 10px;
+        }
+        
+        ul {
+          list-style: none;
+          padding-left: 0;
+          
+          li {
+            background-color: white;
+            padding: 2rem 0.5rem ;
+            border-radius: .25rem;
+            margin-bottom: 10px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, 
+                        rgba(0, 0, 0, 0.12) 0px -12px 30px,
+                        rgba(0, 0, 0, 0.12) 0px 4px 6px, 
+                        rgba(0, 0, 0, 0.17) 0px 12px 13px,
+                        rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            
+            &:hover {
+              transform: translateY(-4px);
+              box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            }
+          }
+        }
+      }
+    }
+  
+  

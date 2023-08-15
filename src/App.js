@@ -9,6 +9,7 @@ import StoryPage from './pages/StoryPage/StoryPage';
 import HomePage from './pages/HomePage/HomePage';
 import ProfileListPage from './pages/ProfileListPage/ProfileListPage'
 import ProfileAddPage from './pages/ProfileAddPage/ProfileAddPage';
+import StoryDepotPage from './pages/StoryDepotPage/StoryDepotPage';
 
 function App() {
   return (
@@ -17,14 +18,15 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/story/prompt" element={<StoryPromptPage />} />
-        <Route path="/story/new" element={<StoryWriterPage />} />
-        <Route path="/story/:id" element={<StoryWriterPage />} />
-
+        <Route path="/story/new/:id" element={<StoryWriterPage />} />
+        <Route path="/story/:id" element={<StoryPage />} />
         <Route path="/profile" element={<ProfileListPage />} />
         <Route path="/profile/:id" element={<ProfilePage />} />
         <Route path="/story/:id" element={<StoryPage />} /> 
         <Route path="/stories" element={<StoryListPage />} />
         <Route path="/create-profile" element={<ProfileAddPage />} />
+        <Route path="/story/depot" element={<StoryDepotPage />} />
+
       </Routes>
     </Router>
   );

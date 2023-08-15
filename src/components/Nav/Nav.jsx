@@ -29,6 +29,10 @@ const NavBar = () => {
           <Link to="/story/new">Writing space</Link>
           
         </li>
+        <li>
+          <Link to="/story/depot">Depot</Link>
+          
+        </li>
       </ul>
     </nav>
   );
