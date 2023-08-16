@@ -1,3 +1,4 @@
+/* ProfileAdd.scss */
 .create-profile {
   width: 30rem;
   display: flex;
@@ -42,6 +43,7 @@
           box-shadow: inset 0 0 0.5rem darken(#ddd, 5%);
         }
       }
+
       input[type="submit"] {
         background-color: #c4c3a7;
         color: white;
@@ -58,21 +60,67 @@
           transition: color 1s;
         }
       }
+
       .form__count{
         position: relative;
+
         &-num{
           position: absolute;
           right:.5rem;
           bottom: -0.5em;
           font-size: 0.7rem;
+
           &--warning{
             color: lightpink;
             font-weight: bold;
           }
         }
       }
+
       .form__button{
         margin-top: 1rem;
+      }
+
+      .input-container {
+        display: flex;
+        align-items: center;
+      }
+
+      .create-profile__form-field {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+
+        &--error {
+          .input {
+            outline:  rgb(132, 170, 201) 2px solid; // Will change to exact colour later. 
+          }
+        }
+      }
+
+      .create-profile__label {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .input {
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 0.9rem;
+        resize: none;
+
+        &--error {
+          outline: rgb(132, 170, 201) 2px solid; // Will change to exact colour later. 
+        }
+
+        &:focus {
+          outline: none;
+          border: 1px solid darken(#ddd, 5%);
+          box-shadow: inset 0 0 0.5rem darken(#ddd, 5%);
+        }
       }
     }
   }

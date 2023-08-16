@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage/HomePage';
 import ProfileListPage from './pages/ProfileListPage/ProfileListPage'
 import ProfileAddPage from './pages/ProfileAddPage/ProfileAddPage';
 import StoryDepotPage from './pages/StoryDepotPage/StoryDepotPage';
+import RegisterPage from './pages/RegisterPage/RegisterPage';
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
         <Route path="/profile/:id" element={<ProfilePage />} />
         <Route path="/story/:id" element={<StoryPage />} /> 
         <Route path="/stories" element={<StoryListPage />} />
-        <Route path="/create-profile" element={<ProfileAddPage />} />
+        <Route path="/profile/new" element={<RegisterPage />} />
         <Route path="/story/depot" element={<StoryDepotPage />} />
 
       </Routes>
