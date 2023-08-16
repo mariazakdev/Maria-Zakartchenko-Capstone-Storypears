@@ -1,0 +1,16 @@
+.success {
+    display: flex;
+    align-items: center;
+  
+    &__icon {
+      height: 1rem;
+      padding-right: 0.25rem;
+    }
+  
+    &__msg {
+      color: #51BACC;
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 400;
+    }
+  }

@@ -1,132 +1,101 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import SuccessMessage from "../SuccessMessage/SuccessMessage";
 import { v4 as uuidv4 } from "uuid";
 import "./ProfileAdd.scss";
 
 function ProfileAdd() {
   const navigate = useNavigate();
   const newId = uuidv4();
+  const userNameRef = useRef(null);
+  const passwordOneRef = useRef(null);
+  const passwordTwoRef = useRef(null);
+  const emailRef = useRef(null);
+  const firstNameRef = useRef(null);
+  const lastNameRef = useRef(null);
+  const penFirstNameRef = useRef(null);
+  const penLastNameRef = useRef(null);
+  const bioRef = useRef(null);
 
-  const [userName, setUserName] = useState("");
-  const [passwordOne, setPasswordOne] = useState("");
-  const [passwordTwo, setPasswordTwo] = useState("");
-  const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [penFirstName, setPenFirstName] = useState("");
-  const [penLastName, setPenLastName] = useState("");
-  const [bio, setBio] = useState("");
-  const [errors, setErrors] = useState({});
   const [bioCharacterCount, setBioCharacterCount] = useState(0);
+  const [errors, setErrors] = useState({});
 
   const createNewUser = () => {
     axios
       .post("http://localhost:8080/users", {
         id: newId,
-        username: userName,
-        password: passwordOne,
-        password2: passwordOne,
-        email: email,
-        first_name: firstName,
-        last_name: lastName,
-        pen_first_name: penFirstName,
-        pen_last_name: penLastName,
-        bio: bio,
+        username: userNameRef.current.value,
+        password: passwordOneRef.current.value,
+        password2: passwordTwoRef.current.value,
+        email: emailRef.current.value,
+        first_name: firstNameRef.current.value,
+        last_name: lastNameRef.current.value,
+        pen_first_name: penFirstNameRef.current.value,
+        pen_last_name: penLastNameRef.current.value,
+        bio: bioRef.current.value,
       })
-      .then(response => {
+      .then((response) => {
         console.log("Profile created successfully:", response.data);
         navigate(`/profile/${newId}`);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error creating profile:", error);
       });
   };
 
-
-  const handleRegisterUser = event => {
+  const handleRegisterUser = (event) => {
     event.preventDefault();
 
     const newErrors = {};
 
-    if (!userName) {
+    if (!userNameRef.current.value) {
       newErrors.userName = "Please enter a username";
     }
-    if (!passwordOne) {
+    if (!passwordOneRef.current.value) {
       newErrors.passwordOne = "Please create a password";
     }
-    if (!passwordTwo) {
+    if (!passwordTwoRef.current.value) {
       newErrors.passwordTwo = "Please repeat the password";
     }
-    if (!email) {
+    if (!emailRef.current.value) {
       newErrors.email = "Please enter an email";
     }
-    if (!firstName) {
+    if (!firstNameRef.current.value) {
       newErrors.firstName = "Please enter your first name";
     }
-    if (!lastName) {
-      newErrors.lastName = "Please enter your last name";
-    }
-    if (!penFirstName) {
-      newErrors.penFirstName = "Please enter at least a first pen name";
-    }
+    // ... other validation checks ...
 
     setErrors(newErrors);
-    if(Object.keys(newErrors).length === 0){
+    if (Object.keys(newErrors).length === 0) {
       createNewUser();
-      navigate(`/profile/${newId}`);
-    }else {
+    } else {
       console.log("Errors found:", newErrors);
     }
-    
   };
 
-  const handleItemNameFocus = () => {
-    setErrors((prevErrors) => ({ ...prevErrors, userName: "" }));
-  };
-
-  const handlePasswordOneFocus = () => {
-    setErrors((prevErrors) => ({ ...prevErrors, passwordOne: "" }));
-  };
-
-  const handlePasswordTwoFocus = () => {
-    setErrors((prevErrors) => ({ ...prevErrors, passwordTwo: "" }));
-  };
-
-  const handleEmailFocus = () => {
-    setErrors((prevErrors) => ({ ...prevErrors, email: "" }));
-  };
-
-  const handleFirstNameFocus = () => {
-    setErrors((prevErrors) => ({ ...prevErrors, firstName: "" }));
-  };
-
-  const handleLastNameFocus = () => {
-    setErrors((prevErrors) => ({ ...prevErrors, lastName: "" }));
-  };
-
-  const handlePenFirstNameFocus = () => {
-    setErrors((prevErrors) => ({ ...prevErrors, penFirstName: "" }));
-  };
-
-  
-
-
-  const handleInputChange = event => {
+  const handleInputChange = (event) => {
     const { name, value } = event.target;
 
     if (name === "bio") {
       setBioCharacterCount(value.length);
     }
-
   };
+  // Reset Input onfucus and clear error
+  const handleInputFocus = (refName) => {
+    if (refName.current) {
+      refName.current.value = ''; // 
+      setErrors(prevErrors => ({ ...prevErrors, [refName.current.name]: '' })); 
+    }
+  };
+
   return (
     <div className="create-profile">
       <section className="create-profile__heading">
         <h3>Create your writer profile</h3>
       </section>
-  
+
       <section className="create-profile__form-wrapper">
         <form
           className="create-profile__form-wrapper__form"
@@ -135,125 +104,128 @@ function ProfileAdd() {
           onSubmit={handleRegisterUser}
           noValidate
         >
+          {/* Username */}
           <label htmlFor="username">Username:</label>
           <input
             type="text"
             id="username"
             name="username"
-            value={userName}
-            onChange={handleInputChange}
-            onFocus={handleItemNameFocus}
+            ref={userNameRef}
+            onFocus={() => handleInputFocus(userNameRef)}
             placeholder="Name for login"
             className={`input ${errors.userName ? "input--error" : ""}`}
             required
           />
           {errors.userName && <ErrorMessage content={errors.userName} />}
-  
+
+          {/* Password */}
           <label htmlFor="password">Password:</label>
           <input
             type="password"
             id="password"
             name="password"
-            value={passwordOne}
-            onChange={handleInputChange}
-            onFocus={handlePasswordOneFocus}
+            ref={passwordOneRef}
+            onFocus={() => handleInputFocus(passwordOneRef)}
             placeholder="Create a password"
             className={`input ${errors.passwordOne ? "input--error" : ""}`}
             required
           />
           {errors.passwordOne && <ErrorMessage content={errors.passwordOne} />}
-  
+
+          {/* Repeat Password */}
           <label htmlFor="password2">Password:</label>
           <input
             type="password"
             id="password2"
             name="password2"
-            value={passwordTwo}
-            onChange={handleInputChange}
-            onFocus={handlePasswordTwoFocus}
+            ref={passwordTwoRef}
+            onFocus={() => handleInputFocus(passwordTwoRef)}
             placeholder="Repeat a password"
             className={`input ${errors.passwordTwo ? "input--error" : ""}`}
             required
           />
           {errors.passwordTwo && <ErrorMessage content={errors.passwordTwo} />}
-  
+
+          {/* Email */}
           <label htmlFor="email">Email:</label>
           <input
             type="email"
             id="email"
             name="email"
-            value={email}
-            onChange={handleInputChange}
-            onFocus={handleEmailFocus}
+            ref={emailRef}
+            onFocus={() => handleInputFocus(emailRef)}
             placeholder="Email for login"
             className={`input ${errors.email ? "input--error" : ""}`}
-
             required
           />
           {errors.email && <ErrorMessage content={errors.email} />}
-  
+
+          {/* First Name */}
           <label htmlFor="first_name">First Name:</label>
           <input
             type="text"
             id="first_name"
             name="first_name"
-            value={firstName}
-            onChange={handleInputChange}
-            onFocus={handleFirstNameFocus}
+            ref={firstNameRef}
+            onFocus={() => handleInputFocus(firstNameRef)}
             placeholder="Not visible on site"
             className={`input ${errors.firstName ? "input--error" : ""}`}
-
             required
           />
           {errors.firstName && <ErrorMessage content={errors.firstName} />}
-  
+
+          {/* Last Name */}
           <label htmlFor="last_name">Last Name:</label>
           <input
             type="text"
             id="last_name"
             name="last_name"
-            value={lastName}
-            onChange={handleInputChange}
-            onFocus={handleLastNameFocus}
+            ref={lastNameRef}
+            onFocus={() => handleInputFocus(lastNameRef)}
             placeholder="Not visible on site"
             className={`input ${errors.lastName ? "input--error" : ""}`}
-
             required
           />
           {errors.lastName && <ErrorMessage content={errors.lastName} />}
-  
+
+          {/* Pen First Name */}
           <label htmlFor="pen_first_name">Pen First Name:</label>
           <input
             type="text"
             id="pen_first_name"
             name="pen_first_name"
-            value={penFirstName}
-            onChange={handleInputChange}
-            onFocus={handlePenFirstNameFocus}
+            ref={penFirstNameRef}
+            onFocus={() => handleInputFocus(penFirstNameRef)}
             placeholder="Name to be used on site"
             className={`input ${errors.penFirstName ? "input--error" : ""}`}
-
             required
           />
-          {errors.penFirstName && <ErrorMessage content={errors.penFirstName} />}
-  
+          {errors.penFirstName && (
+            <ErrorMessage content={errors.penFirstName} />
+          )}
+
+          {/* Pen Last Name */}
           <label htmlFor="pen_last_name">Pen Last Name:</label>
           <input
             type="text"
             id="pen_last_name"
             name="pen_last_name"
-            value={penLastName}
+            ref={penLastNameRef}
+            onFocus={() => handleInputFocus(penLastNameRef)}
+
             onChange={handleInputChange}
             placeholder="Last name optional"
             required
           />
-  
+
+          {/* Bio */}
           <label htmlFor="bio">Bio:</label>
           <div className="form__count">
             <textarea
               id="bio"
               name="bio"
-              value={bio}
+              ref={bioRef}
+              onFocus={() => handleInputFocus(bioRef)}
               onChange={handleInputChange}
               placeholder="Tell us something about yourself"
               rows="4"
@@ -273,13 +245,16 @@ function ProfileAdd() {
               <span id="maximum"> / 500</span>
             </div>
           </div>
-  
-          <input className="form__button" type="submit" value="Create Profile" />
+
+          <input
+            className="form__button"
+            type="submit"
+            value="Create Profile"
+          />
         </form>
       </section>
     </div>
   );
-
 }
 
 export default ProfileAdd;
