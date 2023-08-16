@@ -1,6 +1,7 @@
 import "./ErrorMessage.scss";
 import React from "react";
-import errorIcon from '../../assets/icons/Double-J-Design-Origami-Colored-Pencil-Blue-cross.16.png';
+import errorIcon from '../../assets/icons/icons8-cross-30.png';
+// https://icons8.com/icons/set/cross--blue
 
 function ErrorMessage({ content }) {
   return (
