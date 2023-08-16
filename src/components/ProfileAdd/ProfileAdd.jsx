@@ -45,9 +45,21 @@ function ProfileAdd() {
       });
   };
 
+  // Validation functions:
+  
+  // Validation for email
+  const isEmailValid = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+    // Validation for letters-only input
+    const isLettersOnly = (input) => {
+      const lettersRegex = /^[A-Za-z]+$/;
+      return lettersRegex.test(input);
+    };
+  // Validation for empty inputs
   const handleRegisterUser = (event) => {
     event.preventDefault();
-
     const newErrors = {};
 
     if (!userNameRef.current.value) {
@@ -59,13 +71,31 @@ function ProfileAdd() {
     if (!passwordTwoRef.current.value) {
       newErrors.passwordTwo = "Please repeat the password";
     }
-    if (!emailRef.current.value) {
+    if (passwordOneRef.current.value !== passwordTwoRef.current.value) {
+      newErrors.passwordMatch = "Passwords do not match"; // Passwords dont match error
+    }
+    
+    if (!emailRef.current.value) { // First email validation for empty space
       newErrors.email = "Please enter an email";
+    }
+    if (!isEmailValid(emailRef.current.value)) {  // Second email validation - for correct parameters
+      newErrors.email = "Please enter a valid email address";
     }
     if (!firstNameRef.current.value) {
       newErrors.firstName = "Please enter your first name";
+    } else if (!isLettersOnly(firstNameRef.current.value)) {
+      newErrors.firstName = "Please enter a valid first name (letters only)";
     }
-    // ... other validation checks ...
+
+     if (!lastNameRef.current.value) {
+      newErrors.lastName = "Please enter your last name";
+    } else if (!isLettersOnly(lastNameRef.current.value)) {
+      newErrors.lastName = "Please enter a valid last name (letters only)";
+    }
+
+    if (!penFirstNameRef.current.value) {
+      newErrors.penFirstName = "Please enter at least a first pen name";
+    }
 
     setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
@@ -145,6 +175,7 @@ function ProfileAdd() {
             required
           />
           {errors.passwordTwo && <ErrorMessage content={errors.passwordTwo} />}
+          {errors.passwordMatch && <ErrorMessage content={errors.passwordMatch} />}
 
           {/* Email */}
           <label htmlFor="email">Email:</label>
