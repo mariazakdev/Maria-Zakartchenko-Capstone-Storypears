@@ -17,8 +17,8 @@ function StoryDepot({ halfStories, handleItemClick }) {
               <li
                 key={halfStory.id}
                 onClick={() => handleItemClick(halfStory.id)}
-              >
-                {halfStory.story}
+              ><h3>{halfStory.title}</h3>
+                <p>{halfStory.story}</p>
               </li>
             ))}
           </ul>

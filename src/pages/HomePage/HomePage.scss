@@ -1,0 +1,13 @@
+
+
+.site{
+    &__content{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 1rem;
+        border-radius: .25rem;
+        border: .0625rem gray solid;
+    }
+}

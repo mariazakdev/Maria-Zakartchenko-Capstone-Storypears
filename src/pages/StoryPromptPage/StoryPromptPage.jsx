@@ -38,8 +38,9 @@ function StoryPromptPage() {
 
 
   return (
-    <div className="App">
+    <div className="site">
  <Header />
+ <div className='site__content'></div>
  <StoryStarter  prompts={prompts} feelings={feelings}/>
  <Footer />
     </div>
