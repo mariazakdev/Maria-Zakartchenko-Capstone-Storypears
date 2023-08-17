@@ -13,40 +13,44 @@ function SignIn() {
 
   const [errors, setErrors] = useState({});
 
-  const userLogIn = () => {
-    axios
-      .post("http://localhost:8080/users", {
-        id: newId,
+    // Not sure is I need a new backend or reuse user. will return to axios
+  const userLogIn = async () => {
+    try {
+      const response = await axios.post("http://localhost:8080/login", {
         username: userNameRef.current.value,
         password: passwordOneRef.current.value,
-      })
-      .then((response) => {
+    
+      });
+      
+      if (response.status === 200) {
         console.log("Logged in successfully:", response.data);
         navigate(`/`);
-      })
-      .catch((error) => {
-        console.error("Error creating profile:", error);
-      });
+      } else {
+        console.error("Login failed");
+      }
+    } catch (error) {
+      console.error("Error logging in:", error);
+    }
   };
-
   const handleLogin = (event) => {
     event.preventDefault();
     const newErrors = {};
-
     if (!userNameRef.current.value) {
       newErrors.userName = "Please enter a username";
     }
     if (!passwordOneRef.current.value) {
-      newErrors.passwordOne = "Missing username or password";
+      newErrors.passwordOne = "Please enter a password";
     }
-
+  
     setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
       userLogIn();
+
     } else {
       console.log("Errors found:", newErrors);
     }
   };
+ 
 
   // Reset Input on focus and clear error
   const handleNameFocus = () => {
