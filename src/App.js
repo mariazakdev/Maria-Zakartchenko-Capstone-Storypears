@@ -8,17 +8,15 @@ import ProfilePage from './pages/ProfilePage/ProfilePage';
 import StoryPage from './pages/StoryPage/StoryPage';
 import HomePage from './pages/HomePage/HomePage';
 import ProfileListPage from './pages/ProfileListPage/ProfileListPage'
-import ProfileAddPage from './pages/ProfileAddPage/ProfileAddPage';
 import StoryDepotPage from './pages/StoryDepotPage/StoryDepotPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
-import SignIn from './components/SignIn/SignIn';
+import LoginPage from './pages/LoginPage/LoginPage'
 
 function App() {
   return (
     <main className="App">
      
     <Router>
-       <SignIn/>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
@@ -31,6 +29,7 @@ function App() {
         <Route path="/stories" element={<StoryListPage />} />
         <Route path="/profile/new" element={<RegisterPage />} />
         <Route path="/story/depot" element={<StoryDepotPage />} />
+        <Route path='/login' element={<LoginPage/>}/>
       </Routes>
     </Router>
     </main>

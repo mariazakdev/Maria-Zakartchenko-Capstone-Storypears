@@ -6,6 +6,7 @@ import axios from 'axios';
 const NavBar = () => {
 
   const [userData, setUserData] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     // fetching for nav avatar and name
@@ -18,7 +19,9 @@ const NavBar = () => {
         console.error('Error fetching user data:', error);
       });
   }, []);
-
+  const handleLogout = () => {
+    setLoggedIn(false);
+  };
   return (
     <nav className="nav">
       <ul className="nav-list">
@@ -28,16 +31,11 @@ const NavBar = () => {
         <li>
           <Link to="/story/prompt">Prompts</Link>
         </li>
-        {/* Will not be in final, just want to see it while developing site */}
-        <li>
-          <Link to="/profile">Profile</Link> 
-        </li>
+        
         <li>
           <Link to="/stories">All Stories</Link>
         </li>
-        <li>
-          <Link to="/story">Story</Link>
-        </li>
+    
         <li>
           <Link to="/profile/new">register</Link>
 
@@ -51,16 +49,20 @@ const NavBar = () => {
           
         </li>
         <li className="nav-list__user">
-          {userData && (
-            <>
-              <div className="user__avatar-circle">
-                <img src={userData.avatar_url || '/default-avatar.png'} alt="User Avatar" />
-              </div>
-              <div className="user__info">
-                <span className="username">{userData.username}</span>
-                <span className="logout">Log out</span>
-              </div>
-            </>
+        {loggedIn ? (
+            userData && (
+              <>
+                <div className="user__avatar-circle">
+                  <img src={userData.avatar_url || '/default-avatar.png'} alt="User Avatar" />
+                </div>
+                <div className="user__info">
+                  <span className="username">{userData.username}</span>
+                  <span className="logout" onClick={handleLogout}>Log out</span>
+                </div>
+              </>
+            )
+          ) : (
+            <Link to="/login">Log in</Link>
           )}
         </li>
       </ul>
