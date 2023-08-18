@@ -35,11 +35,7 @@ const NavBar = () => {
         <li>
           <Link to="/stories">All Stories</Link>
         </li>
-    
-        <li>
-          <Link to="/profile/new">register</Link>
-
-        </li>
+  
         <li>
           <Link to="/story/new">Writing space</Link>
           

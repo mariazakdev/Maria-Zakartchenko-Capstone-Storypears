@@ -86,7 +86,7 @@ function SignIn() {
             name="username"
             ref={userNameRef}
             onFocus={handleNameFocus}            
-            placeholder="Name for login"
+            placeholder="Username"
             className={`input ${errors.userName ? "input--error" : ""}`}
             required
           />
@@ -98,6 +98,7 @@ function SignIn() {
             type="password"
             id="password"
             name="password"
+            placeholder="Password"
             ref={passwordOneRef}
             onFocus={handlePasswordFocus}            
             className={`input ${errors.passwordOne ? "input--error" : ""}`}
@@ -111,6 +112,12 @@ function SignIn() {
             value="Sign In"
           />
         </form>
+        <section className="sign-in-profile__form-wrapper--options" >
+          <h3>Sign in with</h3>
+        <button className="social-button">Google</button>
+          <button className="social-button">Facebook</button>
+          <button className="social-button">GitHub</button>
+        </section>
         <h4>Need an account?</h4>
         <h4>
           <a href="/profile/new">Sign Up</a>
