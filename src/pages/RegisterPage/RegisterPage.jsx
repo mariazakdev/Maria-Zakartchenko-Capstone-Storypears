@@ -2,8 +2,7 @@ import React from 'react';
 import './RegisterPage.scss';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-import ProfileAdd from '../../components/ProfileAdd/ProfileAdd';
-
+import RegisterForm from '../../components/RegisterForm/RegisterForm';
 function RegisterPage() {
 
 
@@ -11,7 +10,7 @@ function RegisterPage() {
     <div className="site">
       <Header />
       <section className='site__content'>
-          <ProfileAdd />
+          <RegisterForm />
         </section>
     
       <Footer />

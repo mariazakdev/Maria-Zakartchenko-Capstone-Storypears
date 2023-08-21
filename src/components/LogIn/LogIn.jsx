@@ -4,13 +4,14 @@ import axios from "axios";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { v4 as uuidv4 } from "uuid";
 import "./LogIn.scss";
+import Google from "../../assets/icons/5847fafdcef1014c0b5e48ce.png"
+import Button from "../Button/Button";
 
 function SignIn() {
   const navigate = useNavigate();
   const newId = uuidv4();
   const userNameRef = useRef(null);
   const passwordOneRef = useRef(null);
-
   const [errors, setErrors] = useState({});
 
     // Not sure is I need a new backend or reuse user. will return to axios
@@ -64,6 +65,9 @@ function SignIn() {
     setErrors({});
   };
 
+  const google =()=>{
+    window.open('http://localhost:8080/auth/google');
+    }
   return (
     <div className="sign-in-profile">
       <section className="sign-in-profile__heading">
@@ -105,22 +109,24 @@ function SignIn() {
             required
           />
           {errors.passwordOne && <ErrorMessage content={errors.passwordOne} />}
-
-          <input
+          <Button
+            value="Log In"            
             className="form__button"
-            type="submit"
-            value="Sign In"
+            type="submit" 
           />
         </form>
-        <section className="sign-in-profile__form-wrapper--options" >
+        <section className="sign-in-profile__form-wrapper--options">
           <h3>Sign in with</h3>
-        <button className="social-button">Google</button>
-          <button className="social-button">Facebook</button>
-          <button className="social-button">GitHub</button>
+          <div className="options__login-btn google" onClick={google}>
+          <img src={Google} alt="icon" className="icon"/>
+          Google
+          </div>
+        
+                          
         </section>
         <h4>Need an account?</h4>
         <h4>
-          <a href="/profile/new">Sign Up</a>
+          <a href="/register">Sign Up</a>
         </h4>
       </section>
     </div>

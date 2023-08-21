@@ -2,8 +2,10 @@ import "./Nav.scss";
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Button from "../Button/Button";
+import Avatar from "../Avatar/Avatar";
 
-const NavBar = () => {
+const Nav = ({user}) => {
 
   const [userData, setUserData] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
@@ -24,46 +26,46 @@ const NavBar = () => {
   };
   return (
     <nav className="nav">
-      <ul className="nav-list">
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/story/prompt">Prompts</Link>
-        </li>
-        
-        <li>
-          <Link to="/stories">All Stories</Link>
-        </li>
+    <ul className="nav-list">
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li>
+        <Link to="/story/prompt">Prompts</Link>
+      </li>
+      <li>
+        <Link to="/stories">All Stories</Link>
+      </li>
+      <li>
+        <Link to="/story/new">Writing space</Link>
+      </li>
+      <li>
+        <Link to="/story/depot">Depot</Link>
+      </li>
+    </ul>
+
+    <div className="nav-user">
+
+          {
+            user? (  <div className="user__info">
+              <span className="user__info-username"><Link to="./profile">Bob</Link></span>
+              <Button value="Log out" className="user__info-logout" onClick={handleLogout} />
+            </div>
+          ) :(
+        <Link to="/login">
+          <Button value="Log In" className="user__info-login" />
+        </Link>
+
+          )
+          }
+      
+          
+     
   
-        <li>
-          <Link to="/story/new">Writing space</Link>
-          
-        </li>
-        <li>
-          <Link to="/story/depot">Depot</Link>
-          
-        </li>
-        <li className="nav-list__user">
-        {loggedIn ? (
-            userData && (
-              <>
-                <div className="user__avatar-circle">
-                  <img src={userData.avatar_url || '/default-avatar.png'} alt="User Avatar" />
-                </div>
-                <div className="user__info">
-                  <span className="username">{userData.username}</span>
-                  <span className="logout" onClick={handleLogout}>Log out</span>
-                </div>
-              </>
-            )
-          ) : (
-            <Link to="/login">Log in</Link>
-          )}
-        </li>
-      </ul>
-    </nav>
-  );
+    </div> 
+
+  </nav>
+);
 };
 
-export default NavBar;
+export default Nav;

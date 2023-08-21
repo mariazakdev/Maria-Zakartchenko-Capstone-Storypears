@@ -1,23 +1,22 @@
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-import './LoginPage.scss';
-import LogIn from '../../components/LogIn/LogIn';
 import LoginButton from '../../components/LoginButton/LoginButton';
-import LogoutButton from '../../components/LogoutButton/LogoutButton';
 
-function HomePage(){
+function AuthFailPage (){
     return(
         <div className='site'>
         <Header/>
         <section className='site__content'>
-        <h1>Welcome to Story Pears</h1>
-        <LogIn />
+        <div>
+      <h1>Authentication Failed 😔</h1>
+      <p>Please try logging in again later 🤞</p>
+    </div>
         </section>
            <LoginButton/>
-        <LogoutButton/>
+        
         <Footer/>
      
         </div>
     );
 };
-export default HomePage;
+export default AuthFailPage ;

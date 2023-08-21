@@ -25,58 +25,68 @@
       input[type="text"],
       input[type="password"],
       input[type="email"],
-      textarea {
+     textarea {
+        width: 100%; /* Match the width of other inputs */
         padding: 10px;
         margin-bottom: 10px;
         border: 1px solid #ccc;
-        border-radius: 4px; 
+        border-radius: 4px;
         font-family: inherit;
-        font-size: .9rem;
+        font-size: 0.9rem;
         resize: none;
         ::placeholder {
           color: #999;
         }
-         &:focus {
+        &:focus {
           outline: none;
           border: 1px solid darken(#ddd, 5%);
           box-shadow: inset 0 0 0.5rem darken(#ddd, 5%);
         }
       }
 
-      input[type="submit"] {
-        background-color: #c4c3a7;
-        color: white;
+      button {
+        padding: .625rem;
+        margin: 1rem;
         border: none;
-        border-radius: 4px;
-        padding: 10px;
-        cursor: pointer;
+        border-radius: .25rem;
+      
         font-weight: bold;
-        &:hover, &:focus {
-          background: rgb(238,174,202);
-          background: linear-gradient(90deg, rgba(138,217,223,1) 21%, rgba(250,236,123,0.20772058823529416) 55%, rgba(224,200,150,1) 72%);          
-          transition: background-color .5s;
-          color: gray;
-          transition: color 1s;
+        color: white;
+    
+        background-color: #c4c3a7;
+        cursor: pointer;
+        transition: background-color 0.5s, color 1s;
+      
+        &:hover,
+        &:focus {
+          background: rgb(238, 174, 202);
+          background: linear-gradient(
+            90deg,
+            rgba(138, 217, 223, 1) 21%,
+            rgba(250, 236, 123, 0.20772058823529416) 55%,
+            rgba(224, 200, 150, 1) 72%
+          );
+          color: gray
         }
       }
 
-      .form__count{
+      .form__count {
         position: relative;
 
-        &-num{
+        &-num {
           position: absolute;
-          right:.5rem;
+          right: 0.5rem;
           bottom: -0.5em;
           font-size: 0.7rem;
 
-          &--warning{
+          &--warning {
             color: lightpink;
             font-weight: bold;
           }
         }
       }
 
-      .form__button{
+      .form__button {
         margin-top: 1rem;
       }
 
@@ -92,7 +102,7 @@
 
         &--error {
           .input {
-            outline:  rgb(132, 170, 201) 2px solid; // Will change to exact colour later. 
+            outline: rgb(132, 170, 201) 2px solid; // Will change to exact colour later.
           }
         }
       }
@@ -112,7 +122,7 @@
         resize: none;
 
         &--error {
-          outline: rgb(132, 170, 201) 2px solid; // Will change to exact colour later. 
+          outline: rgb(132, 170, 201) 2px solid; // Will change to exact colour later.
         }
 
         &:focus {

@@ -2,9 +2,9 @@ import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import SuccessMessage from "../SuccessMessage/SuccessMessage";
+import Button from "../Button/Button";
 import { v4 as uuidv4 } from "uuid";
-import "./ProfileAdd.scss";
+import "./RegisterForm.scss";
 
 function ProfileAdd() {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ function ProfileAdd() {
   const createNewUser = () => {
     axios
       .post("http://localhost:8080/users", {
-        id: newId,
+      
         username: userNameRef.current.value,
         password: passwordOneRef.current.value,
         password2: passwordTwoRef.current.value,
@@ -276,11 +276,10 @@ function ProfileAdd() {
               <span id="maximum"> / 500</span>
             </div>
           </div>
-
-          <input
-            className="form__button"
-            type="submit"
+          <Button
             value="Create Profile"
+            className="form__button"
+            type="submit" 
           />
         </form>
       </section>
