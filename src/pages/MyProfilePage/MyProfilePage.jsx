@@ -25,7 +25,7 @@ function MyProfilePage() {
     }, [id]);
     return (
         <div className="App">
-            <Header />
+            {/* <Header /> */}
             <MyProfile userData ={userData} setUserData={setUserData}/>
             <Footer />
         </div>

@@ -1,0 +1,25 @@
+.login-button {
+    padding: 0.625rem;
+    border: none;
+    border-radius: 0.25rem;
+    font-weight: bold;
+    color: black;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.5s, color 1s;
+    &__text{
+        text-decoration: none;
+        color: #333; 
+    }  
+    &:hover,
+    &:focus {
+      background: rgb(238, 174, 202);
+      background: linear-gradient(
+        90deg,
+        rgba(138, 217, 223, 1) 21%,
+        rgba(250, 236, 123, 0.20772058823529416) 55%,
+        rgba(224, 200, 150, 1) 72%
+      );
+      color: gray;
+    }
+  }

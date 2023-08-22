@@ -26,7 +26,7 @@ function StoryDepotPage() {
 
   return (
     <div >
-      <Header />
+      {/* <Header /> */}
       <StoryDepot halfStories={halfStories} 
       handleItemClick={handleItemClick} 
       />

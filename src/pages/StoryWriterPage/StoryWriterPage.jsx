@@ -11,7 +11,7 @@ function StoryWriterPage() {
 
   return (
     <div className="App">
-      <Header />
+      {/* <Header /> */}
       <StoryCreatorSpace passedData={content} />
       <Footer />
     </div>

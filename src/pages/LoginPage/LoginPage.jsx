@@ -8,7 +8,7 @@ import LogoutButton from '../../components/LogoutButton/LogoutButton';
 function HomePage(){
     return(
         <div className='site'>
-        <Header/>
+        {/* <Header/> */}
         <section className='site__content'>
         <h1>Welcome to Story Pears</h1>
         <LogIn />

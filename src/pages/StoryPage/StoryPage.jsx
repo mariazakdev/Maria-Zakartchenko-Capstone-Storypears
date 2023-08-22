@@ -25,8 +25,9 @@ function StoryPage({match}) {
     <div className="App">
  <Header />
  {story ? <StoryReader story={story} /> : <p>Loading...</p>} <Footer />
-    </div>
-  );
+    
+ 
+  <Footer/></div> );
 }
 
 export default StoryPage;

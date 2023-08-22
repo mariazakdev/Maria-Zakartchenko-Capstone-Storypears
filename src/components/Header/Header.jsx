@@ -2,16 +2,14 @@ import "./Header.scss"
 import Logo from '../Logo/Logo';
 import Nav from '../Nav/Nav';
 
-function Header(){
+function Header({user, setUser}){
 
 return(
-<>
 <div className="header">
 <Logo />
-<Nav />
+<Nav user={user} setUser={setUser} />
 </div>
 
-</>
     );
 };
 export default Header;

@@ -1,10 +1,10 @@
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-import ProfileList from '../../components/ProfileList/ProfileList';
+import WriterList from '../../components/WriterList/WriterList'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function ProfilePage() {
+function WriterListPage() {
   const [profileData, setProfileData] = useState([]);
 
   useEffect(() => {
@@ -20,11 +20,11 @@ function ProfilePage() {
 
   return (
     <div className="App">
-      <Header />
-      <ProfileList profileData={profileData} />
+      {/* <Header /> */}
+      <WriterList profileData={profileData} />
       <Footer />
     </div>
   );
 }
 
-export default ProfilePage;
+export default WriterListPage;

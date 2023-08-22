@@ -1,28 +1,30 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import { v4 as uuidv4 } from "uuid";
-import "./LogIn.scss";
-import Google from "../../assets/icons/5847fafdcef1014c0b5e48ce.png"
 import Button from "../Button/Button";
+import "./LogIn.scss";
 
-function SignIn() {
+function LogIn() {
   const navigate = useNavigate();
-  const newId = uuidv4();
-  const userNameRef = useRef(null);
-  const passwordOneRef = useRef(null);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
   const [errors, setErrors] = useState({});
 
-    // Not sure is I need a new backend or reuse user. will return to axios
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
   const userLogIn = async () => {
     try {
-      const response = await axios.post("http://localhost:8080/login", {
-        username: userNameRef.current.value,
-        password: passwordOneRef.current.value,
-    
+      const response = await axios.post("http://localhost:8080/auth/login", {
+        email: formData.email,
+        password: formData.password,
       });
-      
+
       if (response.status === 200) {
         console.log("Logged in successfully:", response.data);
         navigate(`/`);
@@ -33,41 +35,28 @@ function SignIn() {
       console.error("Error logging in:", error);
     }
   };
+
   const handleLogin = (event) => {
     event.preventDefault();
     const newErrors = {};
-    if (!userNameRef.current.value) {
-      newErrors.userName = "Please enter a username";
+
+    if (!formData.email) {
+      newErrors.email = "Please enter an email";
     }
-    if (!passwordOneRef.current.value) {
-      newErrors.passwordOne = "Please enter a password";
+
+    if (!formData.password) {
+      newErrors.password = "Please enter a password";
     }
-  
+
     setErrors(newErrors);
+
     if (Object.keys(newErrors).length === 0) {
       userLogIn();
-
     } else {
       console.log("Errors found:", newErrors);
     }
   };
- 
 
-  // Reset Input on focus and clear error
-  const handleNameFocus = () => {
-    userNameRef.current.value = '';
-  
-    setErrors({});
-  };
-  const handlePasswordFocus = () => {
-    passwordOneRef.current.value = '';
-  
-    setErrors({});
-  };
-
-  const google =()=>{
-    window.open('http://localhost:8080/auth/google');
-    }
   return (
     <div className="sign-in-profile">
       <section className="sign-in-profile__heading">
@@ -82,19 +71,19 @@ function SignIn() {
           onSubmit={handleLogin}
           noValidate
         >
-          {/* Username */}
-          <label htmlFor="username">Username:</label>
+          {/* Email */}
+          <label htmlFor="email">Email:</label>
           <input
-            type="text"
-            id="username"
-            name="username"
-            ref={userNameRef}
-            onFocus={handleNameFocus}            
-            placeholder="Username"
-            className={`input ${errors.userName ? "input--error" : ""}`}
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Email"
+            className={`input ${errors.email ? "input--error" : ""}`}
             required
           />
-          {/* {errors.userName && <ErrorMessage content={errors.userName} />} */}
+          {errors.email && <ErrorMessage content={errors.email} />}
 
           {/* Password */}
           <label htmlFor="password">Password:</label>
@@ -102,28 +91,20 @@ function SignIn() {
             type="password"
             id="password"
             name="password"
+            value={formData.password}
+            onChange={handleChange}
             placeholder="Password"
-            ref={passwordOneRef}
-            onFocus={handlePasswordFocus}            
-            className={`input ${errors.passwordOne ? "input--error" : ""}`}
+            className={`input ${errors.password ? "input--error" : ""}`}
             required
           />
-          {errors.passwordOne && <ErrorMessage content={errors.passwordOne} />}
+          {errors.password && <ErrorMessage content={errors.password} />}
           <Button
-            value="Log In"            
+            value="Log In"
             className="form__button"
-            type="submit" 
+            type="submit"
           />
         </form>
-        <section className="sign-in-profile__form-wrapper--options">
-          <h3>Sign in with</h3>
-          <div className="options__login-btn google" onClick={google}>
-          <img src={Google} alt="icon" className="icon"/>
-          Google
-          </div>
-        
-                          
-        </section>
+
         <h4>Need an account?</h4>
         <h4>
           <a href="/register">Sign Up</a>
@@ -133,4 +114,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default LogIn;

@@ -3,15 +3,13 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Button from "../Button/Button";
-import { v4 as uuidv4 } from "uuid";
 import "./RegisterForm.scss";
 
 function ProfileAdd() {
   const navigate = useNavigate();
-  const newId = uuidv4();
   const userNameRef = useRef(null);
-  const passwordOneRef = useRef(null);
-  const passwordTwoRef = useRef(null);
+  const passwordRef = useRef(null);
+  const repeatedPasswordRef = useRef(null); // Separate ref for repeated password
   const emailRef = useRef(null);
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
@@ -24,11 +22,9 @@ function ProfileAdd() {
 
   const createNewUser = () => {
     axios
-      .post("http://localhost:8080/users", {
-      
+      .post("http://localhost:8080/auth/register", {
         username: userNameRef.current.value,
-        password: passwordOneRef.current.value,
-        password2: passwordTwoRef.current.value,
+        password: passwordRef.current.value,
         email: emailRef.current.value,
         first_name: firstNameRef.current.value,
         last_name: lastNameRef.current.value,
@@ -38,7 +34,7 @@ function ProfileAdd() {
       })
       .then((response) => {
         console.log("Profile created successfully:", response.data);
-        navigate(`/profile/${newId}`);
+        navigate(`/profile`);
       })
       .catch((error) => {
         console.error("Error creating profile:", error);
@@ -46,18 +42,20 @@ function ProfileAdd() {
   };
 
   // Validation functions:
-  
-  // Validation for email
   const isEmailValid = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
-    // Validation for letters-only input
-    const isLettersOnly = (input) => {
-      const lettersRegex = /^[A-Za-z]+$/;
-      return lettersRegex.test(input);
-    };
-  // Validation for empty inputs
+
+  const isLettersOnly = (input) => {
+    const lettersRegex = /^[A-Za-z]+$/;
+    return lettersRegex.test(input);
+  };
+
+  const isPasswordEmpty = (password) => {
+    return password.trim() === "";
+  };
+
   const handleRegisterUser = (event) => {
     event.preventDefault();
     const newErrors = {};
@@ -65,29 +63,29 @@ function ProfileAdd() {
     if (!userNameRef.current.value) {
       newErrors.userName = "Please enter a username";
     }
-    if (!passwordOneRef.current.value) {
-      newErrors.passwordOne = "Please create a password";
+
+    if (isPasswordEmpty(passwordRef.current.value)) {
+      newErrors.password = "Please create a password";
     }
-    if (!passwordTwoRef.current.value) {
-      newErrors.passwordTwo = "Please repeat the password";
+
+    // Check for matching passwords
+    if (passwordRef.current.value !== repeatedPasswordRef.current.value) {
+      newErrors.passwordMatch = "Passwords do not match";
     }
-    if (passwordOneRef.current.value !== passwordTwoRef.current.value) {
-      newErrors.passwordMatch = "Passwords do not match"; // Passwords dont match error
-    }
-    
-    if (!emailRef.current.value) { // First email validation for empty space
+
+    if (!emailRef.current.value) {
       newErrors.email = "Please enter an email";
-    }
-    if (!isEmailValid(emailRef.current.value)) {  // Second email validation - for correct parameters
+    } else if (!isEmailValid(emailRef.current.value)) {
       newErrors.email = "Please enter a valid email address";
     }
+
     if (!firstNameRef.current.value) {
       newErrors.firstName = "Please enter your first name";
     } else if (!isLettersOnly(firstNameRef.current.value)) {
       newErrors.firstName = "Please enter a valid first name (letters only)";
     }
 
-     if (!lastNameRef.current.value) {
+    if (!lastNameRef.current.value) {
       newErrors.lastName = "Please enter your last name";
     } else if (!isLettersOnly(lastNameRef.current.value)) {
       newErrors.lastName = "Please enter a valid last name (letters only)";
@@ -103,6 +101,8 @@ function ProfileAdd() {
     } else {
       console.log("Errors found:", newErrors);
     }
+
+    
   };
 
   const handleInputChange = (event) => {
@@ -112,11 +112,11 @@ function ProfileAdd() {
       setBioCharacterCount(value.length);
     }
   };
-  // Reset Input onfucus and clear error
+
   const handleInputFocus = (refName) => {
     if (refName.current) {
-      refName.current.value = ''; // 
-      setErrors(prevErrors => ({ ...prevErrors, [refName.current.name]: '' })); 
+      refName.current.value = "";
+      setErrors((prevErrors) => ({ ...prevErrors, [refName.current.name]: "" }));
     }
   };
 
@@ -134,7 +134,6 @@ function ProfileAdd() {
           onSubmit={handleRegisterUser}
           noValidate
         >
-          {/* Username */}
           <label htmlFor="username">Username:</label>
           <input
             type="text"
@@ -148,36 +147,34 @@ function ProfileAdd() {
           />
           {errors.userName && <ErrorMessage content={errors.userName} />}
 
-          {/* Password */}
           <label htmlFor="password">Password:</label>
           <input
             type="password"
             id="password"
             name="password"
-            ref={passwordOneRef}
-            onFocus={() => handleInputFocus(passwordOneRef)}
+            ref={passwordRef}
+            onFocus={() => handleInputFocus(passwordRef)}
             placeholder="Create a password"
-            className={`input ${errors.passwordOne ? "input--error" : ""}`}
+            className={`input ${errors.password ? "input--error" : ""}`}
             required
           />
-          {errors.passwordOne && <ErrorMessage content={errors.passwordOne} />}
+          {errors.password && <ErrorMessage content={errors.password} />}
 
-          {/* Repeat Password */}
-          <label htmlFor="password2">Password:</label>
+          <label htmlFor="password2">Repeat Password:</label>
           <input
             type="password"
             id="password2"
             name="password2"
-            ref={passwordTwoRef}
-            onFocus={() => handleInputFocus(passwordTwoRef)}
-            placeholder="Repeat a password"
-            className={`input ${errors.passwordTwo ? "input--error" : ""}`}
+            ref={repeatedPasswordRef}
+            onFocus={() => handleInputFocus(repeatedPasswordRef)}
+            placeholder="Repeat your password"
+            className={`input ${errors.passwordMatch ? "input--error" : ""}`}
             required
           />
-          {errors.passwordTwo && <ErrorMessage content={errors.passwordTwo} />}
-          {errors.passwordMatch && <ErrorMessage content={errors.passwordMatch} />}
+          {errors.passwordMatch && (
+            <ErrorMessage content={errors.passwordMatch} />
+          )}
 
-          {/* Email */}
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -191,7 +188,6 @@ function ProfileAdd() {
           />
           {errors.email && <ErrorMessage content={errors.email} />}
 
-          {/* First Name */}
           <label htmlFor="first_name">First Name:</label>
           <input
             type="text"
@@ -205,7 +201,6 @@ function ProfileAdd() {
           />
           {errors.firstName && <ErrorMessage content={errors.firstName} />}
 
-          {/* Last Name */}
           <label htmlFor="last_name">Last Name:</label>
           <input
             type="text"
@@ -219,7 +214,6 @@ function ProfileAdd() {
           />
           {errors.lastName && <ErrorMessage content={errors.lastName} />}
 
-          {/* Pen First Name */}
           <label htmlFor="pen_first_name">Pen First Name:</label>
           <input
             type="text"
@@ -235,7 +229,6 @@ function ProfileAdd() {
             <ErrorMessage content={errors.penFirstName} />
           )}
 
-          {/* Pen Last Name */}
           <label htmlFor="pen_last_name">Pen Last Name:</label>
           <input
             type="text"
@@ -243,13 +236,11 @@ function ProfileAdd() {
             name="pen_last_name"
             ref={penLastNameRef}
             onFocus={() => handleInputFocus(penLastNameRef)}
-
             onChange={handleInputChange}
             placeholder="Last name optional"
             required
           />
 
-          {/* Bio */}
           <label htmlFor="bio">Bio:</label>
           <div className="form__count">
             <textarea
@@ -279,7 +270,7 @@ function ProfileAdd() {
           <Button
             value="Create Profile"
             className="form__button"
-            type="submit" 
+            type="submit"
           />
         </form>
       </section>

@@ -1,68 +1,71 @@
-import React from 'react';
-import "./MyProfile.scss";
-import Avatar from "../../assets/icons/5847fafdcef1014c0b5e48ce.png";
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import Avatar from '../../assets/icons/5847fafdcef1014c0b5e48ce.png';
+import './MyProfile.scss';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-function MyProfile(userData , setUserData) {
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [profileData, setProfileData] = useState(null);
+function MyProfile() {
+  const [isAuthenticating, setIsAuthenticating] = useState(true);
+  const [userData, setUserData] = useState({});
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     // Send a GET request for profile information
-    // If user is currently logged in, we will get profile data, if they are not logged in, we will get 401 (Unauthorized) that we can handle in `.catch`
-    // Note that we need to use `withCredentials` in order to pass the cookie to a server
     axios
       .get(`${SERVER_URL}/auth/profile`, { withCredentials: true })
       .then((res) => {
         setIsAuthenticating(false);
-        setIsLoggedIn(true);
         setUserData(res.data);
+        setError(null); // Clear any previous errors
       })
       .catch((err) => {
-        // If we are getting back 401 (Unauthorized) back from the server, means we need to log in
-        if (err.response.status === 401) {
-          // Update the state: done authenticating, user is not logged in
-          setIsAuthenticating(false);
-          setIsLoggedIn(false);
-        } else {
-          console.log('Error authenticating', err);
-        }
+        setIsAuthenticating(false);
+        setError(err.message || 'Error fetching profile data');
       });
   }, []);
-  const formatDate = (date) => {
-    // Return date formatted as 'month/day/year'
-    return new Date(date).toLocaleDateString('en-US');
+
+  const updateProfile = () => {
+    // Send a PUT request to update the user's profile with the data
+    axios
+      .put(`${SERVER_URL}/auth/profile/${userData.id}`, userData, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setUserData(res.data);
+        setError(null); // Clear any previous errors
+        console.log('Profile updated successfully:', res.data);
+      })
+      .catch((err) => {
+        setError(err.message || 'Error updating profile');
+        console.error('Error updating profile:', err);
+      });
   };
 
-  // While the component is authenticating, do not render anything (alternatively, this can be a preloader)
-  if (isAuthenticating) return null;
+  if (isAuthenticating) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
-
-    
     <section className="profile">
-      <h2>Welcome {userData.username} </h2>
+      <h2>Welcome {userData && userData.username}</h2>
       <div>
-        <h3>{userData && userData.pen_first_name} {userData.pen_last_name}</h3>
-        <Avatar className='avatar__image-med' />
+        <h3>
+          {userData && userData.pen_first_name} {userData && userData.pen_last_name}
+        </h3>
+        <Avatar className="avatar__image-med" />
       </div>
       <div>
         <h3>Bio:</h3>
-        <p>{userData.bio}</p>
+        <p>{userData && userData.bio}</p>
         <h3>Links:</h3>
-        <p>{userData.links}</p>
+        <p>{userData && userData.links}</p>
+        <button onClick={updateProfile}>Update Profile</button>
       </div>
-      {/* <div>
-        <h3>Pear Tree</h3>
-        <p>Placeholder story1<span>with <Avatar className='avatar__image-sm' /></span></p>
-        <p>Placeholder story2<span>with <Avatar className='avatar__image-sm' /></span> </p>
-        <p>Placeholder story3<span>with <Avatar className='avatar__image-sm' /></span> </p>
-      </div> */}
     </section>
   );
 }

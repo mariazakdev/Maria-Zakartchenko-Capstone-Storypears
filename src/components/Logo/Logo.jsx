@@ -1,4 +1,4 @@
-import PearsLogo from "../../assets/logos/1302125802.png";
+import PearsLogo from "../../assets/logos/pera-architetto-francesc-01 (1).png";
 import "./Logo.scss";
 
 function Logo(){

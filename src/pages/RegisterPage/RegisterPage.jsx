@@ -8,7 +8,7 @@ function RegisterPage() {
 
   return (
     <div className="site">
-      <Header />
+      {/* <Header /> */}
       <section className='site__content'>
           <RegisterForm />
         </section>
