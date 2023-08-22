@@ -24,14 +24,30 @@ function StoryCreatorSpace({ passedData }) {
   };
 
   return (
-    <div>
-      <textarea
-        rows="10"
-        cols="50"
-        value={storyContent}
-        onChange={handleInputChange}
-      />
-    </div>
+  <div className="storywriter">
+
+    {storyContent ? (
+      <div className="storywriter-add">
+        <h2>Continue this story seed</h2>
+        <h4>Submit your nurishment so another can join and make a pear.</h4>
+        <textarea
+        
+          value={storyContent}
+          onChange={handleInputChange}
+        />
+      </div>
+    ) : (
+      <div className="storywriter-empty">
+        <h2>Seed your story</h2>
+        <h4>Start writing so that another writer joins in and you become a pear.</h4>
+        <textarea
+         
+          value=""
+          onChange={handleInputChange}
+        />
+      </div>
+    )}
+  </div>
   );
 }
 

@@ -9,11 +9,18 @@ function MyProfile() {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [userData, setUserData] = useState({});
   const [error, setError] = useState(null);
-
+  const authToken = localStorage.getItem('token');
+ 
   useEffect(() => {
     // Send a GET request for profile information
     axios
-      .get(`${SERVER_URL}/auth/profile`, { withCredentials: true })
+      .get(`${SERVER_URL}/auth/profile`, { 
+        withCredentials: true, 
+        headers:{
+          Authorization: `Bearer ${authToken}`
+        } 
+      
+      })
       .then((res) => {
         setIsAuthenticating(false);
         setUserData(res.data);
@@ -23,7 +30,7 @@ function MyProfile() {
         setIsAuthenticating(false);
         setError(err.message || 'Error fetching profile data');
       });
-  }, []);
+  }, [authToken]);
 
   const updateProfile = () => {
     // Send a PUT request to update the user's profile with the data
@@ -52,6 +59,7 @@ function MyProfile() {
 
   return (
     <section className="profile">
+      <h2>This is your lovely writer space. Let use know about you.</h2>
       <h2>Welcome {userData && userData.username}</h2>
       <div>
         <h3>
