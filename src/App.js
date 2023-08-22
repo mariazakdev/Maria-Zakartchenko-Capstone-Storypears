@@ -64,12 +64,13 @@ function App() {
           {/* Protected Routes */}
           <Route path="/story/prompt" element={<StoryPromptPage />} />
           <Route path="/story/new/:id" element={<StoryWriterPage />} />
+          <Route path="/story/new" element={<StoryWriterPage />} />
+
           <Route path="/story/:id" element={<StoryPage />} />
           <Route path="/writers" element={<WriterListPage />} />
           <Route path="/writers/:id" element={<ProfilePage />} />
           <Route path="/story/:id" element={<StoryPage />} />
-          <Route path="/stories" 
-          element={ user? <StoryListPage /> : <Navigate to ="/login"/>} />
+          <Route path="/stories" element={<StoryListPage/>} />
           <Route path="/story/depot" element={<StoryDepotPage />} />
           {/* Single User Visible */}
           <Route path="/profile" element={<MyProfilePage />} />
