@@ -7,9 +7,8 @@ import "./RegisterForm.scss";
 
 function ProfileAdd() {
   const navigate = useNavigate();
-  const userNameRef = useRef(null);
   const passwordRef = useRef(null);
-  const repeatedPasswordRef = useRef(null); // Separate ref for repeated password
+  const repeatedPasswordRef = useRef(null);
   const emailRef = useRef(null);
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
@@ -23,7 +22,6 @@ function ProfileAdd() {
   const createNewUser = () => {
     axios
       .post("http://localhost:8080/auth/register", {
-        username: userNameRef.current.value,
         password: passwordRef.current.value,
         email: emailRef.current.value,
         first_name: firstNameRef.current.value,
@@ -59,10 +57,6 @@ function ProfileAdd() {
   const handleRegisterUser = (event) => {
     event.preventDefault();
     const newErrors = {};
-
-    if (!userNameRef.current.value) {
-      newErrors.userName = "Please enter a username";
-    }
 
     if (isPasswordEmpty(passwordRef.current.value)) {
       newErrors.password = "Please create a password";
@@ -101,8 +95,6 @@ function ProfileAdd() {
     } else {
       console.log("Errors found:", newErrors);
     }
-
-    
   };
 
   const handleInputChange = (event) => {
@@ -116,7 +108,10 @@ function ProfileAdd() {
   const handleInputFocus = (refName) => {
     if (refName.current) {
       refName.current.value = "";
-      setErrors((prevErrors) => ({ ...prevErrors, [refName.current.name]: "" }));
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [refName.current.name]: "",
+      }));
     }
   };
 
@@ -134,48 +129,10 @@ function ProfileAdd() {
           onSubmit={handleRegisterUser}
           noValidate
         >
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            ref={userNameRef}
-            onFocus={() => handleInputFocus(userNameRef)}
-            placeholder="Name for login"
-            className={`input ${errors.userName ? "input--error" : ""}`}
-            required
-          />
-          {errors.userName && <ErrorMessage content={errors.userName} />}
-
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            ref={passwordRef}
-            onFocus={() => handleInputFocus(passwordRef)}
-            placeholder="Create a password"
-            className={`input ${errors.password ? "input--error" : ""}`}
-            required
-          />
-          {errors.password && <ErrorMessage content={errors.password} />}
-
-          <label htmlFor="password2">Repeat Password:</label>
-          <input
-            type="password"
-            id="password2"
-            name="password2"
-            ref={repeatedPasswordRef}
-            onFocus={() => handleInputFocus(repeatedPasswordRef)}
-            placeholder="Repeat your password"
-            className={`input ${errors.passwordMatch ? "input--error" : ""}`}
-            required
-          />
-          {errors.passwordMatch && (
-            <ErrorMessage content={errors.passwordMatch} />
-          )}
-
-          <label htmlFor="email">Email:</label>
+          <div className="form__error">
+            <label htmlFor="email">Email:</label>
+            {errors.email && <ErrorMessage content={errors.email} />}
+          </div>
           <input
             type="email"
             id="email"
@@ -186,9 +143,44 @@ function ProfileAdd() {
             className={`input ${errors.email ? "input--error" : ""}`}
             required
           />
-          {errors.email && <ErrorMessage content={errors.email} />}
 
-          <label htmlFor="first_name">First Name:</label>
+          <div className="form__error">
+            <label htmlFor="password">Password:</label>
+            {errors.password && <ErrorMessage content={errors.password} />}
+          </div>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            ref={passwordRef}
+            onFocus={() => handleInputFocus(passwordRef)}
+            placeholder="Create a password"
+            className={`input ${errors.password ? "input--error" : ""}`}
+            required
+          />
+
+          <div className="form__error">
+            <label htmlFor="password2">Repeat Password:</label>
+            {errors.passwordMatch && (
+              <ErrorMessage content={errors.passwordMatch} />
+            )}
+          </div>
+
+          <input
+            type="password"
+            id="password2"
+            name="password2"
+            ref={repeatedPasswordRef}
+            onFocus={() => handleInputFocus(repeatedPasswordRef)}
+            placeholder="Repeat your password"
+            className={`input ${errors.passwordMatch ? "input--error" : ""}`}
+            required
+          />
+
+          <div className="form__error">
+            <label htmlFor="first_name">First Name:</label>{" "}
+            {errors.firstName && <ErrorMessage content={errors.firstName} />}
+          </div>
           <input
             type="text"
             id="first_name"
@@ -199,9 +191,11 @@ function ProfileAdd() {
             className={`input ${errors.firstName ? "input--error" : ""}`}
             required
           />
-          {errors.firstName && <ErrorMessage content={errors.firstName} />}
 
-          <label htmlFor="last_name">Last Name:</label>
+          <div className="form__error">
+            <label htmlFor="last_name">Last Name:</label>{" "}
+            {errors.lastName && <ErrorMessage content={errors.lastName} />}
+          </div>
           <input
             type="text"
             id="last_name"
@@ -212,9 +206,13 @@ function ProfileAdd() {
             className={`input ${errors.lastName ? "input--error" : ""}`}
             required
           />
-          {errors.lastName && <ErrorMessage content={errors.lastName} />}
 
-          <label htmlFor="pen_first_name">Pen First Name:</label>
+          <div className="form__error">
+            <label htmlFor="pen_first_name">Pen First Name:</label>{" "}
+            {errors.penFirstName && (
+              <ErrorMessage content={errors.penFirstName} />
+            )}
+          </div>
           <input
             type="text"
             id="pen_first_name"
@@ -225,9 +223,6 @@ function ProfileAdd() {
             className={`input ${errors.penFirstName ? "input--error" : ""}`}
             required
           />
-          {errors.penFirstName && (
-            <ErrorMessage content={errors.penFirstName} />
-          )}
 
           <label htmlFor="pen_last_name">Pen Last Name:</label>
           <input

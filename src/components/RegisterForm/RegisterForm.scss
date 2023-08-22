@@ -89,7 +89,11 @@
       .form__button {
         margin-top: 1rem;
       }
-
+      .form__error{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
       .input-container {
         display: flex;
         align-items: center;
