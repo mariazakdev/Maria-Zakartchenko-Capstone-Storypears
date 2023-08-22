@@ -1,5 +1,5 @@
 import './Avatar.scss';
-import AvatarPic from '../../assets/icons/1389952697.png';
+import AvatarPic from '../../assets/icons/1289336492.png';
 
 function Avatar({ className }) {
   return (

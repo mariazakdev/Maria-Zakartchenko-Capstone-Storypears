@@ -13,8 +13,7 @@ function HomePage(){
         <h1>Welcome to Story Pears</h1>
         <LogIn />
         </section>
-           <LoginButton/>
-        <LogoutButton/>
+    
         <Footer/>
      
         </div>

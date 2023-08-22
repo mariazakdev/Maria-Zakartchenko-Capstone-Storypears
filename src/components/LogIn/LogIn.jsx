@@ -60,7 +60,7 @@ function LogIn() {
   return (
     <div className="sign-in-profile">
       <section className="sign-in-profile__heading">
-        <h3>Sign In</h3>
+        <h3>Log In</h3>
       </section>
 
       <section className="sign-in-profile__form-wrapper">
@@ -104,12 +104,13 @@ function LogIn() {
             type="submit"
           />
         </form>
-
+      </section>
+      <search className="sign-in-profile__sign-up">
         <h4>Need an account?</h4>
         <h4>
           <a href="/register">Sign Up</a>
         </h4>
-      </section>
+      </search>
     </div>
   );
 }

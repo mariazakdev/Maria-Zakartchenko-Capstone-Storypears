@@ -1,7 +1,21 @@
-.logout-button {
- a{
-    span{
-        color: black;
+.logout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &-avatar-box{
+        border-radius: 50%;
+        background-color: bisque;
+        overflow: hidden;
+        // border: black 1px solid;
+        margin-right: 1rem;
+        width:40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
- }
-  }
+    a{
+        text-decoration: none; 
+        font-weight: bold;     
+        color: gray;   
+    }
+}

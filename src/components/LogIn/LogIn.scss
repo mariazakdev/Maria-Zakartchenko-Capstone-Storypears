@@ -2,6 +2,9 @@
     width: 30rem;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 2rem;
   
     &__heading {
       text-align: center;
@@ -139,31 +142,19 @@
           }
         }
       }
+      
     }
-  }
-  .options __login-btn{
-    height: 2rem;
-    border: red 2px solid;
-    .icon{
-      width: 20px;
-      height: 20px;
-    }
+    &__sign-up{
+      width: 83%;
+      display: flex;
+      justify-content:space-around;
+        a{
+          text-decoration: none;
+      font-weight: bold;     
+      color: gray;  
+        }
+      }
   }
 
-  .options__login-btn{
-    height: 40px;
-    img{
-width: 30px;
-height: 30px;
-    }
-  }
-  .facebook{
-    background-color: rgb(58, 122, 182);
-  }
-  .google{
-    background-color: rgb(182, 87, 58);
-  }
-  .github{
-    background-color: rgb(99, 93, 91);
 
-  }
+
