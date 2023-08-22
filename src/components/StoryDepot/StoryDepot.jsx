@@ -1,7 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./StoryDepot.scss";
 
-function StoryDepot({ halfStories, handleItemClick }) {
+function StoryDepot({ halfStories}) {
+   const navigate = useNavigate();
+  // Define a function to handle the item click and navigate to the new story page
+  const handleItemClick = (id) => {
+ 
+
+    const selectedHalfStory = getHalfStoryById(id);
+    navigate(`/story/new/${id}`, { state: { data: selectedHalfStory } });
+  };
+
+  const getHalfStoryById = (id) => {
+    return halfStories.find((halfStory) => halfStory.id === id);
+  };
+
   return (
     <div className="story-depot">
       <section className="story-depot__heading">

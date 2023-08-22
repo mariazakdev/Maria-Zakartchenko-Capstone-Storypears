@@ -2,7 +2,8 @@
     border: burlywood 4px solid;
     background-color: beige; 
     &-add,
-    &-empty{
+    &-empty,
+    &-pear{
         display: flex;
         flex-direction: column;
         justify-content: center;

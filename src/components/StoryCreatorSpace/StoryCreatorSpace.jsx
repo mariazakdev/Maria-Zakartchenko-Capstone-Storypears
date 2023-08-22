@@ -16,39 +16,50 @@ import React, { useState } from "react";
 // data backforth with backend
 
 // if data from prompts, load it.if no data leave empty
-function StoryCreatorSpace({ passedData }) {
+function StoryCreatorSpace({ passedData, selectedHalfStory }) {
   const [storyContent, setStoryContent] = useState(passedData);
+  const [halfStoryContent, setHalfStoryContent] = useState (selectedHalfStory)
 
-  const handleInputChange = (event) => {
+  const handleStarterChange = (event) => {
     setStoryContent(event.target.value);
+  };
+  const handleHalfStoryChange = (event) => {
+   setHalfStoryContent(event.target.value);
   };
 
   return (
-  <div className="storywriter">
-
-    {storyContent ? (
+    <div className="storywriter">
+    {halfStoryContent ? (
       <div className="storywriter-add">
         <h2>Continue this story seed</h2>
-        <h4>Submit your nurishment so another can join and make a pear.</h4>
+        <h4>Complete this writing or ask for previous writer to continue.</h4>
         <textarea
-        
-          value={storyContent}
-          onChange={handleInputChange}
+          value={halfStoryContent}
+          onChange={handleHalfStoryChange}
         />
       </div>
-    ) : (
-      <div className="storywriter-empty">
-        <h2>Seed your story</h2>
-        <h4>Start writing so that another writer joins in and you become a pear.</h4>
-        <textarea
-         
-          value=""
-          onChange={handleInputChange}
-        />
+    ) : null}
+
+    {storyContent && !halfStoryContent ? (
+      <div className="storywriter-add">
+        <h2>Continue this story seed</h2>
+        <h4>Submit your nourishment so another can join and make a pair.</h4>
+        <textarea value={storyContent} onChange={handleStarterChange} />
       </div>
-    )}
+    ) : null}
+
+    {!storyContent && !halfStoryContent ? (
+      <div className="storywriter-pear">
+        <h2>Seed your story.</h2>
+        <h4>
+          Start writing so that another writer joins in and you become a
+          pair.
+        </h4>
+        <textarea value="" onChange={handleStarterChange} />
+      </div>
+    ) : null}
   </div>
-  );
+);
 }
 
 export default StoryCreatorSpace;
