@@ -1,0 +1,47 @@
+//icons on elements
+@mixin iconElement {
+  position: absolute;
+  top: 0.7rem;
+  left: 1rem;
+  z-index: 3;
+}
+
+@mixin tablet-plus {
+  @media (min-width: 48rem) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: 16.6875rem) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (min-width: 48rem) and (max-width: 79.9375rem) {
+    @content;
+  }
+}
+@mixin desktop {
+  @media (min-width: 80rem) {
+    @content;
+  }
+}
+
+@mixin flex($justify-content, $align-items, $flex-direction) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  flex-direction: $flex-direction;
+}
+
+@mixin multi-color{
+  background: rgb(238, 174, 202);
+            background: linear-gradient(
+              90deg,
+              rgba(138, 217, 223, 1) 21%,
+              rgba(250, 236, 123, 0.20772058823529416) 55%,
+              rgba(224, 200, 150, 1) 72%
+            );
+            color: gray;
+}

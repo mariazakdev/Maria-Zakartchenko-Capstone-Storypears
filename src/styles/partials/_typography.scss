@@ -1,0 +1,50 @@
+@use "./colors" as c;
+@use "./mixins" as m;
+@import "../../index.scss";
+
+* {
+  box-sizing: border-box;
+  font-family: "avenir", sans-serif;
+}
+
+h1 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  @include m.tablet-plus {
+    font-size: 2.0625rem;
+    line-height: 2.75rem;
+  }
+}
+h2 {
+  font-size: 0.75rem;
+  line-height: 20px;
+  font-weight: 700;
+  color: c.$secondaryTextColor;
+}
+h3 {
+  font-size: 0.8125rem;
+  line-height: 1.125rem;
+  font-weight: 700;
+  @include m.tablet-plus {
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+  }
+}
+
+p {
+  font-size: 0.8125rem;
+  line-height: 1.125rem;
+
+  font-weight: 400;
+  @include m.tablet-plus {
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    letter-spacing: 0.15px;
+  }
+}
+.video-description__details {
+  p {
+    color: c.$linesColor;
+  }
+}

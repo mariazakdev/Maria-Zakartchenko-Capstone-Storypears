@@ -1,11 +1,12 @@
+@use "../../styles/partials/colors" as c;
+@use "../../styles/partials/mixins" as m;
+
+
 .header{
+    @include m.flex(center, center, row);
     height: 7rem;
     width:auto;
     background: radial-gradient(circle at center, #f4f3f0 , #cfc2a5);
-    display: flex;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     padding-left: 1.25rem;
     padding-right: 1.25rem;
 }

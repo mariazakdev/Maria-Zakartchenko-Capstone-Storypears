@@ -1,7 +1,7 @@
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import StoryList from '../../components/StoryList/StoryList';
-
+import "./StoryListPage.scss";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -21,9 +21,12 @@ function StoryListPage() {
   }, [])
 console.log(stories);
   return (
-    <div>
+    <div className='site'>
  {/* <Header /> */}
+ <section className='site__content'>
+
  {stories.length > 0 ? <StoryList stories={stories} /> : <p>Loading...</p>}
+ </section>
  <Footer />
     </div>
   );

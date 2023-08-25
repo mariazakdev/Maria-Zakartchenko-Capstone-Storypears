@@ -25,8 +25,12 @@ const Nav = ({ user, setUser }) => {
         <li>
           <Link to="/story/depot">Depot</Link>
         </li>
+        <li>
+          <Link to="/writers">writers</Link>
+        </li>
+        
       </ul>
-
+<LogoutButton/>
       <div className="nav-user">
         {user ? <LogoutButton /> : <LoginButton />}
       </div>

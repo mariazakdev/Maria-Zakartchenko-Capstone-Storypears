@@ -9,7 +9,7 @@ function ProfileList({profileData}){
         <ul>
           {profileData.map(profile => (
             <li key={profile.id}>
-                <Link to={`/profile/${profile.id}`}>
+                <Link to={`/writers/${profile.id}`}>
                 <Avatar className="avatar__image-bg"/>
               <p>{profile.pen_first_name}{profile.pen_last_name}</p>
               </Link>

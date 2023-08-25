@@ -1,41 +1,34 @@
+@use "../../styles/partials/colors" as c;
+@use "../../styles/partials/mixins" as m;
+
+
 .sign-in-profile {
-    width: 30rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 2rem;
-  
+    width: 18rem;
+    @include m.flex(center, center, column);
+    padding-bottom: 2rem; 
+    @include m.tablet{
+      width: 30rem;
+    }
     &__heading {
       text-align: center;
       margin-bottom: 20px;
     }
   
     &__form-wrapper {
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
+      @include m.flex(center, center, column);
       
-      &--options{
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        width: 30%; 
-    
-      }
       &__form {
         display: flex;
         flex-direction: column;
-        width: 400px;
-  
+        width:  18rem;
+        @include m.tablet{
+        width:  25rem;
+        }
         label {
           font-weight: bold;
           margin-bottom: 5px;
         }
   
-        input[type="text"],
-        input[type="password"],
-        input[type="email"],
         textarea {
           padding: 10px;
           margin-bottom: 10px;
@@ -59,30 +52,20 @@
           margin: 1rem;
           border: none;
           border-radius: .25rem;
-        
           font-weight: bold;
           color: white;
-      
           background-color: #c4c3a7;
           cursor: pointer;
           transition: background-color 0.5s, color 1s;
         
           &:hover,
           &:focus {
-            background: rgb(238, 174, 202);
-            background: linear-gradient(
-              90deg,
-              rgba(138, 217, 223, 1) 21%,
-              rgba(250, 236, 123, 0.20772058823529416) 55%,
-              rgba(224, 200, 150, 1) 72%
-            );
-            color: gray;
+           @include m.multi-color;
           }
         }
   
         .form__count{
           position: relative;
-  
           &-num{
             position: absolute;
             right:.5rem;

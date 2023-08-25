@@ -5,7 +5,7 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Button from "../Button/Button";
 import "./RegisterForm.scss";
 
-function ProfileAdd() {
+function RegisterForm() {
   const navigate = useNavigate();
   const passwordRef = useRef(null);
   const repeatedPasswordRef = useRef(null);
@@ -32,7 +32,7 @@ function ProfileAdd() {
       })
       .then((response) => {
         console.log("Profile created successfully:", response.data);
-        navigate(`/profile`);
+        navigate(`/login`);
       })
       .catch((error) => {
         console.error("Error creating profile:", error);
@@ -273,4 +273,4 @@ function ProfileAdd() {
   );
 }
 
-export default ProfileAdd;
+export default RegisterForm;

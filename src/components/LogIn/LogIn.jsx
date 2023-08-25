@@ -27,7 +27,7 @@ function LogIn() {
 
       if (response.status === 200) {
         console.log("Logged in successfully:", response.data);
-        navigate(`/`);
+        navigate(`/profile`);
       } else {
         console.error("Login failed");
       }

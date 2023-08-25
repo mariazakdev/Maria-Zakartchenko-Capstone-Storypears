@@ -3,6 +3,7 @@ import Footer from '../../components/Footer/Footer';
 import WriterList from '../../components/WriterList/WriterList'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './WriterListPage.scss'
 
 function WriterListPage() {
   const [profileData, setProfileData] = useState([]);
@@ -19,9 +20,12 @@ function WriterListPage() {
   }, []);
 
   return (
-    <div className="App">
+    <div className="Site">
       {/* <Header /> */}
+      <section className='site__content'>
+
       <WriterList profileData={profileData} />
+      </section>
       <Footer />
     </div>
   );

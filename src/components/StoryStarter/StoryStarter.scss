@@ -1,3 +1,7 @@
+@use "../../styles/partials/colors" as c;
+@use "../../styles/partials/mixins" as m;
+
+
 .story-starter {
     padding: 20px;
     
@@ -19,10 +23,7 @@
     }
     
     &__container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 20px;
+      @include m.flex(center, center, column);
       
       &--toggler {
         display: flex;
@@ -64,16 +65,11 @@
           
           li {
             background-color: white;
-            width: 13rem;
+            width: 18rem;
             padding: 2rem 0.5rem ;
             border-radius: .25rem;
             margin-bottom: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-            // box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, 
-            //             rgba(0, 0, 0, 0.12) 0px -12px 30px,
-            //             rgba(0, 0, 0, 0.12) 0px 4px 6px, 
-            //             rgba(0, 0, 0, 0.17) 0px 12px 13px,
-            //             rgba(0, 0, 0, 0.09) 0px -3px 5px;
             transition: transform 0.3s ease, box-shadow 0.5s ease;
             
             &:hover {
