@@ -1,0 +1,24 @@
+@use "../../styles/partials/colors" as c;
+@use "../../styles/partials/mixins" as m;
+
+
+
+.story-reader{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &__story{
+         display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:18.75rem;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    border: none;
+        
+    }
+   
+}

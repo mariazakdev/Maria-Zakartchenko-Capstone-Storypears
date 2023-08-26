@@ -10,27 +10,20 @@ const authService = {
       const response = await axios.post(`${authUrl}/login`, { email, password });
       const { token } = response.data;
 
-      // Store the token in a cookie or localStorage
-      Cookies.set(jwt, token); // Using js-cookie
-      // localStorage.setItem(jwtCookieName, token); // Using localStorage
-
-      return true; // Login successful
+      Cookies.set(jwt, token); 
+      return true; 
     } catch (error) {
       console.error('Login error:', error);
-      return false; // Login failed
+      return false; 
     }
   },
 
   logout: () => {
-    // Remove the token from the cookie or localStorage
-    Cookies.remove(jwt); // Using js-cookie
-    // localStorage.removeItem(jwtCookieName); // Using localStorage
+    Cookies.remove(jwt); 
   },
 
   getToken: () => {
-    // Retrieve the token from the cookie or localStorage
-    return Cookies.get(jwt); // Using js-cookie
-    // return localStorage.getItem(jwtCookieName); // Using localStorage
+    return Cookies.get(jwt);
   },
 };
 

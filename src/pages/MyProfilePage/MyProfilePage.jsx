@@ -15,18 +15,14 @@ function ProfilePage() {
     useEffect(() => {
       const fetchUserData = async () => {
         try {
-          // Get the JWT token from your authentication service
           const token = authService.getToken();
   
-          // Set up headers with the JWT token
           const headers = {
             Authorization: `Bearer ${token}`,
           };
   
-          // Make an authenticated request to the profile route
           const response = await axios.get('http://localhost:8080/auth/profile', { headers });
   
-          // Set the user data with the response data
           setUserData(response.data.user);
         } catch (error) {
           console.error("Error fetching profile data:", error);

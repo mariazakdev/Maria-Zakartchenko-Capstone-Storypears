@@ -1,6 +1,5 @@
 .storywriter{
-    border: burlywood 4px solid;
-    background-color: beige; 
+
     &-add,
     &-empty,
     &-pear{
@@ -15,7 +14,16 @@
             padding: 1rem;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
             border: none;
+            resize: none;
 
+        }
+    }
+    &-pear{
+        &__storyInputs{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
     }
 }

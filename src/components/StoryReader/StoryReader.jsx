@@ -3,16 +3,18 @@ import "./StoryReader.scss";
 
 function StoryPage({story}) {
   
+
+
  return(
     <div className="story-reader">
-      <div>
+      <div className="story-reader__nav">
         <NavStoryReader />
       </div>
-      <div>
+      <div  className="story-reader__story">
       <h2>{story.title}</h2>
       <p>{story.story}</p>
       </div>
-      <div>
+      <div className="story-reader__nav">
         <NavStoryReader />
       </div>
     </div>

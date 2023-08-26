@@ -7,7 +7,6 @@ const authUrl = process.env.REACT_APP_AUTH_URL;
 const LogoutButton = () => {
   const handleLogout = () => {
     authService.logout();
-    // Redirect the user to the login page or any other desired location
   };
 
   return (

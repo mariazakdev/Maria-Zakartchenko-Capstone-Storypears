@@ -6,8 +6,8 @@ import LogoutButton from "../LogoutButton/LogoutButton";
 import LoginButton from "../LoginButton/LoginButton";
 
 const Nav = () => {
-  // const { user } = useContext(AuthContext);
-const user =true;
+  const { user } = useContext(AuthContext);
+
   return (
 <nav className="nav">
       <ul className="nav-list">
