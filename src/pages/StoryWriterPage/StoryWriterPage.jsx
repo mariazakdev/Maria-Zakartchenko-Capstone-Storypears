@@ -6,13 +6,14 @@ import StoryCreatorSpace from '../../components/StoryCreatorSpace/StoryCreatorSp
 
 function StoryWriterPage() {
   const location = useLocation();
-  const passedData = location.state?.data || {};
-  const content = passedData.sentence || '';
-
+  const selectedPromptData = location.state?.data || {}; // Data from prompts
+  const selectedHalfStoryData = location.state?.data || {}; // Data from half stories
+  const promptContent = selectedPromptData.sentence || '';
+  const halfStoryContent = selectedHalfStoryData.story || '';
   return (
     <div className="App">
       <Header />
-      <StoryCreatorSpace passedData={content} />
+      <StoryCreatorSpace promptData={promptContent} halfStoryData={halfStoryContent} />
       <Footer />
     </div>
   );

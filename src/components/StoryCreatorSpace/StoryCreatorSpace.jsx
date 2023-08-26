@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import './StoryCreatorSpace.scss';
-function StoryCreatorSpace({ passedData, selectedHalfStory }) {
-  const [storyContent, setStoryContent] = useState(passedData);
-  const [halfStoryContent, setHalfStoryContent] = useState(selectedHalfStory);
-  const [textAreaContent, setTextAreaContent] = useState(initialStoryContent || ""); // for content in session
+
+
+function StoryCreatorSpace({ promptData, halfStoryData }) {
+
+  const [storyContent, setStoryContent] = useState(promptData);
+  const [halfStoryContent, setHalfStoryContent] = useState(halfStoryData);
+  const [textAreaContent, setTextAreaContent] = useState(""); // for content in session
 
   const [genreName, setGenreName] = useState(""); 
   const [genres, setGenres] = useState([]); 
@@ -71,6 +74,8 @@ return (
       </div>
     ) : null}
 
+
+
     {storyContent && !halfStoryContent ? (
       <div className="storywriter-add">
         <h2>Continue this story seed</h2>
@@ -78,6 +83,12 @@ return (
         <textarea value={storyContent} onChange={handleStarterChange} />
       </div>
     ) : null}
+
+
+
+
+
+
 
     {!storyContent && !halfStoryContent ? (
       <div className="storywriter-pear">
