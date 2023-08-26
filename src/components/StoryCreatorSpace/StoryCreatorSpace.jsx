@@ -4,8 +4,11 @@ import './StoryCreatorSpace.scss';
 function StoryCreatorSpace({ passedData, selectedHalfStory }) {
   const [storyContent, setStoryContent] = useState(passedData);
   const [halfStoryContent, setHalfStoryContent] = useState(selectedHalfStory);
+  const [textAreaContent, setTextAreaContent] = useState(initialStoryContent || ""); // for content in session
+
   const [genreName, setGenreName] = useState(""); 
   const [genres, setGenres] = useState([]); 
+
 
   useEffect(() => {
     async function fetchGenres() {
@@ -31,7 +34,33 @@ function StoryCreatorSpace({ passedData, selectedHalfStory }) {
   const handleGenreChange = (event) => {
     setGenreName(event.target.value);
   };
+  // Functions handling when a user saves story in session but not submits.
+  const saveToSessionStorage = () => {
+    if (storyContent) {
+      sessionStorage.setItem('storyContent', storyContent);
+    }
+  };
+  // User retrieves data from session. 
+  const getFromSessionStorage = () => {
+    const savedContent = sessionStorage.getItem('storyContent');
+    return savedContent || ''; 
+  };
+// Use edited content or content from session storage
+const submitHalfStory = async () => {
+  const user1_id = 34; // Waiting for login help to finish this code. Harded coded based on Emma, my first authenticated user. 
+  const halfStoryData = {
+    content: halfStoryContent || getFromSessionStorage(),
+    user1_id, 
+  };
 
+  try {
+    // Send the half story data to Axios
+    const response = await axios.post('http://localhost:8080/halfstories', halfStoryData);
+    // Handle the response as needed
+  } catch (error) {
+    console.error('Error submitting half story:', error);
+  }
+};
 return (
   <div className="storywriter">
     {halfStoryContent ? (
@@ -85,11 +114,11 @@ return (
             id="story"
             name="story"
             onChange={handleStarterChange}
-            value=""
-          />
+            value={textAreaContent}
 
-          <input type="submit" value="Submit" />
-          <input type="button" value="Edit" id="editButton" />
+          />
+          <input type="button" value="Save" onClick={saveToSessionStorage} />
+          <input type="submit" value="Submit" onClick={submitHalfStory}/>
         </form>
       </div>
     ) : null}
