@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-import Profile from '../../components/Profile/Profile';
+import WriterProfile from '../../components/WriterProfile/WriterProfile';
 
 function ProfilePage() {
     const [userData, setUserData] = useState(null);
@@ -24,8 +24,8 @@ function ProfilePage() {
     }, [id]);
     return (
         <div className="App">
-            {/* <Header /> */}
-            <Profile userData ={userData} setUserData={setUserData}/>
+            <Header />
+            <WriterProfile userData ={userData} setUserData={setUserData}/>
             <Footer />
         </div>
     );

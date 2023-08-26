@@ -2,7 +2,7 @@ import React from 'react';
 import "./Profile.scss";
 import Avatar from "../Avatar/Avatar";
 
-function Profile({ userData, setUserData}) {
+function WriterProfile({ userData, setUserData}) {
   if (!userData) {
     return <div>🤷‍♀️ Couldn't find the data...</div>;
 }
@@ -29,4 +29,4 @@ function Profile({ userData, setUserData}) {
   );
 }
 
-export default Profile;
+export default WriterProfile;

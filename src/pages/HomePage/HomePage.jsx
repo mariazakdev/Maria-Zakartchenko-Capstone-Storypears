@@ -5,7 +5,7 @@ import './HomePage.scss';
 function HomePage(){
     return(
         <div className='site'>
-        {/* <Header/> */}
+        <Header/>
         <section className='site__content'>
         <h1>Welcome to Story Pears</h1>
         <h2>A collaborative space to write stories in pairs</h2>

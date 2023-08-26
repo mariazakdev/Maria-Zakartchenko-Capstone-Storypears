@@ -22,7 +22,7 @@ function StoryListPage() {
 console.log(stories);
   return (
     <div className='site'>
- {/* <Header /> */}
+ <Header />
  <section className='site__content'>
 
  {stories.length > 0 ? <StoryList stories={stories} /> : <p>Loading...</p>}

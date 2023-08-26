@@ -21,7 +21,7 @@ function WriterListPage() {
 
   return (
     <div className="Site">
-      {/* <Header /> */}
+      <Header />
       <section className='site__content'>
 
       <WriterList profileData={profileData} />

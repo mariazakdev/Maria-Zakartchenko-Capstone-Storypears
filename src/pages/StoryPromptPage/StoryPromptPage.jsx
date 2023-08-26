@@ -39,7 +39,7 @@ function StoryPromptPage() {
 
   return (
     <div className="site">
- {/* <Header /> */}
+ <Header />
  <div className='site__content'></div>
  <StoryStarter  prompts={prompts} feelings={feelings}/>
  <Footer />

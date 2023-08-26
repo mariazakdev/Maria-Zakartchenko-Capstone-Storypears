@@ -5,7 +5,7 @@ import LoginButton from '../../components/LoginButton/LoginButton';
 function AuthFailPage (){
     return(
         <div className='site'>
-        {/* <Header/> */}
+        <Header/>
         <section className='site__content'>
         <div>
       <h1>Authentication Failed 😔</h1>
