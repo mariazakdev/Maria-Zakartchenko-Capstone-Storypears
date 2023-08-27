@@ -26,26 +26,7 @@ const Url = process.env.REACT_APP_API_URL;
 const authUrl = process.env.REACT_APP_AUTH_URL;
 
 function App() {
-  const [user, setUser] = useState(null);
-  useEffect(() => {
-    const getUser = async () => {
-      try {
-        const response = await axios.get("http://localhost:8080/auth/profile", {
-          withCredentials: true,
-        });
 
-        if (response.status === 200) {
-          setUser(response.data.user);
-        } else {
-          throw new Error("Authentication has failed!");
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    getUser();
-  }, []);
 
   return ( 
     <main className="App">

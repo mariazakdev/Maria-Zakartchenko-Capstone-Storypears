@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios'; // Import Axios
+import axios from 'axios';
+import authService from '../services/authService'; // Import authService
 
 const authUrl = process.env.REACT_APP_AUTH_URL;
-
 
 const AuthContext = createContext();
 export default AuthContext;
@@ -13,8 +13,19 @@ export const AuthProvider = ({ children }) => {
   // Function to fetch authenticated user data
   const fetchAuthenticatedUser = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/auth/profile"); 
-      setUser(response.data); // Set the user data in the state
+      const token = authService.getToken(); // Get the JWT token from authService
+
+      if (token) {
+        const headers = {
+          Authorization: `Bearer ${token}`,
+        };
+
+        const response = await axios.get(`${authUrl}/profile`, { headers });
+        setUser(response.data); // Set the user data in the state
+      } else {
+        // Handle the case where there's no token (user not authenticated)
+        setUser(null); // Clear the user data
+      }
     } catch (error) {
       // Handle any errors here
       console.error('Error fetching authenticated user:', error);
@@ -22,9 +33,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    // Check if the user is authenticated and fetch the user data
     fetchAuthenticatedUser();
-  }, []); // The empty dependency array ensures this effect runs only once
+  }, []); 
 
   return (
     <AuthContext.Provider value={{ user }}>

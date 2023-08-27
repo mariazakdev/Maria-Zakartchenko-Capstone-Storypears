@@ -70,7 +70,24 @@ return (
       <div className="storywriter-add">
         <h2>Continue this story seed</h2>
         <h4>Complete this writing or ask for the previous writer to continue.</h4>
-        <textarea value={halfStoryContent} onChange={handleHalfStoryChange} />
+
+        <form className="storywriter-add__storyInputs">
+          <label htmlFor="penName">User Pen Name:</label>
+          <input type="text" id="penName" name="penName" required />
+
+          <label htmlFor="story">Start Typing:</label>
+          <br />
+          <textarea
+            id="story"
+            name="story"
+            value={halfStoryContent} 
+            onChange={handleHalfStoryChange}
+           
+
+          />
+          <input type="button" value="Save" onClick={saveToSessionStorage} />
+          <input type="submit" value="Submit" onClick={submitHalfStory}/>
+        </form>
       </div>
     ) : null}
 
@@ -80,14 +97,44 @@ return (
       <div className="storywriter-add">
         <h2>Continue this story seed</h2>
         <h4>Submit your contribution so another can join and make a pair.</h4>
-        <textarea value={storyContent} onChange={handleStarterChange} />
+        <form className="storywriter-pear__storyInputs">
+          <label htmlFor="penName">User Pen Name:</label>
+          <input type="text" id="penName" name="penName" required />
+
+          <label htmlFor="title">Title:</label>
+          <input type="text" id="title" name="title" required />
+
+          <label htmlFor="genre">Genre:</label>
+          <select
+              id="genre"
+              name="genre"
+              required
+              value={genreName}
+              onChange={handleGenreChange}
+            >
+              <option value="">Select a Genre</option>
+              {genres.map((genre) => (
+                <option key={genre.id} value={genre.genre_name}>
+                  {genre.genre_name}
+                </option>
+              ))}
+            </select>
+
+          <label htmlFor="story">Start Typing:</label>
+          <br />
+          <textarea
+            id="story"
+            name="story"
+            value={storyContent} 
+            onChange={handleStarterChange} 
+
+          />
+          <input type="button" value="Save" onClick={saveToSessionStorage} />
+          <input type="submit" value="Submit" onClick={submitHalfStory}/>
+        </form>
+
       </div>
     ) : null}
-
-
-
-
-
 
 
     {!storyContent && !halfStoryContent ? (

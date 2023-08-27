@@ -25,6 +25,30 @@ const authService = {
   getToken: () => {
     return Cookies.get(jwt);
   },
+
+  getProfile: async () => {
+    try {
+      const token = Cookies.get(jwt);
+      if (!token) {
+        // Token is not available, handle the error or redirect to login.
+        throw new Error('No token available');
+      }
+
+      const response = await axios.get(`${authUrl}/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      // Returns user profile
+      return response.data; 
+    } catch (error) {
+      console.error('Profile retrieval error:', error);
+      throw error;
+    }
+  },
 };
+
+  
+
 
 export default authService;

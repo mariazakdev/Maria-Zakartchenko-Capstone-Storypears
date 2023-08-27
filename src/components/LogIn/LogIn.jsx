@@ -105,12 +105,12 @@ function LogIn() {
           />
         </form>
       </section>
-      <search className="sign-in-profile__sign-up">
+      <section className="sign-in-profile__sign-up">
         <h4>Need an account?</h4>
         <h4>
           <a href="/register">Sign Up</a>
         </h4>
-      </search>
+      </section>
     </div>
   );
 }
