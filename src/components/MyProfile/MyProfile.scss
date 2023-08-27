@@ -1,0 +1,21 @@
+@use "../../styles/partials/typography" as *;
+
+.profile {
+  &-greeting {
+  }
+  &-pic{
+    width: 18.75rem;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  &-info {
+    width: 18.75rem;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+p{
+        font-family: "Handlee", sans-serif;
+
+}
+  }
+
+}

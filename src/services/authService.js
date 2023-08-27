@@ -1,54 +1,60 @@
 import axios from 'axios';
-import Cookies from 'js-cookie'; // If using js-cookie
 
-const jwt= process.env.REACT_APP_JWT_COOKIE_NAME;
+
+const jwt = process.env.REACT_APP_JWT_KEY;
 const authUrl = process.env.REACT_APP_AUTH_URL;
 
+console.log('JWT Key:', jwt);
 const authService = {
   login: async (email, password) => {
     try {
       const response = await axios.post(`${authUrl}/login`, { email, password });
       const { token } = response.data;
 
-      Cookies.set(jwt, token); 
-      return true; 
+      // Store the token in localStorage
+      localStorage.setItem(jwt, token);
+      console.log('Token set in localStorage:', localStorage.getItem(jwt));
+      return true;
     } catch (error) {
       console.error('Login error:', error);
-      return false; 
+      return false;
     }
   },
 
   logout: () => {
-    Cookies.remove(jwt); 
+    // Remove the token from localStorage
+    localStorage.removeItem(jwt);
   },
 
   getToken: () => {
-    return Cookies.get(jwt);
+    // Retrieve the token from localStorage
+    return localStorage.getItem(jwt);
   },
 
   getProfile: async () => {
     try {
-      const token = Cookies.get(jwt);
+      const token = localStorage.getItem(jwt);
+      console.log('Token:', token);
       if (!token) {
-        // Token is not available, handle the error or redirect to login.
         throw new Error('No token available');
       }
 
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      console.log('Headers:', headers);
+
       const response = await axios.get(`${authUrl}/profile`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers,
       });
-      // Returns user profile
-      return response.data; 
+
+      return response.data;
     } catch (error) {
       console.error('Profile retrieval error:', error);
       throw error;
     }
   },
 };
-
-  
-
 
 export default authService;

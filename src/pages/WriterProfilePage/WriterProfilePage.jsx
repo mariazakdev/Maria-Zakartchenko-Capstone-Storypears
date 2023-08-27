@@ -23,9 +23,12 @@ function ProfilePage() {
       fetchUserData();
     }, [id]);
     return (
-        <div className="App">
-            <Header />
+      <div className='site'>
+      <Header />
+      <section className='site__content'>
+
             <WriterProfile userData ={userData} setUserData={setUserData}/>
+            </section>
             <Footer />
         </div>
     );

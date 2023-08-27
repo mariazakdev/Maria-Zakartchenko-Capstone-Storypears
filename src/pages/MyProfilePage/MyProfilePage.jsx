@@ -1,47 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import MyProfile from '../../components/MyProfile/MyProfile';
 import authService from '../../services/authService';
-
-const authUrl = process.env.REACT_APP_AUTH_URL;
+import axios from 'axios';
 
 function ProfilePage() {
-  const [userData, setUserData] = useState(null);
-  const { id } = useParams();
+const userData = {   
+id: 43,
+first_name: "John",
+last_name: "Rix",
+pen_first_name: "JR",
+pen_last_name: "Writer",
+bio: "I'm a passionate writer with a love for storytelling. My goal is to inspire and entertain readers with my words."
+  };
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const token = authService.getToken();
 
-        if (token) {
-          const headers = {
-            Authorization: `Bearer ${token}`,
-          };
-
-          const response = await axios.get(`${authUrl}/profile`, { headers });
-
-          setUserData(response.data.user);
-        } else {
-          // Handle the case where there's no token (user not authenticated)
-          setUserData(null); // Clear the user data
-        }
-      } catch (error) {
-        console.error("Error fetching profile data:", error);
-        setUserData(null); // Clear the user data on error
-      }
-    };
-
-    fetchUserData();
-  }, [id]);
 
   return (
-    <div className="App">
+   <div className='site'>
       <Header />
-      <MyProfile userData={userData} />
+      <section className='site__content'>
+        <MyProfile userData={userData} />
+      </section>
       <Footer />
     </div>
   );

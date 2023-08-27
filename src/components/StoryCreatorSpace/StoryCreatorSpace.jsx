@@ -48,6 +48,20 @@ function StoryCreatorSpace({ promptData, halfStoryData }) {
     const savedContent = sessionStorage.getItem('storyContent');
     return savedContent || ''; 
   };
+    // Function to handle user contributions to the halfStoryContent
+    const addContributionToHalfStory = () => {
+      // Get the user's contribution from textAreaContent
+      const userContribution = textAreaContent;
+  
+      if (userContribution) {
+        // Append the user's contribution to the existing halfStoryContent
+        const updatedHalfStory = halfStoryContent + "\n" + userContribution;
+        setHalfStoryContent(updatedHalfStory);
+        
+        // Clear the textarea for user input
+        setTextAreaContent("");
+      }
+    }
 // Use edited content or content from session storage
 const submitHalfStory = async () => {
   const user1_id = 34; // Waiting for login help to finish this code. Harded coded based on Emma, my first authenticated user. 
