@@ -30,11 +30,9 @@ function MyProfile({ userData }) {
          
         })
         .then((response) => {
-          // Handle successful update, e.g., show a success message
           console.log("User data updated:", response.data);
         })
         .catch((error) => {
-          // Handle error, e.g., show an error message
           console.error("Error updating user data:", error);
         });
     }
@@ -43,11 +41,8 @@ function MyProfile({ userData }) {
     setIsEditMode(!isEditMode);
   };
   const handleLinkChange = (index, newValue) => {
-    // Create a copy of the editedLinks array
     const newEditedLinks = [...editedLinks];
-    // Update the link at the specified index
     newEditedLinks[index] = newValue;
-    // Update the state with the new editedLinks array
     setEditedLinks(newEditedLinks);
   };
 
@@ -73,7 +68,6 @@ function MyProfile({ userData }) {
   <h3>Pen Name / Username:</h3>
   {isEditMode ? (
     <div>
-      {/* Input fields for editing pen names */}
       <input
         type="text"
         className="profile-info__pen-name-edit"
@@ -92,7 +86,6 @@ function MyProfile({ userData }) {
       />
     </div>
   ) : (
-    // Display pen names as static text
     <p className="profile-info__pen-name">
       {userData.pen_first_name} {userData.pen_last_name}
     </p>
