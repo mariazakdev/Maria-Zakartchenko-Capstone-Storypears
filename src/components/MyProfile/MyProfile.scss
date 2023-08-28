@@ -1,21 +1,113 @@
 @use "../../styles/partials/typography" as *;
+@use "../../styles/partials/mixins" as m;
 
 .profile {
-  &-greeting {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+  &-header{
+    display: flex;
   }
-  &-pic{
+  &-pic {
     width: 18.75rem;
     padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   &-info {
     width: 18.75rem;
     padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-p{
-        font-family: "Handlee", sans-serif;
+    
+    p {
+      font-family: "Handlee", sans-serif;
+      padding-left: 1rem;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+      li {
+        margin-bottom: 0.5rem;
+        padding-left: 1rem;
+      }
+    }
+    a {
+      text-decoration: none;
+      font-family: "Handlee", sans-serif;
+      color: black;
+    }
+    edit-icon {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      cursor: pointer;
+    }
+    edit-icon:hover {
+      transform: scale(1.1);
+    }
+    img {
+      width: 20px;
+      height: 20px;
+    }
+    &:last-child {
+        margin-bottom: 1rem;
+      }
+      &__btn{
+            padding: .625rem;
+            margin: 1rem;
+            border: none;
+            border-radius: .25rem;
+            font-weight: bold;
+            color: white;
+            background-color: #c4c3a7;
+            cursor: pointer;
+            transition: background-color 0.5s, color 1s;
+          
+            &:hover,
+            &:focus {
+             @include m.multi-color;
+            
+          }
+      }
 
-}
+
+  }
+  input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    font-family: "Handlee", sans-serif;
+    margin-bottom: 1rem;
+  }
+
+  textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    font-family: "Handlee", sans-serif;
+    resize: none; 
+    margin-bottom: 1rem;
+    min-height: calc(500 / 50 * 1.5rem);
   }
 
 }
+
+.form__count {
+    position: relative;
+
+    &-num {
+      position: absolute;
+      right: 0.5rem;
+      bottom: -0.5em;
+      font-size: 0.7rem;
+
+      &--warning {
+        color: lightpink;
+        font-weight: bold;
+      }
+    }
+  }

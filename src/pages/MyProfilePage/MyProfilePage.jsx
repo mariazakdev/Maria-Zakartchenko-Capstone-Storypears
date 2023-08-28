@@ -7,15 +7,19 @@ import authService from '../../services/authService';
 import axios from 'axios';
 
 function ProfilePage() {
-const userData = {   
-id: 43,
-first_name: "John",
-last_name: "Rix",
-pen_first_name: "JR",
-pen_last_name: "Writer",
-bio: "I'm a passionate writer with a love for storytelling. My goal is to inspire and entertain readers with my words."
-  };
-
+const userData = 
+{
+  id: 2,
+  avatar_url: null,
+  password: "password1",
+  email: "user1@example.com",
+  first_name: "John",
+  last_name: "Doe",
+  pen_first_name: "Penelope",
+  pen_last_name: "Drake",
+  bio: "Poet with a heart full of emotions and a pen dipped in ink.",
+  links: ["https://twitter.com/user2", "https://linkedin.com/in/user2"]
+  }
 
 
   return (
