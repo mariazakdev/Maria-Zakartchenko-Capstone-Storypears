@@ -70,7 +70,7 @@ function MyProfile({ userData }) {
       </div>
 {/* Pen Names section */}
 <div className="profile-info">
-  <h3>Pen Names:</h3>
+  <h3>Pen Name / Username:</h3>
   {isEditMode ? (
     <div>
       {/* Input fields for editing pen names */}
