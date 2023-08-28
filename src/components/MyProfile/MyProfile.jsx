@@ -17,11 +17,14 @@ function MyProfile({ userData }) {
   const [bioCharacterCount, setBioCharacterCount] = useState(userData.bio.length); // Initialize with the current bio length
   const toggleButtonValue = () => {
     if (isEditMode) {
+      const newUsername = `${editedPenFirstName.toLowerCase()}${editedPenLastName.toLowerCase()}`;
+
       // Handle Update Button Click
       axios
         .put(`http://localhost:8080/users/${userData.id}`, {
           pen_first_name: editedPenFirstName,
           pen_last_name: editedPenLastName,
+          username: newUsername,
           bio: editedBio,
           links: editedLinks,
          
