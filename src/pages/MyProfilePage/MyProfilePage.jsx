@@ -15,10 +15,10 @@ const userData =
   email: "user1@example.com",
   first_name: "John",
   last_name: "Doe",
-  pen_first_name: "Penelope",
-  pen_last_name: "Drake",
+  pen_first_name: "Penny",
+  pen_last_name: "Writer",
   bio: "Poet with a heart full of emotions and a pen dipped in ink.",
-  links: ["https://twitter.com/user2", "https://linkedin.com/in/user2"]
+  links: ["https://twitter.com/user2", "https://linkedin.com/in/user2", "https://instagram.com/in/fgfgdg"]
   }
 
 

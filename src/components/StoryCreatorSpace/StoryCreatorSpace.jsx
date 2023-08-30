@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import './StoryCreatorSpace.scss';
+const { v4: uuidv4 } = require('uuid');
 
-
-function StoryCreatorSpace({ promptData, halfStoryData }) {
+function StoryCreatorSpace({ promptData, halfStoryData, user }) {
 
   const [storyContent, setStoryContent] = useState(promptData);
   const [halfStoryContent, setHalfStoryContent] = useState(halfStoryData);
-  const [textAreaContent, setTextAreaContent] = useState(""); // for content in session
-
+  const [textAreaContent, setTextAreaContent] = useState(""); 
+  const [title, setTitle] = useState("")
   const [genreName, setGenreName] = useState(""); 
+  const [genreId, setGenreId] =useState("");
   const [genres, setGenres] = useState([]); 
-
 
   useEffect(() => {
     async function fetchGenres() {
       try {
         const response = await axios.get('http://localhost:8080/genres');
         setGenres(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error('Error fetching genres:', error);
       }
     }
-
     fetchGenres();
   }, []); 
 
@@ -35,7 +35,17 @@ function StoryCreatorSpace({ promptData, halfStoryData }) {
   };
 
   const handleGenreChange = (event) => {
-    setGenreName(event.target.value);
+    const selectedGenreName = event.target.value;
+    setGenreName(selectedGenreName);
+    const selectedGenre = genres.find((genre) => genre.genre_name === selectedGenreName);
+    if (selectedGenre) {
+      setGenreId(selectedGenre.id);
+      console.log(selectedGenre.id);
+    }
+  };
+
+  const handleTextAreaChange = (event) => {
+    setTextAreaContent(event.target.value);
   };
   // Functions handling when a user saves story in session but not submits.
   const saveToSessionStorage = () => {
@@ -43,88 +53,141 @@ function StoryCreatorSpace({ promptData, halfStoryData }) {
       sessionStorage.setItem('storyContent', storyContent);
     }
   };
-  // User retrieves data from session. 
+  
   const getFromSessionStorage = () => {
     const savedContent = sessionStorage.getItem('storyContent');
     return savedContent || ''; 
   };
-    // Function to handle user contributions to the halfStoryContent
-    const addContributionToHalfStory = () => {
-      // Get the user's contribution from textAreaContent
-      const userContribution = textAreaContent;
-  
-      if (userContribution) {
-        // Append the user's contribution to the existing halfStoryContent
-        const updatedHalfStory = halfStoryContent + "\n" + userContribution;
-        setHalfStoryContent(updatedHalfStory);
-        
-        // Clear the textarea for user input
-        setTextAreaContent("");
-      }
-    }
-// Use edited content or content from session storage
-const submitHalfStory = async () => {
-  const user1_id = 34; // Waiting for login help to finish this code. Harded coded based on Emma, my first authenticated user. 
-  const halfStoryData = {
-    content: halfStoryContent || getFromSessionStorage(),
-    user1_id, 
-  };
+console.log(user);
+
+const startHalfStory = async () => {
+  const userContribution = textAreaContent || getFromSessionStorage();
+  const id = uuidv4();
+  const storyId = uuidv4();
 
   try {
-    // Send the half story data to Axios
-    const response = await axios.post('http://localhost:8080/halfstories', halfStoryData);
-    // Handle the response as needed
+    if (genreName.trim() !== "" && title.trim() !== "") {
+      const response = await axios.post('http://localhost:8080/storycontents', {
+        id,
+        content: userContribution,
+        user_id: user.id,
+        story_id: storyId,
+        genre_id: genreId, // Update genre_id here
+        genre: genreName,
+        title: title, 
+        timestamp: new Date().toISOString(),
+      });
+
+      console.log('Successfully submitted half story:', response.data);
+    } else {
+      console.error('Genre and title cannot be empty.');
+    }
   } catch (error) {
     console.error('Error submitting half story:', error);
   }
 };
-return (
-  <div className="storywriter">
-    {halfStoryContent ? (
-      <div className="storywriter-add">
-        <h2>Continue this story seed</h2>
-        <h4>Complete this writing or ask for the previous writer to continue.</h4>
+  return (
+    <div className="storywriter">
 
-        <form className="storywriter-add__storyInputs">
-          <label htmlFor="penName">User Pen Name:</label>
-          <input type="text" id="penName" name="penName" required />
+{/*       
+      {halfStoryContent ? (
+        <div className="storywriter-add">
+          <h2>Continue this story seed</h2>
+          <h4>Complete this writing or ask for the previous writer to continue.</h4>
+  
+          <form className="storywriter-add__storyInputs">
+            <h3>{user.pen_first_name} {user.pen_last_name}</h3>
+  
+            <label htmlFor="story">Start Typing:</label>
+            <br />
+            <textarea
+              id="story"
+              name="story"
+              value={halfStoryContent} 
+              onChange={handleHalfStoryChange}
+            />
+            <input type="button" value="Save" onClick={saveToSessionStorage} />
+            <input 
+              type="submit" 
+              value="Submit" 
+              onClick={startHalfStory}
+            />
+          </form>
+        </div>
+      ) : null} */}
+  
+      {/* {storyContent && !halfStoryContent ? (
+        <div className="storywriter-add">
+          <h2>Continue this story seed</h2>
+          <h4>Submit your contribution so another can join and make a pair.</h4>
+          <form className="storywriter-pear__storyInputs">
+            <h3>{user.pen_first_name} {user.pen_last_name}</h3>
+  
+            <label htmlFor="title">Title:</label>
+            <input type="text" id="title" name="title" required />
+  
+            <label htmlFor="genre">Genre:</label>
+            <select
+                id="genre"
+                name="genre"
+                required
+                value={genreName} 
+                onChange={handleGenreChange}
+              >
+                <option value="">Select a Genre</option>
+                {genres.map((genre) => (
+                  <option key={genre.id} value={genre.genre_name}>
+                    {genre.genre_name}
+                  </option>
+                ))}
+              </select>
+  
+            <label htmlFor="story">Start Typing:</label>
+            <br />
+            <textarea
+              id="story"
+              name="story"
+              value={storyContent} 
+              onChange={handleStarterChange} 
+            />
+            <input type="button" value="Save" onClick={saveToSessionStorage} />
+            <input 
+              type="submit" 
+              value="Submit" 
+              onClick={startHalfStory}
+            />
+          </form>
+        </div>
+      ) : null} */}
 
-          <label htmlFor="story">Start Typing:</label>
-          <br />
-          <textarea
-            id="story"
-            name="story"
-            value={halfStoryContent} 
-            onChange={handleHalfStoryChange}
-           
+      
+  {/* Start new story */}
+  {!storyContent && !halfStoryContent ? (
+        <div className="storywriter-pear">
+          <h2>Seed your story.</h2>
+          <h4>
+            Start writing so that another writer joins in and you become a pair.
+          </h4>
+          <form className="storywriter-pear__storyInputs">
+            <h3>{user.pen_first_name} {user.pen_last_name}</h3>
 
-          />
-          <input type="button" value="Save" onClick={saveToSessionStorage} />
-          <input type="submit" value="Submit" onClick={submitHalfStory}/>
-        </form>
-      </div>
-    ) : null}
-
-
-
-    {storyContent && !halfStoryContent ? (
-      <div className="storywriter-add">
-        <h2>Continue this story seed</h2>
-        <h4>Submit your contribution so another can join and make a pair.</h4>
-        <form className="storywriter-pear__storyInputs">
-          <label htmlFor="penName">User Pen Name:</label>
-          <input type="text" id="penName" name="penName" required />
-
-          <label htmlFor="title">Title:</label>
-          <input type="text" id="title" name="title" required />
-
-          <label htmlFor="genre">Genre:</label>
-          <select
-              id="genre"
-              name="genre"
+            <label htmlFor="title">Title:</label>
+            <input
+              type="text"
+              id="title"
+              name="title" 
+              value={title} 
+              onChange={(e) => setTitle(e.target.value)}
               required
+            />
+
+            <label htmlFor="genre">Genre:</label>
+            <select
+              id="genre"
+              name="genre" 
               value={genreName}
               onChange={handleGenreChange}
+              required
             >
               <option value="">Select a Genre</option>
               {genres.map((genre) => (
@@ -134,69 +197,25 @@ return (
               ))}
             </select>
 
-          <label htmlFor="story">Start Typing:</label>
-          <br />
-          <textarea
-            id="story"
-            name="story"
-            value={storyContent} 
-            onChange={handleStarterChange} 
-
-          />
-          <input type="button" value="Save" onClick={saveToSessionStorage} />
-          <input type="submit" value="Submit" onClick={submitHalfStory}/>
-        </form>
-
-      </div>
-    ) : null}
-
-
-    {!storyContent && !halfStoryContent ? (
-      <div className="storywriter-pear">
-        <h2>Seed your story.</h2>
-        <h4>
-          Start writing so that another writer joins in and you become a pair.
-        </h4>
-        <form className="storywriter-pear__storyInputs">
-          <label htmlFor="penName">User Pen Name:</label>
-          <input type="text" id="penName" name="penName" required />
-
-          <label htmlFor="title">Title:</label>
-          <input type="text" id="title" name="title" required />
-
-          <label htmlFor="genre">Genre:</label>
-          <select
-              id="genre"
-              name="genre"
-              required
-              value={genreName}
-              onChange={handleGenreChange}
-            >
-              <option value="">Select a Genre</option>
-              {genres.map((genre) => (
-                <option key={genre.id} value={genre.genre_name}>
-                  {genre.genre_name}
-                </option>
-              ))}
-            </select>
-
-          <label htmlFor="story">Start Typing:</label>
-          <br />
-          <textarea
-            id="story"
-            name="story"
-            onChange={handleStarterChange}
-            value={textAreaContent}
-
-          />
-          <input type="button" value="Save" onClick={saveToSessionStorage} />
-          <input type="submit" value="Submit" onClick={submitHalfStory}/>
-        </form>
-      </div>
-    ) : null}
-  </div>
-);
+            <label htmlFor="story">Start Typing:</label>
+            <br />
+            <textarea
+              id="story"
+              name="story" 
+              onChange={handleTextAreaChange}
+              value={textAreaContent}
+            />
+            <input type="button" value="Save" onClick={saveToSessionStorage} />
+            <input
+              type="submit"
+              value="Submit"
+              onClick={startHalfStory} 
+            />
+          </form>
+        </div>
+      ) : null}
+    </div>
+  );
 }
 
 export default StoryCreatorSpace;
-

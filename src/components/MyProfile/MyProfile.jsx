@@ -9,7 +9,7 @@ function MyProfile({ userData }) {
   const [editedLinks, setEditedLinks] = useState(userData.links);
   const [editedPenFirstName, setEditedPenFirstName] = useState(userData.pen_first_name);
   const [editedPenLastName, setEditedPenLastName] = useState(userData.pen_last_name);
-  
+
   const bioRef = useRef(null);
   const penFirstNameRef = useRef(null);
   const penLastNameRef = useRef(null);
@@ -30,11 +30,9 @@ function MyProfile({ userData }) {
          
         })
         .then((response) => {
-          // Handle successful update, e.g., show a success message
           console.log("User data updated:", response.data);
         })
         .catch((error) => {
-          // Handle error, e.g., show an error message
           console.error("Error updating user data:", error);
         });
     }
@@ -43,11 +41,8 @@ function MyProfile({ userData }) {
     setIsEditMode(!isEditMode);
   };
   const handleLinkChange = (index, newValue) => {
-    // Create a copy of the editedLinks array
     const newEditedLinks = [...editedLinks];
-    // Update the link at the specified index
     newEditedLinks[index] = newValue;
-    // Update the state with the new editedLinks array
     setEditedLinks(newEditedLinks);
   };
 
