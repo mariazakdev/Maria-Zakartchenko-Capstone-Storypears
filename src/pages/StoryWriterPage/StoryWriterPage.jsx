@@ -10,10 +10,17 @@ function StoryWriterPage() {
   const selectedHalfStoryData = location.state?.data || {}; // Data from half stories
   const promptContent = selectedPromptData.sentence || '';
   const halfStoryContent = selectedHalfStoryData.story || '';
+
+
+  const user ={
+    id: 48,
+    }
+  
+
   return (
     <div className="App">
       <Header />
-      <StoryCreatorSpace promptData={promptContent} halfStoryData={halfStoryContent} />
+      <StoryCreatorSpace promptData={promptContent} halfStoryData={halfStoryContent} user={user} />
       <Footer />
     </div>
   );

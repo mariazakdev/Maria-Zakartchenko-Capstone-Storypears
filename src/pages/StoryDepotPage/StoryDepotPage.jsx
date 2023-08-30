@@ -12,7 +12,7 @@ function StoryDepotPage() {
 
   const fetchHalfStories = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/halfstories');
+      const response = await axios.get('http://localhost:8080/storycontents');
       setHalfStories(response.data);
       console.log(response.data);
     } catch (error) {
