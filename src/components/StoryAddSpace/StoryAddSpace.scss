@@ -1,0 +1,52 @@
+
+.storywriter{
+ background-image: url('../../assets/icons/1665403462pear-tree.png');
+    background-size:cover; 
+
+    &-add,
+    &-empty,
+    &-pear{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1rem;
+        input{
+            width:18.75rem;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            border: none;
+            resize: none;
+            margin: 0.5rem;
+        }
+        textarea{
+            width:18.75rem;
+            height:40rem;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            border: none;
+            resize: none;
+        }
+        select{
+            width:18.75rem;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            border: none;
+            resize: none;
+        }
+        &__storyInputs{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    &-pear{
+        &__storyInputs{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}

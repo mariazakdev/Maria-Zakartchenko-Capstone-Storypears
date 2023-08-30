@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./StoryDepot.scss";
-import GenreFilter from "../GenreFilter/GenresFilter"; 
+import GenreFilter from "../GenresFilter/GenresFilter"; 
+import EmotionsFilter from "../EmotionsFilter/EmotionsFilter";
 
 function StoryDepot({ halfStories }) {
   const navigate = useNavigate();
   const [selectedGenre, setSelectedGenre] = useState("All");
+  const [selectedEmotion, setSelectedEmotion] = useState("All"); 
 
   const handleItemClick = (id) => {
     const selectedHalfStory = getHalfStoryById(id);
-    navigate(`/story/new/${id}`, { state: { data: selectedHalfStory } });
+    navigate(`/story/studio/${id}`, { state: { data: selectedHalfStory } });
   };
 
   const getHalfStoryById = (id) => {
@@ -18,18 +20,27 @@ function StoryDepot({ halfStories }) {
   };
 
   const genres = Array.from(new Set(halfStories.map((halfStory) => halfStory.genre)));
+  const emotions = Array.from(new Set(halfStories.map((halfStory) => halfStory.emotion))); 
 
-  const filterHalfStoriesByGenre = () => {
-    if (selectedGenre === "All") {
+  const filterHalfStoriesByGenreAndEmotion = () => {
+    if (selectedGenre === "All" && selectedEmotion === "All") {
       return halfStories;
     } else {
-      return halfStories.filter((halfStory) => halfStory.genre === selectedGenre);
+      return halfStories.filter(
+        (halfStory) =>
+          (selectedGenre === "All" || halfStory.genre === selectedGenre) &&
+          (selectedEmotion === "All" || halfStory.emotion === selectedEmotion)
+      );
     }
   };
 
   const handleGenreSelect = (genre) => {
     setSelectedGenre(genre);
   };
+  const handleEmotionSelect = (emotion) => {
+    setSelectedEmotion(emotion);
+  };
+
 
   return (
     <div className="story-depot">
@@ -38,17 +49,26 @@ function StoryDepot({ halfStories }) {
         <p>Add your own nourishment so a pear can grow.</p>
       </section>
 
-      <GenreFilter selectedGenre={selectedGenre} handleGenreSelect={handleGenreSelect} genres={genres} />
+      <GenreFilter 
+      selectedGenre={selectedGenre} 
+      handleGenreSelect={handleGenreSelect} 
+      genres={genres} />
 
+      <EmotionsFilter 
+       selectedEmotion={selectedEmotion}
+       handleEmotionSelect={handleEmotionSelect}
+       emotions={emotions}
+      />
       <section className="story-depot__half-stories">
         <div>
           <h3>Half Stories:</h3>
           <ul>
-            {filterHalfStoriesByGenre().map((halfStory) => (
-              <li key={halfStory.id} onClick={() => handleItemClick(halfStory.id)}>
+          {filterHalfStoriesByGenreAndEmotion().map((halfStory) => (              
+          <li key={halfStory.id} onClick={() => handleItemClick(halfStory.id)}>
                 <h3>{halfStory.title}</h3>
                 <p>{halfStory.content}</p>
                 <h4>{halfStory.genre}</h4>
+                <h4>{halfStory.emotion}</h4>
               </li>
             ))}
           </ul>

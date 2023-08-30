@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./StoryCreatorSpace.scss";
+import "./StoryAddSpace.scss";
 const { v4: uuidv4 } = require("uuid");
 
-function StoryCreatorSpace({ promptData, halfStoryData, user }) {
+function StoryAddSpace({ promptData, halfStoryData, user }) {
 
   const [storyContent, setStoryContent] = useState(promptData);
   const [halfStoryContent, setHalfStoryContent] = useState(halfStoryData);
@@ -127,7 +127,7 @@ function StoryCreatorSpace({ promptData, halfStoryData, user }) {
 
   return (
     <div className="storywriter">
-      
+     
       {halfStoryContent ? (
         <div className="storywriter-add">
           <h2>Continue this story seed</h2>
@@ -269,4 +269,4 @@ function StoryCreatorSpace({ promptData, halfStoryData, user }) {
   );
 }
 
-export default StoryCreatorSpace;
+export default StoryAddSpace;

@@ -51,7 +51,10 @@ const Nav = () => {
             </li>
             <li>
               <Link to="/story/new">Writing Space</Link>
+            </li><li>
+              <Link to="/story/studio">Studio</Link>
             </li>
+
             <li>
               <Link to="/story/depot">Depot</Link>
             </li>

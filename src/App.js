@@ -42,7 +42,9 @@ function App() {
             
             {/* Other routes */}
             <Route path="/story/prompt" element={<StoryPromptPage />} />
+            <Route path="/story/studio/:id" element={<StoryWriterPage />} />
             <Route path="/story/new/:id" element={<StoryWriterPage />} />
+
             <Route path="/story/new" element={<StoryWriterPage />} />
             <Route path="/story/:id" element={<StoryPage />} />
             <Route path="/writers" element={<WriterListPage />} />

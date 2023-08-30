@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import StoryCreatorSpace from '../../components/StoryCreatorSpace/StoryCreatorSpace';
+import StoryAddSpace from "../../components/StoryAddSpace/StoryAddSpace"
 
 function StoryWriterPage() {
   const location = useLocation();
@@ -20,7 +21,9 @@ function StoryWriterPage() {
   return (
     <div className="App">
       <Header />
-      <StoryCreatorSpace promptData={promptContent} halfStoryData={halfStoryContent} user={user} />
+      <StoryCreatorSpace promptData={promptContent}  user={user} />
+      <StoryAddSpace  halfStoryData={halfStoryContent} user={user} />
+
       <Footer />
     </div>
   );

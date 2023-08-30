@@ -3,6 +3,9 @@ import axios from 'axios';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import StoryDepot from '../../components/StoryDepot/StoryDepot';
+
+
+
 function StoryDepotPage() {
   const [halfStories, setHalfStories] = useState([]);
 

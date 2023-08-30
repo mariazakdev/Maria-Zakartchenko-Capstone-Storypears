@@ -1,5 +1,5 @@
 import React from "react";
-import "./GenreFilter.scss"; 
+import "./GenresFilter.scss"; 
 
 function GenreFilter({ selectedGenre, handleGenreSelect, genres }) {
   return (
