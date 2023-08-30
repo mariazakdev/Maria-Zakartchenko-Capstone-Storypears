@@ -13,7 +13,7 @@ function StoryWriterPage() {
 
 
   const user ={
-    id: 48,
+    id: 69,
     }
   
 
