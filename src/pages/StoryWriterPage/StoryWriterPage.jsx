@@ -7,23 +7,27 @@ import StoryAddSpace from "../../components/StoryAddSpace/StoryAddSpace"
 
 function StoryWriterPage() {
   const location = useLocation();
-  const selectedPromptData = location.state?.data || {}; // Data from prompts
-  const selectedHalfStoryData = location.state?.data || {}; // Data from half stories
+  const selectedPromptData = location.state?.data || {};
+  const selectedFeelingData = location.state?.data || {};
+  const selectedHalfStoryData = location.state?.data || {};
   const promptContent = selectedPromptData.sentence || '';
+  const feelingContent = selectedFeelingData.sentence || '';
   const halfStoryContent = selectedHalfStoryData.story || '';
 
-
-  const user ={
+  const user = {
     id: 69,
-    }
-  
+    pen_first_name: "Billy",
+    pen_last_name: "Writer"
+  };
 
   return (
     <div className="App">
       <Header />
-      <StoryCreatorSpace promptData={promptContent}  user={user} />
-      <StoryAddSpace  halfStoryData={halfStoryContent} user={user} />
-
+      {halfStoryContent ? (
+        <StoryAddSpace halfStoryData={halfStoryContent} selectedHalfStoryData={selectedHalfStoryData} user={user} />
+      ) : (
+        <StoryCreatorSpace promptData={promptContent} feelingData={feelingContent} user={user} />
+      )}
       <Footer />
     </div>
   );

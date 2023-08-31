@@ -2,6 +2,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    flex-direction: column;
     margin-bottom: 20px;
   
     h3 {
@@ -9,6 +10,9 @@
     }
   
     ul {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
       list-style: none;
       padding: 0;
   
@@ -21,7 +25,7 @@
         transition: background-color 0.3s ease;
   
         &.selected {
-          background-color: #007acc;
+          background-color: grey;
           color: #fff;
         }
       }

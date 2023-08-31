@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "./StoryCreatorSpace.scss";
 const { v4: uuidv4 } = require("uuid");
 
-function StoryCreatorSpace({ promptData, halfStoryData, user }) {
-
-  const [storyContent, setStoryContent] = useState(promptData);
-  const [halfStoryContent, setHalfStoryContent] = useState(halfStoryData);
-  const [textAreaContent, setTextAreaContent] = useState("");
+function StoryCreatorSpace({ promptData, feelingData, user }) {
+  const [storyContent, setStoryContent] = useState(promptData || feelingData || "");
+  const [textAreaContent, setTextAreaContent] = useState(storyContent);
   const [title, setTitle] = useState("");
   const [genreName, setGenreName] = useState("");
   const [genreId, setGenreId] = useState("");
@@ -15,6 +13,13 @@ function StoryCreatorSpace({ promptData, halfStoryData, user }) {
   const [emotionName, setEmotionName] = useState("");
   const [emotionId, setEmotionId] = useState("");
   const [emotions, setEmotions] = useState([]);
+
+  // State variables to control which select is displayed
+  const [displayGenreSelect, setDisplayGenreSelect] = useState(true);
+  const [displayEmotionSelect, setDisplayEmotionSelect] = useState(false);
+
+  // Ref for textarea
+  const textAreaRef = useRef(null);
 
   useEffect(() => {
     async function fetchGenres() {
@@ -54,7 +59,7 @@ function StoryCreatorSpace({ promptData, halfStoryData, user }) {
     }
   };
 
- const handleGenreChange = (event) => {
+  const handleGenreChange = (event) => {
     const selectedGenreName = event.target.value;
     setGenreName(selectedGenreName);
     const selectedGenre = genres.find(
@@ -66,24 +71,16 @@ function StoryCreatorSpace({ promptData, halfStoryData, user }) {
     }
   };
 
-
   const handleStarterChange = (event) => {
-    setStoryContent(event.target.value);
-  };
-
-  const handleHalfStoryChange = (event) => {
-    setHalfStoryContent(event.target.value);
-  };
-
- 
-
-  const handleTextAreaChange = (event) => {
     setTextAreaContent(event.target.value);
   };
-  // Functions handling when a user saves story in session but not submits.
+
   const saveToSessionStorage = () => {
-    if (storyContent) {
-      sessionStorage.setItem("storyContent", storyContent);
+    if (textAreaRef.current) {
+      const userContribution = textAreaRef.current.value;
+      if (userContribution) {
+        sessionStorage.setItem("storyContent", userContribution);
+      }
     }
   };
 
@@ -92,136 +89,86 @@ function StoryCreatorSpace({ promptData, halfStoryData, user }) {
     return savedContent || "";
   };
 
-  console.log(user);
-
   const startHalfStory = async () => {
-    const userContribution = textAreaContent || getFromSessionStorage();
+    const userContribution = textAreaRef.current.value || getFromSessionStorage();
     const id = uuidv4();
     const storyId = uuidv4();
 
     try {
-      if (genreName.trim() !== "" && title.trim() !== "") {
-        const response = await axios.post(
-          "http://localhost:8080/storycontents",
-          {
-            id,
-            content: userContribution,
-            user_id: user.id,
-            story_id: storyId,
-            genre_id: genreId, 
-            genre: genreName,
-            title: title,
-            timestamp: new Date().toISOString(),
-          }
-        );
+      let postData = {
+        id,
+        content: userContribution,
+        user_id: user.id,
+        story_id: storyId,
+        title: title,
+        timestamp: new Date().toISOString(),
+      };
 
-        console.log("Successfully submitted half story:", response.data);
-      } else {
-        console.error("Genre and title cannot be empty.");
+      if (displayGenreSelect) {
+        // Only add genre if it's the selected one
+        if (genreName.trim() !== "") {
+          postData = {
+            ...postData,
+            genre: genreName,
+          };
+        }
+      } else if (displayEmotionSelect) {
+        // Only add emotion if it's the selected one
+        if (emotionName.trim() !== "") {
+          postData = {
+            ...postData,
+            emotion: emotionName,
+          };
+        }
       }
+
+      const response = await axios.post(
+        "http://localhost:8080/storycontents",
+        postData
+      );
+
+      console.log("Successfully submitted half story:", response.data);
+
+      // Reset the form
+      setTextAreaContent("");
+      setTitle("");
+      setGenreName("");
+      setEmotionName("");
+      textAreaRef.current.value = "";
+
+      // Clear session storage
+      sessionStorage.removeItem("storyContent");
     } catch (error) {
       console.error("Error submitting half story:", error);
     }
   };
 
+  const toggleGenreSelect = () => {
+    setDisplayGenreSelect(true);
+    setDisplayEmotionSelect(false);
+  };
+
+  const toggleEmotionSelect = () => {
+    setDisplayGenreSelect(false);
+    setDisplayEmotionSelect(true);
+  };
 
   return (
-    <div className="storywriter">
-      
-      {halfStoryContent ? (
-        <div className="storywriter-add">
-          <h2>Continue this story seed</h2>
-          <h4>Complete this writing or ask for the previous writer to continue.</h4>
-  
-          <form className="storywriter-add__storyInputs">
-            <h3>{user.pen_first_name} {user.pen_last_name}</h3>
-  
-            <label htmlFor="story">Start Typing:</label>
-            <br />
-            <textarea
-              id="story"
-              name="story"
-              value={halfStoryContent} 
-              onChange={handleHalfStoryChange}
-            />
-            <input type="button" value="Save" onClick={saveToSessionStorage} />
-            <input 
-              type="submit" 
-              value="Submit" 
-              onClick={startHalfStory}
-            />
-          </form>
+    <div className="story-creator-space">
+      <div className="storywriter-feeling">
+        <h2>Feeling</h2>
+        <h4>Submit your contribution so another can join and make a pair.</h4>
+
+        <div className="toggle-buttons">
+          <button onClick={toggleGenreSelect}>Genre</button>
+          <button onClick={toggleEmotionSelect}>Emotion</button>
         </div>
-      ) : null} 
-  
-      {storyContent && !halfStoryContent ? (
-        <div className="storywriter-add">
-          <h2>Continue this story seed</h2>
-          <h4>Submit your contribution so another can join and make a pair.</h4>
-          <form className="storywriter-pear__storyInputs">
-            <h3>{user.pen_first_name} {user.pen_last_name}</h3>
-  
-            <label htmlFor="title">Title:</label>
-            <input type="text" id="title" name="title" required />
-  
-            <label htmlFor="genre">Genre:</label>
-            <select
-                id="genre"
-                name="genre"
-                required
-                value={genreName} 
-                onChange={handleGenreChange}
-              >
-                <option value="">Select a Genre</option>
-                {genres.map((genre) => (
-                  <option key={genre.id} value={genre.genre_name}>
-                    {genre.genre_name}
-                  </option>
-                ))}
-              </select>
-  
-            <label htmlFor="story">Start Typing:</label>
-            <br />
-            <textarea
-              id="story"
-              name="story"
-              value={storyContent} 
-              onChange={handleStarterChange} 
-            />
-            <input type="button" value="Save" onClick={saveToSessionStorage} />
-            <input 
-              type="submit" 
-              value="Submit" 
-              onClick={startHalfStory}
-            />
-          </form>
-        </div>
-      ) : null}
 
-
-
-      {/* Start new story */}
-      {!storyContent && !halfStoryContent ? (
-        <div className="storywriter-pear">
-          <h2>Seed your story.</h2>
-          <h4>
-            Start writing so that another writer joins in and you become a pair.
-          </h4>
-          <form className="storywriter-pear__storyInputs">
+        {displayGenreSelect && (
+          <div>
             <h3>
               {user.pen_first_name} {user.pen_last_name}
             </h3>
-
-            <label htmlFor="title">Title:</label>
-            <input
-              type="text"
-              id="title"
-              name="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-
             <label htmlFor="genre">Genre:</label>
             <select
               id="genre"
@@ -237,6 +184,14 @@ function StoryCreatorSpace({ promptData, halfStoryData, user }) {
                 </option>
               ))}
             </select>
+          </div>
+        )}
+
+        {displayEmotionSelect && (
+          <div>
+            <h3>
+              {user.pen_first_name} {user.pen_last_name}
+            </h3>
             <label htmlFor="emotion">Emotion:</label>
             <select
               id="emotion"
@@ -252,19 +207,21 @@ function StoryCreatorSpace({ promptData, halfStoryData, user }) {
                 </option>
               ))}
             </select>
-            <label htmlFor="story">Start Typing:</label>
-            <br />
-            <textarea
-              id="story"
-              name="story"
-              onChange={handleTextAreaChange}
-              value={textAreaContent}
-            />
-            <input type="button" value="Save" onClick={saveToSessionStorage} />
-            <input type="submit" value="Submit" onClick={startHalfStory} />
-          </form>
-        </div>
-      ) : null}
+          </div>
+        )}
+
+        <label htmlFor="story">Start Typing:</label>
+        <br />
+        <textarea
+          id="story"
+          name="story"
+          ref={textAreaRef}
+          value={textAreaContent}
+          onChange={handleStarterChange}
+        />
+        <input type="button" value="Save" onClick={saveToSessionStorage} />
+        <input type="submit" value="Submit" onClick={startHalfStory} />
+      </div>
     </div>
   );
 }

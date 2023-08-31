@@ -1,7 +1,8 @@
-.genre-filter {
+.emotion-filter {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    flex-direction: column;
     margin-bottom: 20px;
   
     h3 {
@@ -9,10 +10,13 @@
     }
   
     ul {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
       list-style: none;
       padding: 0;
   
-      .genre-filter__item {
+      .emotion-filter__item {
         margin-right: 10px;
         padding: 5px 10px;
         border: 1px solid #ccc;
@@ -21,7 +25,7 @@
         transition: background-color 0.3s ease;
   
         &.selected {
-          background-color: #007acc;
+          background-color: gray;
           color: #fff;
         }
       }
