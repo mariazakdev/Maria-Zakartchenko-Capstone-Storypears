@@ -6,7 +6,7 @@ import StoryStudio from '../../components/StoryStudio/StoryStudio';
 
 function StoryStudioPage({ updateHalfStoriesList }) {
   const location = useLocation();
-  const selectedHalfStoryData = location.state?.data || {};
+  const selectedHalfStoryData = location.state?.data || [];
 
   const user = {
     id: 61,
@@ -17,11 +17,7 @@ function StoryStudioPage({ updateHalfStoriesList }) {
   return (
     <div className="App">
       <Header />      
-      <StoryStudio
-        halfStoryData={selectedHalfStoryData}
-        user={user}
-        updateHalfStoriesList={updateHalfStoriesList} 
-      />
+      <StoryStudio halfStoryGroup={selectedHalfStoryData} user={user} updateHalfStoriesList={updateHalfStoriesList} />
       <Footer />
     </div>
   );
