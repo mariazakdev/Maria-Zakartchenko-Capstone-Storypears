@@ -6,13 +6,20 @@ function StoryStarter({ prompts, feelings }) {
   const [activeContent, setActiveContent] = useState("prompts"); // Prompts is open by default
   const navigate = useNavigate();
 
-  const handleItemClick = (id) => {
-    const selectedItemData = getDataById(id);
-    navigate(`/story/new/${id}`, { state: { data: selectedItemData } });
+  const handlePromptClick = (id) => {
+    const selectedPromptData = getPromptDataById(id);
+    navigate(`/story/new/${id}`, { state: { data: selectedPromptData } });
+  };
+  const handleFeelingClick = (id) => {
+    const selectedFeelingData = getFeelingDataById(id);
+    navigate(`/story/new/${id}`, { state: { data: selectedFeelingData } });
   };
 
-  const getDataById = (id) => {
-    return prompts.find((prompt) => prompt.id === id) || feelings.find((feeling) => feeling.id === id);
+  const getPromptDataById = (id) => {
+    return prompts.find((prompt) => prompt.id === id) ;
+  };
+  const getFeelingDataById = (id) => {
+    return feelings.find((feeling) => feeling.id === id)  
   };
 
   return (
@@ -41,7 +48,7 @@ function StoryStarter({ prompts, feelings }) {
                 {prompts && prompts.map((prompt) => (
                   <li
                     key={prompt.id}
-                    onClick={() => handleItemClick(prompt.id)}
+                    onClick={() => handlePromptClick(prompt.id)}
                   >
                     {prompt.sentence}
                   </li>
@@ -56,7 +63,7 @@ function StoryStarter({ prompts, feelings }) {
                 {feelings && feelings.map((feeling) => (
                   <li
                     key={feeling.id}
-                    onClick={() => handleItemClick(feeling.id)}
+                    onClick={() => handleFeelingClick(feeling.id)}
                   >
                     {feeling.sentence}
                   </li>

@@ -9,7 +9,7 @@ function MyProfile({ userData }) {
   const [editedLinks, setEditedLinks] = useState(userData.links);
   const [editedPenFirstName, setEditedPenFirstName] = useState(userData.pen_first_name);
   const [editedPenLastName, setEditedPenLastName] = useState(userData.pen_last_name);
-
+  
   const bioRef = useRef(null);
   const penFirstNameRef = useRef(null);
   const penLastNameRef = useRef(null);
@@ -68,7 +68,6 @@ function MyProfile({ userData }) {
   <h3>Pen Name / Username:</h3>
   {isEditMode ? (
     <div>
-      {/* Input fields for editing pen names */}
       <input
         type="text"
         className="profile-info__pen-name-edit"
@@ -87,7 +86,6 @@ function MyProfile({ userData }) {
       />
     </div>
   ) : (
-    // Display pen names as static text
     <p className="profile-info__pen-name">
       {userData.pen_first_name} {userData.pen_last_name}
     </p>
