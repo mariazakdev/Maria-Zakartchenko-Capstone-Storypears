@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import "./StoryCreatorSpace.scss";
+import "./StoryCreator.scss";
 const { v4: uuidv4 } = require("uuid");
 
-function StoryCreatorSpace({ promptData, feelingData, user }) {
+function StoryCreator({ promptData, feelingData, user }) {
   const [storyContent, setStoryContent] = useState(promptData || feelingData || "");
   const [textAreaContent, setTextAreaContent] = useState(storyContent);
   const [title, setTitle] = useState("");
@@ -156,7 +156,7 @@ function StoryCreatorSpace({ promptData, feelingData, user }) {
   return (
     <div className="story-creator-space">
       <div className="storywriter-feeling">
-        <h2>Feeling</h2>
+        <h2>CREATOR SPACE</h2>
         <h4>Submit your contribution so another can join and make a pair.</h4>
 
         <div className="toggle-buttons">
@@ -226,4 +226,4 @@ function StoryCreatorSpace({ promptData, feelingData, user }) {
   );
 }
 
-export default StoryCreatorSpace;
+export default StoryCreator;

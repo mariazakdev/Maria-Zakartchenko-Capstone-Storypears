@@ -8,8 +8,8 @@ import {
 } from "react-router-dom";
 import StoryListPage from "./pages/StoryListPage/StoryListPage";
 import StoryPromptPage from "./pages/StoryPromptPage/StoryPromptPage";
-import StoryWriterPage from "./pages/StoryWriterPage/StoryWriterPage";
-import StoryPage from "./pages/StoryPage/StoryPage";
+import StoryCreatorPage from "./pages/StoryCreatorPage/StoryCreatorPage";
+import StoryStudioPage from "./pages/StoryStudioPage/StoryStudioPage";
 import HomePage from "./pages/HomePage/HomePage";
 import WriterListPage from "./pages/WriterListPage/WriterListPage";
 import WriterProfilePage from "./pages/AboutPage/AboutPage";
@@ -42,11 +42,9 @@ function App() {
             
             {/* Other routes */}
             <Route path="/story/prompt" element={<StoryPromptPage />} />
-            <Route path="/story/studio/:id" element={<StoryWriterPage />} />
-            <Route path="/story/new/:id" element={<StoryWriterPage />} />
-
-            <Route path="/story/new" element={<StoryWriterPage />} />
-            <Route path="/story/:id" element={<StoryPage />} />
+            <Route path="/story/studio/:id" element={<StoryStudioPage />} />
+            <Route path="/story/new/:id" element={<StoryCreatorPage />} />
+            <Route path="/story/new" element={<StoryCreatorPage />} />
             <Route path="/writers" element={<WriterListPage />} />
             <Route path="/writers/:id" element={<WriterProfilePage />} />
             <Route path="/stories" element={<StoryListPage />} />
