@@ -34,7 +34,8 @@ const shuffleArray = (array) => {
 };
 const genres = Array.from(new Set(halfStories.map(story => story.genre)));
 const emotions = Array.from(new Set(halfStories.map(story => story.emotion))).filter(emotion => emotion);
-  const filterHalfStories = () => {
+ 
+const filterHalfStories = () => {
     return halfStories.filter(story =>
       (selectedGenre === "All" || story.genre === selectedGenre) &&
       (selectedEmotion === "All" || story.emotion === selectedEmotion)

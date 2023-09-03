@@ -4,7 +4,9 @@ import "./StoryCreator.scss";
 const { v4: uuidv4 } = require("uuid");
 
 function StoryCreator({ promptData, feelingData, user }) {
-  const [storyContent, setStoryContent] = useState(promptData || feelingData || "");
+  const [storyContent, setStoryContent] = useState(
+    promptData || feelingData || ""
+  );
   const [textAreaContent, setTextAreaContent] = useState(storyContent);
   const [title, setTitle] = useState("");
   const [genreName, setGenreName] = useState("");
@@ -90,7 +92,8 @@ function StoryCreator({ promptData, feelingData, user }) {
   };
 
   const startHalfStory = async () => {
-    const userContribution = textAreaRef.current.value || getFromSessionStorage();
+    const userContribution =
+      textAreaRef.current.value || getFromSessionStorage();
     const id = uuidv4();
     const storyId = uuidv4();
 
@@ -220,7 +223,8 @@ function StoryCreator({ promptData, feelingData, user }) {
           onChange={handleStarterChange}
         />
         <input type="button" value="Save" onClick={saveToSessionStorage} />
-        <input type="submit" value="Submit" onClick={startHalfStory} />
+        <input type="button" value="Add" onClick={startHalfStory} />
+        <input type="button" value="Complete" onClick={startHalfStory} />
       </div>
     </div>
   );

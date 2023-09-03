@@ -18,6 +18,7 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import MyProfilePage from "./pages/MyProfilePage/MyProfilePage";
 import AboutPage from "./pages/AboutPage/AboutPage";
+import StoryPage from "./pages/StoryPage/StoryPage";
 
 import { AuthProvider } from "./context/AuthProvider";
 
@@ -45,6 +46,8 @@ function App() {
             <Route path="/story/studio/:id" element={<StoryStudioPage />} />
             <Route path="/story/new/:id" element={<StoryCreatorPage />} />
             <Route path="/story/new" element={<StoryCreatorPage />} />
+            <Route path="/story/:id" element={<StoryPage />} />
+
             <Route path="/writers" element={<WriterListPage />} />
             <Route path="/writers/:id" element={<WriterProfilePage />} />
             <Route path="/stories" element={<StoryListPage />} />

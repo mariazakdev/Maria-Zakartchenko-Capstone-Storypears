@@ -4,28 +4,31 @@ import StoryList from '../../components/StoryList/StoryList';
 import "./StoryListPage.scss";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+const apiURL = process.env.REACT_APP_API_URL;
 
 function StoryListPage() {
-  const [stories, setStories] = useState([]);
-  const apiURL = process.env.REACT_APP_API_URL;
+  const [fullStories, setFullStories] = useState([]);
+  
   useEffect(() => {
-
     axios
-      .get(`http://localhost:8080/stories`)
+      .get(`${apiURL}/fullstories`)
       .then(response => {
-        setStories(response.data);
+        setFullStories(response.data);
       })
       .catch(error => {
         console.error('Error fetching stories:', error);
       });
   }, [])
-console.log(stories);
+console.log(fullStories);
+
+
+
   return (
     <div className='site'>
  <Header />
  <section className='site__content'>
 
- {stories.length > 0 ? <StoryList stories={stories} /> : <p>Loading...</p>}
+<StoryList fullStories={fullStories} />
  </section>
  <Footer />
     </div>

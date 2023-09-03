@@ -67,7 +67,9 @@ function StoryStudio({  halfStoryGroup, user, updateHalfStoriesList }) {
                     onChange={handleHalfStoryChange}
                 />
                 <input type="button" value="Save" onClick={saveToSessionStorage} />
-                <input type="button" value="Submit" onClick={startHalfStory} />
+                <input type="button" value="Add" onClick={startHalfStory} />
+                <input type="button" value="Complete" onClick={startHalfStory} />
+
             </form>
         </div>
     </div>

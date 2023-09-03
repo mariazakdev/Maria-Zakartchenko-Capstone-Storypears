@@ -2,44 +2,75 @@ import Avatar from "../Avatar/Avatar";
 import "./MyProfile.scss";
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import authService from '../../services/authService';
 
-function MyProfile({ userData }) {
+function MyProfile() {
+  const [userData, setUserData] = useState({});
   const [isEditMode, setIsEditMode] = useState(false);
-  const [editedBio, setEditedBio] = useState(userData.bio);
-  const [editedLinks, setEditedLinks] = useState(userData.links);
-  const [editedPenFirstName, setEditedPenFirstName] = useState(userData.pen_first_name);
-  const [editedPenLastName, setEditedPenLastName] = useState(userData.pen_last_name);
-  
+  const [editedBio, setEditedBio] = useState('');
+  const [editedLinks, setEditedLinks] = useState([]);
+  const [editedPenFirstName, setEditedPenFirstName] = useState('');
+  const [editedPenLastName, setEditedPenLastName] = useState('');
+  const [bioCharacterCount, setBioCharacterCount] = useState(0);
   const bioRef = useRef(null);
   const penFirstNameRef = useRef(null);
   const penLastNameRef = useRef(null);
+  
+  useEffect(() => {
+    let isMounted = true;
 
-  const [bioCharacterCount, setBioCharacterCount] = useState(userData.bio.length); // Initialize with the current bio length
+    const fetchUserData = async () => {
+      try {
+        const data = await authService.getProfile();
+        if (isMounted) {
+          setUserData(data);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+    fetchUserData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    setEditedBio(userData.bio || '');
+    setEditedLinks(userData.links || []);
+    setEditedPenFirstName(userData.pen_first_name || '');
+    setEditedPenLastName(userData.pen_last_name || '');
+    setBioCharacterCount(userData.bio?.length || 0);
+  }, [userData]);
+
+  const updateUser = async () => {
+    try {
+      const newUsername = `${editedPenFirstName.toLowerCase()}${editedPenLastName.toLowerCase()}`;
+      const updatedData = {
+        pen_first_name: editedPenFirstName,
+        pen_last_name: editedPenLastName,
+        username: newUsername,
+        bio: editedBio,
+        links: editedLinks,
+      };
+
+      const response = await authService.updateProfile(userData.id, updatedData);
+      console.log("User data updated:", response);
+      // Add feedback to user here (e.g., using a toast notification or a simple alert).
+    } catch (error) {
+      console.error("Error updating user data:", error);
+      // Add feedback to user about the error here.
+    }
+  };
+
   const toggleButtonValue = () => {
     if (isEditMode) {
-      const newUsername = `${editedPenFirstName.toLowerCase()}${editedPenLastName.toLowerCase()}`;
-
-      // Handle Update Button Click
-      axios
-        .put(`http://localhost:8080/users/${userData.id}`, {
-          pen_first_name: editedPenFirstName,
-          pen_last_name: editedPenLastName,
-          username: newUsername,
-          bio: editedBio,
-          links: editedLinks,
-         
-        })
-        .then((response) => {
-          console.log("User data updated:", response.data);
-        })
-        .catch((error) => {
-          console.error("Error updating user data:", error);
-        });
+      updateUser();
     }
-
-    // Toggle edit mode regardless of whether it's an edit or update
     setIsEditMode(!isEditMode);
   };
+
   const handleLinkChange = (index, newValue) => {
     const newEditedLinks = [...editedLinks];
     newEditedLinks[index] = newValue;
@@ -49,6 +80,9 @@ function MyProfile({ userData }) {
   useEffect(() => {
     setBioCharacterCount(editedBio.length);
   }, [editedBio]);
+
+
+
   return (
     <section className="profile">
       <div className="profile-header">

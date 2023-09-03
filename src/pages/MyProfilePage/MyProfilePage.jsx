@@ -7,26 +7,13 @@ import authService from '../../services/authService';
 import axios from 'axios';
 
 function ProfilePage() {
-const userData = 
-{
-  id: 2,
-  avatar_url: null,
-  password: "password1",
-  email: "user1@example.com",
-  first_name: "John",
-  last_name: "Doe",
-  pen_first_name: "Penny",
-  pen_last_name: "Writer",
-  bio: "Poet with a heart full of emotions and a pen dipped in ink.",
-  links: ["https://twitter.com/user2", "https://linkedin.com/in/user2", "https://instagram.com/in/fgfgdg"]
-  }
 
 
   return (
    <div className='site'>
       <Header />
       <section className='site__content'>
-        <MyProfile userData={userData} />
+        <MyProfile />
       </section>
       <Footer />
     </div>
