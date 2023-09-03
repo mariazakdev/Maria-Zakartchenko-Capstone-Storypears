@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GenreFilter from "../GenresFilter/GenresFilter";
 import EmotionsFilter from "../EmotionsFilter/EmotionsFilter";
+import TinyPear from "../../assets/icons/pera-architetto-francesc-01 (1).png"
 import './StoryDepot.scss';
 
 function StoryDepot({ halfStories, updateHalfStoriesList }) {
@@ -63,14 +64,24 @@ const filterHalfStories = () => {
         <div>
           <h3>Half Stories:</h3>
           <ul>
-            {shuffledGroupedStories.map(group => (
-              <li key={group[0].id} onClick={() => handleItemClick(group)}>
-                <h3>{group[0].title}</h3>
-                {group.map(story => <p key={story.id}>{story.content}</p>)}
-                <h4>{group[0].genre}</h4>
-                <h4>{group[0].emotion}</h4>
-              </li>
+          {shuffledGroupedStories.map(group => {
+    // Getting unique user IDs for each group
+    const uniqueUserIds = [...new Set(group.map(story => story.user_id))];
+
+    return (
+        <li key={group[0].id} onClick={() => handleItemClick(group)}>
+            <h3>{group[0].title}</h3>
+            
+            {uniqueUserIds.map(userId => (
+                <img key={userId} src={TinyPear} alt="tiny pear" />
             ))}
+            
+            {group.map(story => <p key={story.id}>{story.content}</p>)}
+            <h4>{group[0].genre}</h4>
+            <h4>{group[0].emotion}</h4>
+        </li>
+    );
+})}
           </ul>
         </div>
       </section>
