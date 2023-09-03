@@ -1,13 +1,13 @@
 import "./StoryList.scss";
-import Avatar from "../Avatar/Avatar";
 import { useNavigate } from "react-router-dom";
 import MiniPearTree from "../../assets/icons/1665403462pear-tree.png";
 import GenreFilter from "../GenresFilter/GenresFilter";
 import EmotionsFilter from "../EmotionsFilter/EmotionsFilter";
 import { useState } from "react";
+
+
 function StoryList({ fullStories }) {
   const navigate = useNavigate();
-
   const [selectedGenre, setSelectedGenre] = useState("All");
   const [selectedEmotion, setSelectedEmotion] = useState("All");
 
@@ -35,11 +35,10 @@ function StoryList({ fullStories }) {
     )
   ).filter((emotion) => emotion);
 
-  const handleStoryClick = (storyId) => {
-    console.log("Clicked story with ID:", storyId);
-    navigate(`/stories/${storyId}`);
+  const handleStoryClick = (id) => {
+    console.log("Clicked story with ID:", id);
+    navigate(`/storytree/${id}`);
   };
-
   const filterStories = () => {
     return fullStories.filter(story => {
         const storiesData = typeof story.stories_data === 'string'

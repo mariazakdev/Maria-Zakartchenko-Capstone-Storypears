@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import GenreFilter from "../GenresFilter/GenresFilter";
 import EmotionsFilter from "../EmotionsFilter/EmotionsFilter";
@@ -15,7 +15,13 @@ function StoryDepot({ halfStories, updateHalfStoriesList }) {
     navigate(`/story/studio/${group[0].story_id}`, { state: { data: group } });
   };
 
- 
+  const [accumulatedStories, setAccumulatedStories] = useState([]);
+  useEffect(() => {
+    if (halfStories) {
+        setAccumulatedStories(prevStories => [...prevStories, ...halfStories]);
+    }
+}, [halfStories]);
+
 const groupByStoryId = (stories) => {
   return stories.reduce((acc, story) => {
     if (!acc[story.story_id]) {
@@ -33,15 +39,17 @@ const shuffleArray = (array) => {
   }
   return array;
 };
-const genres = Array.from(new Set(halfStories.map(story => story.genre)));
-const emotions = Array.from(new Set(halfStories.map(story => story.emotion))).filter(emotion => emotion);
+const genres = Array.from(new Set(accumulatedStories.map(story => story.genre)));
+const emotions = Array.from(new Set(accumulatedStories.map(story => story.emotion))).filter(emotion => emotion);
+
  
 const filterHalfStories = () => {
-    return halfStories.filter(story =>
-      (selectedGenre === "All" || story.genre === selectedGenre) &&
-      (selectedEmotion === "All" || story.emotion === selectedEmotion)
-    );
-  };
+  return accumulatedStories.filter(story =>
+    (selectedGenre === "All" || story.genre === selectedGenre) &&
+    (selectedEmotion === "All" || story.emotion === selectedEmotion)
+  );
+};
+
 
   const handleFilterSelect = (type, value) => {
     if (type === "genre") {

@@ -9,20 +9,30 @@ const apiURL = process.env.REACT_APP_API_URL;
 function StoryListPage() {
   const [fullStories, setFullStories] = useState([]);
   
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  
   useEffect(() => {
     axios
       .get(`${apiURL}/fullstories`)
       .then(response => {
         setFullStories(response.data);
+        setIsLoading(false);
       })
-      .catch(error => {
-        console.error('Error fetching stories:', error);
+      .catch(err => {
+        console.error('Error fetching stories:', err);
+        setError(err);
+        setIsLoading(false);
       });
-  }, [])
-console.log(fullStories);
-
-
-
+  }, []);
+  
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  
+  if (error) {
+    return <div>Error loading stories. Please try again later.</div>;
+  }
   return (
     <div className='site'>
  <Header />

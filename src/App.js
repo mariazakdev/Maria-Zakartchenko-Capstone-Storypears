@@ -30,35 +30,37 @@ function App() {
 
 
   return ( 
-    <main className="App">
-      <AuthProvider>
-        <Router>
-          <Routes>
-            {/* Public Routes */}
-            <Route path="/" element={<HomePage />} />
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            
-            {/* Other routes */}
-            <Route path="/story/prompt" element={<StoryPromptPage />} />
-            <Route path="/story/studio/:id" element={<StoryStudioPage />} />
-            <Route path="/story/new/:id" element={<StoryCreatorPage />} />
-            <Route path="/story/new" element={<StoryCreatorPage />} />
-            <Route path="/story/:id" element={<StoryPage />} />
+<main className="App">
+  <AuthProvider>
+    <Router>
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<HomePage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        
+        {/* Other routes */}
+        <Route path="/story/prompt" element={<StoryPromptPage />} />
+        <Route path="/story/studio/:id" element={<StoryStudioPage />} />
+        <Route path="/story/new/:id" element={<StoryCreatorPage />} />
+        <Route path="/story/new" element={<StoryCreatorPage />} />
+         <Route path="/storytree" element={<StoryListPage />} />
+        <Route path="/storytree/:id" element={<StoryPage />} />
 
-            <Route path="/writers" element={<WriterListPage />} />
-            <Route path="/writers/:id" element={<WriterProfilePage />} />
-            <Route path="/stories" element={<StoryListPage />} />
-            <Route path="/story/depot" element={<StoryDepotPage />} />
-            
-            {/* Single User Visible */}
-            <Route path="/profile" element={<MyProfilePage />} />
-          </Routes>
-        </Router> 
-      </AuthProvider>
-    </main>
+        <Route path="/stories/depot" element={<StoryDepotPage />} /> 
+
+
+        <Route path="/writers" element={<WriterListPage />} />
+        <Route path="/writers/list/:id" element={<WriterProfilePage />} />
+       
+        {/* Single User Visible */}
+        <Route path="/profile" element={<MyProfilePage />} />
+      </Routes>
+    </Router> 
+  </AuthProvider>
+</main>
   );
 }
 

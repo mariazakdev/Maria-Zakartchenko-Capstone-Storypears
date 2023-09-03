@@ -1,50 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { getStories, getUsers } from '../../axios'; 
+import axios from 'axios';
 
-function StoryList() {
-  const [stories, setStories] = useState([]);
-  const [users, setUsers] = useState([]);
+// Base URL for your API endpoints
+const BASE_URL = 'http://localhost:8080';
 
-  useEffect(() => {
-    // Fetch stories and users when the component mounts
-    getStories()
-      .then((data) => {
-        setStories(data);
-      })
-      .catch((error) => {
+// Fetch all stories
+export const fetchStories = async () => {
+    try {
+        const response = await axios.get(`${BASE_URL}/fullstories`);
+        return response.data;
+    } catch (error) {
         console.error('Error fetching stories:', error);
-      });
-
-    getUsers()
-      .then((data) => {
-        setUsers(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching users:', error);
-      });
-  }, []);
-
-  // Function to get user names by user ID
-  const getUserNamesByIds = (userIds) => {
-    return userIds.map((userId) => {
-      const user = users.find((user) => user.id === userId);
-      return user ? user.name : 'Unknown User';
-    });
-  };
-
-  return (
-    <div>
-      <h1>Story List</h1>
-      <ul>
-        {stories.map((story) => (
-          <li key={story.id}>
-            <h2>{story.title}</h2>
-            <p>Authors: {getUserNamesByIds(story.userIds).join(', ')}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+        throw error;
+    }
 }
 
-export default StoryList;
+// Fetch all users
+export const fetchUsers = async () => {
+    try {
+        const response = await axios.get(`${BASE_URL}/users`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        throw error;
+    }
+}
+export const fetchStoryById = async (storyId) => {
+  const response = await axios.get(`${BASE_URL}/fullstories/${storyId}`);
+  return response.data;
+}
+
+

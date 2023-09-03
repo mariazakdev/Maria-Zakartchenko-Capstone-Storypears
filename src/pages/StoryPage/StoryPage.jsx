@@ -1,41 +1,47 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-import StoryReader from '../../components/StoryDepot/StoryDepot';
+import StoryReader from '../../components/StoryReader/StoryReader';
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
+function StoryPage() {
+    const location = useLocation();
+    const storyId = location.pathname.split('/').pop();
+    const [storyData, setStoryData] = useState(null);
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const storyResponse = await axios.get(`http://localhost:8080/fullstories/${storyId}`);
+                const usersResponse = await axios.get('http://localhost:8080/users'); 
 
-function StoryDepotPage() {
-  const [fullStories, setFullStories] = useState([]);
+                setStoryData(storyResponse.data);
+                setUsers(usersResponse.data);
+                setLoading(false);
+            } catch (err) {
+                setError(err);
+                setLoading(false);
+            }
+        }
 
-  useEffect(() => {
-    fetchFullStories();
-  }, []);
+        fetchData();
+    }, [storyId]);
 
-  const fetchFullStories = async () => {
-    try {
-      const response = await axios.get('http://localhost:8080/full_stories');
-      setFullStories(response.data);
-      console.log(response.data);
-    } catch (error) {
-      console.error('Error fetching half stories:', error);
-    }
-  };
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error fetching data: {error.message}</div>;
 
-  const handleItemClick = (id) => {
-    console.log(`Clicked on item with ID: ${id}`);
-  };
-
-  return (
-    <div >
-      <Header />
-      <StoryReader fullStories={fullStories} 
-      handleItemClick={handleItemClick} 
-      />
-      <Footer />
-    </div>
-  );
+    return (
+        <div>
+            <Header />
+            <h1>STORY PAGE</h1>
+            <StoryReader storyData={storyData} users={users} />
+            <Footer />
+        </div>
+    );
 }
 
-export default StoryDepotPage;
+export default StoryPage;
