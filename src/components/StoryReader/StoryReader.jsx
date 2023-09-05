@@ -56,7 +56,7 @@ function StoryReader({ storyData = {}, users = [] }) {
             <div className="story-reader__story">
                 {stories.map((story, index) => (
                     <div key={index} className={`story-content-section ${contentClassName(story.user_id)}`}>
-                        {index === 0 && <h3>{story.title}</h3>} {/* Display title only for the first piece */}
+                        {index === 0 && <h3>{story.title}</h3>} 
                         <p>{story.content}</p>
                     </div>
                 ))}
