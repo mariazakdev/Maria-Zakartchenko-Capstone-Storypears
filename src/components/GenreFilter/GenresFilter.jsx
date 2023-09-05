@@ -12,7 +12,6 @@ function GenreFilter({ selectedGenre, handleGenreSelect, genres }) {
         >
           All
         </li>
-
         {genres.map((genre) => (
           <li
             key={genre}
@@ -26,5 +25,6 @@ function GenreFilter({ selectedGenre, handleGenreSelect, genres }) {
     </section>
   );
 }
+
 
 export default GenreFilter;

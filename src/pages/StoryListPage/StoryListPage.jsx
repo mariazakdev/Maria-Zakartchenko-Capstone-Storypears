@@ -9,36 +9,30 @@ const apiURL = process.env.REACT_APP_API_URL;
 function StoryListPage() {
   const [fullStories, setFullStories] = useState([]);
   
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  
   useEffect(() => {
-    axios
-      .get(`${apiURL}/fullstories`)
-      .then(response => {
-        setFullStories(response.data);
-        setIsLoading(false);
-      })
-      .catch(err => {
-        console.error('Error fetching stories:', err);
-        setError(err);
-        setIsLoading(false);
-      });
+    fetchFullStories();
   }, []);
-  
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-  
-  if (error) {
-    return <div>Error loading stories. Please try again later.</div>;
-  }
+
+  const fetchFullStories = async () => {
+    try {
+      const response = await axios.get(`${apiURL}/storytree`);
+      setFullStories(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error fetching tree stories:', error);
+    }
+  };
+
+  const handleItemClick = (id) => {
+    console.log(`Clicked tree item with ID: ${id}`);
+  };
+
   return (
     <div className='site'>
  <Header />
  <section className='site__content'>
 
-<StoryList fullStories={fullStories} />
+<StoryList fullStories={fullStories} handleItemClick={handleItemClick}/>
  </section>
  <Footer />
     </div>

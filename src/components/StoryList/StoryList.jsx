@@ -1,110 +1,61 @@
 import "./StoryList.scss";
 import { useNavigate } from "react-router-dom";
 import MiniPearTree from "../../assets/icons/1665403462pear-tree.png";
-import GenreFilter from "../GenresFilter/GenresFilter";
 import EmotionsFilter from "../EmotionsFilter/EmotionsFilter";
 import { useState } from "react";
-
+import GenreFilter from '../GenreFilter/GenresFilter';
 
 function StoryList({ fullStories }) {
-  const navigate = useNavigate();
   const [selectedGenre, setSelectedGenre] = useState("All");
-  const [selectedEmotion, setSelectedEmotion] = useState("All");
 
   const genres = Array.from(
-    new Set(
-      fullStories.map((story) => {
-        const storiesData =
-          typeof story.stories_data === "string"
-            ? JSON.parse(story.stories_data)
-            : story.stories_data;
-        return storiesData[0].genre;
-      })
-    )
+    new Set(fullStories.map(story => {
+      const storyContent = typeof story.content === 'string' 
+        ? JSON.parse(story.content) 
+        : story.content;
+      return storyContent[0].genre;
+    }))
   );
 
-  const emotions = Array.from(
-    new Set(
-      fullStories.map((story) => {
-        const storiesData =
-          typeof story.stories_data === "string"
-            ? JSON.parse(story.stories_data)
-            : story.stories_data;
-        return storiesData[0].emotion;
-      })
-    )
-  ).filter((emotion) => emotion);
-
-  const handleStoryClick = (id) => {
-    console.log("Clicked story with ID:", id);
-    navigate(`/storytree/${id}`);
-  };
-  const filterStories = () => {
-    return fullStories.filter(story => {
-        const storiesData = typeof story.stories_data === 'string'
-            ? JSON.parse(story.stories_data)
-            : story.stories_data;
-        const firstStory = storiesData[0];
-
-        return (selectedGenre === "All" || firstStory.genre === selectedGenre) &&
-               (selectedEmotion === "All" || firstStory.emotion === selectedEmotion);
+  const filteredStories = selectedGenre === "All"
+    ? fullStories
+    : fullStories.filter(story => {
+        const storyContent = typeof story.content === 'string'
+          ? JSON.parse(story.content)
+          : story.content;
+        return storyContent[0].genre === selectedGenre;
     });
-};
 
-
-  const handleFilterSelect = (type, value) => {
-    if (type === "genre") {
-      setSelectedGenre(value);
-      setSelectedEmotion("All");
-    } else if (type === "emotion") {
-      setSelectedEmotion(value);
-      setSelectedGenre("All");
-    }
+  const handleGenreSelect = (genre) => {
+    setSelectedGenre(genre);
   };
-  const shuffleArray = (array) => {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  };
-  const shuffledStories = shuffleArray(filterStories());
 
   return (
-    <div className="story">
-      <h2>The Pear Tree Stories</h2>
+    <div className="story-depot">
       <GenreFilter
         selectedGenre={selectedGenre}
-        handleGenreSelect={(genre) => handleFilterSelect("genre", genre)}
+        handleGenreSelect={handleGenreSelect}
         genres={genres}
       />
-      <EmotionsFilter
-        selectedEmotion={selectedEmotion}
-        handleEmotionSelect={(emotion) =>
-          handleFilterSelect("emotion", emotion)
-        }
-        emotions={emotions}
-      />
-      <ul className="story-list">
-        {shuffledStories.map((storyItem) => {
-          const storiesData =
-            typeof storyItem.stories_data === "string"
-              ? JSON.parse(storyItem.stories_data)
-              : storyItem.stories_data;
-          const firstStory = storiesData[0];
-
-          return (
-            <li
-              className="story-list__item"
-              key={storyItem.id}
-              onClick={() => handleStoryClick(storyItem.id)}
-            >
-              <p>{firstStory.title}</p>
-              <img src={MiniPearTree} alt="tree" />
-            </li>
-          );
-        })}
-      </ul>
+      <section className="story-depot__stories">
+        <div>
+          <h3>Help these story branches become trees:</h3>
+          <ul>
+            {filteredStories.map(story => (
+              <li key={story.id}>
+                <h4>{story.title}</h4>
+                <div>
+                  {JSON.parse(story.content).map((content, index) => (
+                    <div key={index}>
+                      <p>{content.text}</p>
+                    </div>
+                  ))}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
     </div>
   );
 }

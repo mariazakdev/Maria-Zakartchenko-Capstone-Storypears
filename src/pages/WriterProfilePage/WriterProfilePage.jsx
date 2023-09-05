@@ -4,34 +4,25 @@ import axios from 'axios';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import WriterProfile from '../../components/WriterProfile/WriterProfile';
+import { useLocation } from 'react-router-dom';
 
-function ProfilePage() {
-    const [userData, setUserData] = useState(null);
-    const apiURL = process.env.REACT_APP_API_URL;
-    const {id} = useParams();
-  
-    useEffect(() => {
-      const fetchUserData = async () => {
-        try {
-          const response = await axios.get(`http://localhost:8080/users/${id}`);
-          setUserData(response.data);
-        } catch (error) {
-          console.error("Error fetching profile data:", error);
-        }
-      };
-  
-      fetchUserData();
-    }, [id]);
+
+
+function WriterProfilePage() {
+  const location = useLocation();
+    const writerData = location.state?.writerData;
+    const { username } = useParams();
+
     return (
       <div className='site'>
       <Header />
       <section className='site__content'>
 
-            <WriterProfile userData ={userData} setUserData={setUserData}/>
+            <WriterProfile writerData={writerData} />
             </section>
             <Footer />
         </div>
     );
 }
 
-export default ProfilePage;
+export default WriterProfilePage;

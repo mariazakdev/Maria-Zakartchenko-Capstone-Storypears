@@ -3,21 +3,20 @@ import { useLocation } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import StoryStudio from '../../components/StoryStudio/StoryStudio';
+import { user } from '../../services/authService';
 
-function StoryStudioPage({ updateHalfStoriesList }) {
+
+function StoryStudioPage({}) {
   const location = useLocation();
-  const selectedHalfStoryData = location.state?.data || [];
-
-  const user = {
-    id: 61,
-    pen_first_name: "Billy",
-    pen_last_name: "Writer"
-  };
-
+  const selectedHalfStoryData = location.state?.data;
+  
   return (
     <div className="App">
       <Header />      
-      <StoryStudio halfStoryGroup={selectedHalfStoryData} user={user} updateHalfStoriesList={updateHalfStoriesList} />
+      <StoryStudio 
+          storyBranch={selectedHalfStoryData} 
+          user={user} 
+      />
       <Footer />
     </div>
   );

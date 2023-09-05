@@ -4,8 +4,6 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import StoryDepot from '../../components/StoryDepot/StoryDepot';
 
-
-
 function StoryDepotPage() {
   const [halfStories, setHalfStories] = useState([]);
 
@@ -15,7 +13,7 @@ function StoryDepotPage() {
 
   const fetchHalfStories = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/storycontents');
+      const response = await axios.get('http://localhost:8080/storybranch');
       setHalfStories(response.data);
       console.log(response.data);
     } catch (error) {
@@ -24,15 +22,13 @@ function StoryDepotPage() {
   };
 
   const handleItemClick = (id) => {
-    console.log(`Clicked on item with ID: ${id}`);
+    console.log(`Clicked on branch item with ID: ${id}`);
   };
 
   return (
-    <div >
+    <div>
       <Header />
-      <StoryDepot halfStories={halfStories} 
-      handleItemClick={handleItemClick} 
-      />
+      <StoryDepot halfStories={halfStories} handleItemClick={handleItemClick} />
       <Footer />
     </div>
   );

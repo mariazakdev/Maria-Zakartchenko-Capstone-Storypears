@@ -12,7 +12,7 @@ import StoryCreatorPage from "./pages/StoryCreatorPage/StoryCreatorPage";
 import StoryStudioPage from "./pages/StoryStudioPage/StoryStudioPage";
 import HomePage from "./pages/HomePage/HomePage";
 import WriterListPage from "./pages/WriterListPage/WriterListPage";
-import WriterProfilePage from "./pages/AboutPage/AboutPage";
+import WriterProfilePage from "./pages/WriterProfilePage/WriterProfilePage";
 import StoryDepotPage from "./pages/StoryDepotPage/StoryDepotPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
@@ -28,10 +28,13 @@ const authUrl = process.env.REACT_APP_AUTH_URL;
 
 function App() {
 
-
+  const user = {
+    id: 61,
+    pen_first_name: "Billy",
+    pen_last_name: "Writer"
+  };
   return ( 
 <main className="App">
-  <AuthProvider>
     <Router>
       <Routes>
         {/* Public Routes */}
@@ -53,13 +56,13 @@ function App() {
 
 
         <Route path="/writers" element={<WriterListPage />} />
-        <Route path="/writers/list/:id" element={<WriterProfilePage />} />
+        <Route path="/writers/:username" element={<WriterProfilePage />} />
        
         {/* Single User Visible */}
         <Route path="/profile" element={<MyProfilePage />} />
+
       </Routes>
     </Router> 
-  </AuthProvider>
 </main>
   );
 }

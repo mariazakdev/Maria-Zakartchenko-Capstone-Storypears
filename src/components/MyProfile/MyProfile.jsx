@@ -4,8 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import authService from '../../services/authService';
 
-function MyProfile() {
-  const [userData, setUserData] = useState({});
+function MyProfile({userData}) {
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedBio, setEditedBio] = useState('');
   const [editedLinks, setEditedLinks] = useState([]);
@@ -16,26 +15,6 @@ function MyProfile() {
   const penFirstNameRef = useRef(null);
   const penLastNameRef = useRef(null);
   
-  useEffect(() => {
-    let isMounted = true;
-
-    const fetchUserData = async () => {
-      try {
-        const data = await authService.getProfile();
-        if (isMounted) {
-          setUserData(data);
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-    fetchUserData();
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
   useEffect(() => {
     setEditedBio(userData.bio || '');
     setEditedLinks(userData.links || []);
@@ -57,10 +36,8 @@ function MyProfile() {
 
       const response = await authService.updateProfile(userData.id, updatedData);
       console.log("User data updated:", response);
-      // Add feedback to user here (e.g., using a toast notification or a simple alert).
     } catch (error) {
       console.error("Error updating user data:", error);
-      // Add feedback to user about the error here.
     }
   };
 
@@ -80,7 +57,6 @@ function MyProfile() {
   useEffect(() => {
     setBioCharacterCount(editedBio.length);
   }, [editedBio]);
-
 
 
   return (
