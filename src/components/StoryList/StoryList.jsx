@@ -44,13 +44,6 @@ function StoryList({ fullStories }) {
             {filteredStories.map(story => (
               <li key={story.id}>
                 <h4>{story.title}</h4>
-                <div>
-                  {JSON.parse(story.content).map((content, index) => (
-                    <div key={index}>
-                      <p>{content.text}</p>
-                    </div>
-                  ))}
-                </div>
               </li>
             ))}
           </ul>
