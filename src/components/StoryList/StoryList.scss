@@ -1,21 +1,54 @@
-
-.story{
- background-image: url('../../assets/icons/1665403462pear-tree.png');
-&-list{
-   cursor: pointer;
-    list-style-type: none;
-    &__item{
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        p{
-            margin-right: 1rem;
-        }
-        img{ 
-            width: 1.875rem;
-            height: 1.875rem;
-        }
+.story-list {
+    &__stories {
+      margin: 20px 0;
     }
-}
-
-}
+  
+    &__items {
+      list-style: none;
+      padding: 0;
+    }
+  
+    &__item {
+      margin: 10px 0;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border: 1px solid #e1e1e1;
+      border-radius: 5px;
+    }
+  
+    &__title {
+      font-size: 1.2em;
+      margin-bottom: 5px;
+    }
+  
+    &__authors {
+      font-size: 0.9em;
+      color: #666;
+    }
+  }
+  
+  .genre-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 20px;
+  
+    button {
+      padding: 5px 15px;
+      border: none;
+      background-color: #ddd;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+  
+      &.active {
+        background-color: #007bff;
+        color: white;
+      }
+  
+      &:hover {
+        background-color: #c4d351;
+      }
+    }
+  }
+  

@@ -4,19 +4,17 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import StoryDepot from '../../components/StoryDepot/StoryDepot';
 
-
-
 function StoryDepotPage() {
-  const [halfStories, setHalfStories] = useState([]);
+  const [branchStories, setBranchStories] = useState([]);
 
   useEffect(() => {
-    fetchHalfStories();
+    fetchBranchStories();
   }, []);
 
-  const fetchHalfStories = async () => {
+  const fetchBranchStories = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/storycontents');
-      setHalfStories(response.data);
+      const response = await axios.get('http://localhost:8080/storybranch');
+      setBranchStories(response.data);
       console.log(response.data);
     } catch (error) {
       console.error('Error fetching half stories:', error);
@@ -24,15 +22,13 @@ function StoryDepotPage() {
   };
 
   const handleItemClick = (id) => {
-    console.log(`Clicked on item with ID: ${id}`);
+    console.log(`Clicked on branch item with ID: ${id}`);
   };
 
   return (
-    <div >
+    <div>
       <Header />
-      <StoryDepot halfStories={halfStories} 
-      handleItemClick={handleItemClick} 
-      />
+      <StoryDepot branchStories={branchStories} handleItemClick={handleItemClick} />
       <Footer />
     </div>
   );

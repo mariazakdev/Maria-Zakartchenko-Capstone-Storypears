@@ -15,7 +15,7 @@ const Nav = () => {
         <Link to="/">Home</Link>
       </li>
      
-      <>
+      
         <li>
           <Link to="/story/prompt">Prompts</Link>
         </li>
@@ -31,7 +31,7 @@ const Nav = () => {
         <li>
           <Link to="/writers">Writers</Link>
         </li>
-      </>
+      
       
     </ul>
     <div className="nav-user">

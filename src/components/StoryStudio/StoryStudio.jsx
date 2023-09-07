@@ -4,76 +4,80 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import "./StoryStudio.scss";
 
-function StoryStudio({  halfStoryGroup, user, updateHalfStoriesList }) {
-
-  const [halfStoryContent, setHalfStoryContent] = useState('');
+function StoryStudio({ user, storyBranch }) {
+  const [userContribution, setUserContribution] = useState('');
   const navigate = useNavigate();
-  
-  const handleHalfStoryChange = (event) => {
-    setHalfStoryContent(event.target.value);
+
+  const handleStoryChange = (event) => {
+    setUserContribution(event.target.value);
   };
 
   const saveToSessionStorage = () => {
-    sessionStorage.setItem('storyContent', halfStoryContent);
+    sessionStorage.setItem('storyContent', userContribution);
   };
 
-  const startHalfStory = async () => {
-    const userContribution = halfStoryContent || sessionStorage.getItem('storyContent');
+  const addToHalfStory = async () => {
+    const contribution = userContribution || sessionStorage.getItem('storyContent');
+    const updatedContent = [
+      ...JSON.parse(storyBranch.content),
+      {
+        user_id: user.id,
+        text: contribution
+      }
+    ];
 
     try {
-      const response = await axios.post('http://localhost:8080/storycontents', {
-        id: uuidv4(),
-        content: userContribution,
-        user_id: user.id, 
-        story_id: halfStoryGroup[0].story_id,
-        emotion: halfStoryGroup[0].emotion,
-        genre: halfStoryGroup[0].genre,
-        title: halfStoryGroup[0].title,
+      const response = await axios.post('http://localhost:8080/storybranch', {
+        ...storyBranch,
+        content: JSON.stringify(updatedContent)
       });
-  
-      console.log('Successfully submitted half story:', response.data);
-      navigate('/'); 
+
+      console.log('Successfully updated story:', response.data);
+      navigate('/');
     } catch (error) {
-      console.error('Error submitting half story:', error);
+      console.error('Error updating story:', error);
     }
+  };
+
+  const finishStory = () => {
+    navigate('/'); // will update later, want to add title into url first
   };
 
   return (
     <div className="storywriter">
-        <div className="storywriter-add">
-            <h2>Continue this story seed</h2>
-            <h4>Submit your contribution so another can join and make a pair.</h4>
-            <form className="storywriter-pear__storyInputs">
-                <h3>
-                    {user.pen_first_name} {user.pen_last_name}
-                </h3>
+      <div className="storywriter-add">
+        <h2>Continue this story seed</h2>
+        <h4>Submit your contribution so another can join and make a pair.</h4>
+        <form className="storywriter-pear__storyInputs">
+          <h3>
+            {user.pen_first_name} {user.pen_last_name}
+          </h3>
 
-                <label htmlFor="title">Title:</label>
-                <h3>{halfStoryGroup[0].title}</h3>
-                <label htmlFor="title">Genre / Emotion:</label>
-                <h3>{halfStoryGroup[0].genre || null}</h3>
-                <h3>{halfStoryGroup[0].emotion || null}</h3>
+          <label htmlFor="title">Title:</label>
+          <h3>{storyBranch.title}</h3>
+          <label htmlFor="genre">Genre / Emotion:</label>
+          <h3>{storyBranch.genre || null}</h3>
+          <h3>{storyBranch.emotion || null}</h3>
 
-                <label htmlFor="story">Previous Stories:</label>
-                {halfStoryGroup.map((story, index) => (
-                    <p key={index} className="storyInputes-prevStory">{story.content}</p>
-                ))}
+          <label htmlFor="story">Previous Stories:</label>
+          {JSON.parse(storyBranch.content).map((content) => ( 
+            <div key={content.user_id}> 
+              <p>{content.text}</p>
+            </div>
+          ))}
 
-               
-                <textarea
-                    id="story"
-                    name="story"
-                    placeholder="Add to the writing"
-                    onChange={handleHalfStoryChange}
-                />
-                <input type="button" value="Save" onClick={saveToSessionStorage} />
-                <input type="button" value="Add" onClick={startHalfStory} />
-                <input type="button" value="Complete" onClick={startHalfStory} />
-
-            </form>
-        </div>
+          <textarea 
+            placeholder="Continue the story..."
+            value={userContribution}
+            onChange={handleStoryChange}
+          />
+          <input type="button" value="Save" onClick={saveToSessionStorage} />
+          <input type="button" value="Add" onClick={addToHalfStory} />
+          <input type="button" value="Complete" onClick={finishStory} />
+        </form>
+      </div>
     </div>
-);
+  );
 }
 
 export default StoryStudio;

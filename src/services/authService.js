@@ -22,7 +22,6 @@ const authService = {
   },
 
   logout: async () => {
-    // Call the backend endpoint to clear the HttpOnly cookie and perform other logout operations.
     try {
       const response = await axios.post(`${authUrl}/logout`, {}, { withCredentials: true });
       return response.data;

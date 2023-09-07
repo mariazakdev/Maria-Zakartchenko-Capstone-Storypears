@@ -6,13 +6,13 @@ import axios from 'axios';
 import './WriterListPage.scss'
 
 function WriterListPage() {
-  const [profileData, setProfileData] = useState([]);
+  const [writerListData, setWriterListData] = useState([]);
 
   useEffect(() => {
     axios
       .get('http://localhost:8080/users')
       .then(response => {
-        setProfileData(response.data);
+        setWriterListData(response.data);
       })
       .catch(error => {
         console.error('Error fetching profile data:', error);
@@ -24,7 +24,7 @@ function WriterListPage() {
       <Header />
       <section className='site__content'>
 
-      <WriterList profileData={profileData} />
+      <WriterList writerListData={writerListData} />
       </section>
       <Footer />
     </div>
