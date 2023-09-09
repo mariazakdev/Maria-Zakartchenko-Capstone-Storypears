@@ -20,11 +20,10 @@ function StoryReader({ storyData = {}, users = [] }) {
     return (
         <div className="story-reader">
             <div className="story-reader__nav">
-                <NavStoryReader />
             </div>
 
-            <h1>{storyData.title}</h1>
-            <h2>{storyData.genre}</h2>
+            <h2>{storyData.title}</h2>
+            <h3>{storyData.genre}  {storyData.emotion}</h3>
 
             <div className="story-reader__authors">
     {uniqueContributors.map(userId => {
@@ -37,7 +36,7 @@ function StoryReader({ storyData = {}, users = [] }) {
                 className={highlightedUser === user.id ? "highlighted-button" : ""}
                 onClick={() => handleClick(user.id)}
             >
-                {user.pen_first_name}
+                {user.username}
             </button> 
             : null
         );

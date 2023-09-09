@@ -9,8 +9,9 @@ import { useNavigate } from "react-router-dom";
 function StoryList({ fullStories = [] }) { 
 
   const navigate = useNavigate();
+  
   const handleStoryClick = (story) => {
-    navigate(`/storytree/${story.id}`, { 
+    navigate(`/storytrees/${story.id}`, { 
       state: {
         story: story,
         uniqueAuthors: story.contents ? new Set(story.contents.map(content => content.user_id)).size : 0

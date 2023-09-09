@@ -6,44 +6,46 @@ import axios from 'axios';
 
 function StoryPromptPage() {
   const [prompts, setPrompts] = useState([]);
-  const [feelings, setFeelings] =useState([]);
-
-  useEffect(() => {
-    fetchPrompts();
-  }, []);
+  const [feelings, setFeelings] = useState([]);
 
   const fetchPrompts = async () => {
-    try {
-      const response = await axios.get('http://localhost:8080/prompts');
-      setPrompts(response.data);
-      console.log(response.data);
-    } catch (error) {
-      console.error('Error fetching prompts sentences:', error);
-    }
+      try {
+          const response = await axios.get('http://localhost:8080/prompts');
+          setPrompts(response.data);
+          console.log(response.data);
+      } catch (error) {
+          console.error('Error fetching prompts sentences:', error);
+      }
   };
-  useEffect(() => {
-    fetchFeelings();
-  }, []);
 
   const fetchFeelings = async () => {
-    try {
-      const response = await axios.get('http://localhost:8080/feelings');
-      setFeelings(response.data);
-      console.log(response.data);
-
-    } catch (error) {
-      console.error('Error fetching feeling expressions:', error);
-    }
+      try {
+          const response = await axios.get('http://localhost:8080/feelings');
+          setFeelings(response.data);
+          console.log(response.data);
+      } catch (error) {
+          console.error('Error fetching feeling expressions:', error);
+      }
   };
 
+  useEffect(() => {
+      fetchPrompts();
+      fetchFeelings();
+  }, []);
 
   return (
-    <div className="site">
- <Header />
- <div className='site__content'></div>
- <StoryStarter  prompts={prompts} feelings={feelings}/>
- <Footer />
-    </div>
+      <div className="site">
+          <Header />
+          <div className='site__content'>
+              <StoryStarter 
+                  prompts={prompts} 
+                  feelings={feelings}
+                  fetchPrompts={fetchPrompts}
+                  fetchFeelings={fetchFeelings}
+              />
+              <Footer />
+          </div>
+      </div>
   );
 }
 

@@ -46,11 +46,11 @@ function App() {
         <Route path="/story/studio/:id" element={<StoryStudioPage />} />
         <Route path="/story/new/:id" element={<StoryCreatorPage />} />
         <Route path="/story/new" element={<StoryCreatorPage />} />
-         <Route path="/storytree" element={<StoryListPage />} />
+         <Route path="/storytrees" element={<StoryListPage />} />
          {/* url based on story title */}
-         <Route path="/storytree/:id" element={<StoryPage />} />
+         <Route path="/storytrees/:id" element={<StoryPage />} />
 
-        <Route path="/stories/depot" element={<StoryDepotPage />} /> 
+        <Route path="/storybranches" element={<StoryDepotPage />} /> 
 
 
         <Route path="/writers" element={<WriterListPage />} />

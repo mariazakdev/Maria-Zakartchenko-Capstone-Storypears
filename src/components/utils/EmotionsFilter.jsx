@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
+import "./EmotionsFilter.scss";
 
 function EmotionsFilter({ emotions =[], onEmotionSelect = ()=> {}, className = "" }) {
   const [activeEmotion, setActiveEmotion] = useState('All Emotions');
+
+  // Check if the 'emotions' prop is null or empty before rendering
+  if (!emotions || emotions.length === 0) {
+    return null; // Don't render the component
+  }
 
   return (
     <div className={`emotions-filter ${className}`}>
@@ -27,4 +33,5 @@ function EmotionsFilter({ emotions =[], onEmotionSelect = ()=> {}, className = "
     </div>
   );
 }
+
 export default EmotionsFilter;

@@ -1,32 +1,47 @@
 @use "../../styles/partials/colors" as c;
 @use "../../styles/partials/mixins" as m;
 
-
-
-.story-reader{
-    width:100%;
+.story-reader {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    &__story{
-         display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width:18.75rem;
-    padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    border: none;
-        
+    padding: 1.5rem 0;
+
+    &__story {
+        width: 18.75rem;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border: 1px solid lightGray;
+        border-radius: 8px;
+        background-color: white; 
+        text-align: center;
+
+    
     }
-   
 }
+
 .highlighted-content {
-    background-color: lightgoldenrodyellow; 
+    background-color: lemonchiffon;  
+    border-radius: 4px;
 }
 
 .highlighted-button {
-    background-color: gray;
-    color: white;
+    background-color: rgb(226, 213, 213);  
+    color: white; 
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+
+    &:hover {
+        background-color: darken(gray, 10%); 
+        transform: translateY(-3px); 
+    }
+
+    &:active {
+        transform: translateY(1px); 
+    }
 }

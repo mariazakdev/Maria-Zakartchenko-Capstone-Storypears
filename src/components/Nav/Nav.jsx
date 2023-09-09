@@ -7,7 +7,7 @@ import LogoutButton from "../LogoutButton/LogoutButton";
 import LoginButton from "../LoginButton/LoginButton";
 
 const Nav = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(true);
 
   useEffect(() => {
     const getUser = async () => {
@@ -31,42 +31,39 @@ const Nav = () => {
     getUser();
   }, []);
   return (
+
 <nav className="nav">
+
+  
       <ul className="nav-list">
-        {/* Always show the "Why Join?" link */}
-        <li>
-          <Link to="/about">Why Join?</Link>
-        </li>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
+    
         {user && (
-          // Show these links only when the user is logged in
           <>
             <li>
-              <Link to="/story/prompt">Prompts</Link>
+              <Link to="/story/prompt">Seeds</Link>
             </li>
             <li>
-              <Link to="/stories">All Stories</Link>
+              <Link to="/storytrees">Trees</Link>
+            </li>
+            <li>
+              <Link to="/storybranches">Branches</Link>
             </li>
             <li>
               <Link to="/story/new">Writing Space</Link>
-            </li><li>
-              <Link to="/story/studio">Studio</Link>
             </li>
-
-            <li>
-              <Link to="/story/depot">Depot</Link>
-            </li>
+           
+          
             <li>
               <Link to="/writers">Writers</Link>
             </li>
           </>
         )}
       </ul>
+
+
       <div className="nav-user">
-        {user ? <LogoutButton /> : <LoginButton />}
-      </div>
+       <LogoutButton />
+              </div>
     </nav>
   );
 };

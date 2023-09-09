@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import "./StoryStarter.scss";
+const { v4: uuidv4 } = require('uuid');
+
 
 function StoryStarter({ prompts, feelings, fetchPrompts, fetchFeelings }) {
   const [activeContent, setActiveContent] = useState("prompts");
@@ -9,12 +11,30 @@ function StoryStarter({ prompts, feelings, fetchPrompts, fetchFeelings }) {
   const [newFeeling, setNewFeeling] = useState('');
   const navigate = useNavigate();
 
+  const createPrompt = async (data) => {
+    try {
+      const response = await axios.post(`http://localhost:8080/prompts`, data);
+      return response.data;
+    } catch (error) {
+      throw new Error("Error creating prompt:", error);
+    }
+  };
+
+  const createFeeling = async (data) => {
+    try {
+      const response = await axios.post(`http://localhost:8080/feelings`, data);
+      return response.data;
+    } catch (error) {
+      throw new Error("Error creating feeling:", error);
+    }
+  };
+
   const handleContentClick = (id, type) => {
     const selectedData = type === 'prompt' 
       ? getPromptDataById(id) 
       : getFeelingDataById(id);
 
-    navigate(`/story/new/${id}`, { state: { data: selectedData } });
+    navigate(`/storytree/${id}`, { state: { data: selectedData } });
   };
 
   const getPromptDataById = (id) => prompts.find(prompt => prompt.id === id);
@@ -22,14 +42,14 @@ function StoryStarter({ prompts, feelings, fetchPrompts, fetchFeelings }) {
 
   const handleAdd = async (type) => {
     const sentence = type === 'prompt' ? newPrompt : newFeeling;
-    const endpoint = `http://localhost:8080/${type}s`;
 
     try {
-      await axios.post(endpoint, { sentence });
       if (type === 'prompt') {
+        await createPrompt({ sentence });
         setNewPrompt('');
         fetchPrompts();
       } else {
+        await createFeeling({ sentence }); 
         setNewFeeling('');
         fetchFeelings();
       }

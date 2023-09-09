@@ -82,8 +82,8 @@ function StoryCreator({ promptData, feelingData, user, genres, emotions }) {
         <h2>CREATOR SPACE</h2>
         <h4>Submit your contribution so another can join and make a pair.</h4>
 
-        <div className="toggle-buttons">
-          <button onClick={toggleSelect}>{displayGenreSelect ? 'Emotion' : 'Genre'}</button>
+        <div className="toggle-buttons toggle-buttons-toggler">
+          <button className="toggle-buttons toggle-buttons-toggler"onClick={toggleSelect}>{displayGenreSelect ? 'Emotion' : 'Genre'}</button>
         </div>
 
         <h3>

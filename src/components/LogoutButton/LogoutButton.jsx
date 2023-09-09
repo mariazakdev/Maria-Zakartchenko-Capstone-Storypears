@@ -1,13 +1,12 @@
 import "./LogoutButton.scss"
 import Avatar from "../Avatar/Avatar";
 import { Link } from "react-router-dom";
-import authService from '../../services/authService';
 const authUrl = process.env.REACT_APP_AUTH_URL;
 
 const LogoutButton = () => {
-  const handleLogout = () => {
-    authService.logout();
-  };
+  // const handleLogout = () => {
+  //   authService.logout();
+  // };
 
   return (
     <div className="logout">
@@ -20,7 +19,7 @@ const LogoutButton = () => {
         className="logout-link"
         href={`${authUrl}/logout`}
       >
-        <span className="logout-link__text" onClick={handleLogout} >Logout</span>
+        {/* <span className="logout-link__text" onClick={handleLogout} >Logout</span> */}
       </a>
     </div>
   );

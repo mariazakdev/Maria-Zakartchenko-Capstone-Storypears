@@ -2,10 +2,8 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import WriterList from '../../components/WriterList/WriterList'
 import React, { useState, useEffect } from 'react';
-import authService from '../../services/authService';
-
-import axios from 'axios';
 import './WriterListPage.scss'
+import userService from '../../services/userService';
 
 function WriterListPage() {
   const [writerListData, setWriterListData] = useState([]);
@@ -13,7 +11,7 @@ function WriterListPage() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const users = await authService.getUsers();
+        const users = await userService.getUsers();
         setWriterListData(users);
       } catch (error) {
         console.error('Error fetching profile data:', error);

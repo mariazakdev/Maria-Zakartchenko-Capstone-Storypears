@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "./GenreFilter.scss";
 
 function GenreFilter({ genres = [], onGenreSelect = () => {} }) {
   const [activeGenre, setActiveGenre] = useState('All Genres');

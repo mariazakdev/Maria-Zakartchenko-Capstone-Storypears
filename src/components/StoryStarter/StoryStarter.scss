@@ -4,7 +4,42 @@
 
 .story-starter {
     padding: 20px;
-
+    &-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+  
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+  
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        resize: none; 
+      }
+  
+      button {
+        background-color: #bfccda;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        align-self: flex-end;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+  
+        &:hover {
+          background-color: #e7e2d7;
+        }
+      }
+    }
     p {
       font-size: 18px;
       margin-bottom: 10px;

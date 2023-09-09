@@ -1,14 +1,13 @@
 import "./Footer.scss";
 import NavFooter from '../Nav/NavFooter';
-function Footer(){
 
+
+function Footer(){
     return(
         <div className="footer">
-
-       <NavFooter />
-        <h2>Story Pears</h2>
-        
-         </div>
+            <NavFooter />
+        </div>
     );
 };
+
 export default Footer;
