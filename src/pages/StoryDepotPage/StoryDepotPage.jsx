@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import StoryDepot from '../../components/StoryDepot/StoryDepot';
+import { getAllStoryBranches } from '../../services/storyService'; 
 
 function StoryDepotPage() {
   const [branchStories, setBranchStories] = useState([]);
@@ -13,7 +13,7 @@ function StoryDepotPage() {
 
   const fetchBranchStories = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/storybranch');
+      const response = await getAllStoryBranches(); 
       setBranchStories(response.data);
       console.log(response.data);
     } catch (error) {

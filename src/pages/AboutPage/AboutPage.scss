@@ -1,11 +1,59 @@
-.site{
-    &__content{
+.site {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    &__content {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         margin: 1rem;
+        padding: 1rem;
         border-radius: .25rem;
         border: .0625rem gray solid;
+        background-color: #f7f7f7; // A light gray background for contrast
+
+        .intro {
+            margin-bottom: 2rem;
+            text-align: center;
+
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 80%; 
+
+            p {
+                font-size: 1rem;
+                line-height: 1.4;
+                text-align: justify;
+
+                strong {
+                    color: #dace8b; 
+                }
+            }
+        }
+
+        .image-container {
+            margin-top: 2rem;
+            width: 100%;
+            text-align: center;
+
+            img {
+                max-width: 30%; 
+                border-radius: .5rem;
+            }
+        }
     }
 }

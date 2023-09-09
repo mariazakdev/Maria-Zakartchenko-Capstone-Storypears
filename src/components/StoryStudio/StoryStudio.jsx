@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { v4 as uuidv4 } from 'uuid';
 import "./StoryStudio.scss";
 
-function StoryStudio({ user, storyBranch }) {
+function StoryStudio({ user, storyBranch, addContribution, createStoryTree }) {
   const [userContribution, setUserContribution] = useState('');
   const navigate = useNavigate();
 
@@ -17,30 +15,38 @@ function StoryStudio({ user, storyBranch }) {
   };
 
   const addToHalfStory = async () => {
-    const contribution = userContribution || sessionStorage.getItem('storyContent');
-    const updatedContent = [
-      ...JSON.parse(storyBranch.content),
+    const contribution = {
+      user_id: user.id,
+      text: userContribution || sessionStorage.getItem('storyContent')
+    };
+    await addContribution(contribution);
+    navigate('/home');
+  };
+
+  const finishStory = async () => {
+    const combinedContent = [
+      ...JSON.parse(storyBranch.content || "[]"),
       {
         user_id: user.id,
-        text: contribution
+        text: userContribution || sessionStorage.getItem('storyContent')
       }
     ];
 
+    const finishedStoryData = {
+      title: storyBranch.title,
+      genre: storyBranch.genre,
+      emotion: storyBranch.emotion,
+      content: null, 
+      branch_id: storyBranch.id
+    };
+
     try {
-      const response = await axios.post('http://localhost:8080/storybranch', {
-        ...storyBranch,
-        content: JSON.stringify(updatedContent)
-      });
-
-      console.log('Successfully updated story:', response.data);
-      navigate('/');
+      const response = await createStoryTree(finishedStoryData);
+      console.log('Successfully created story tree:', response.data);
+      navigate('/home');
     } catch (error) {
-      console.error('Error updating story:', error);
+      console.error('Error creating story tree:', error);
     }
-  };
-
-  const finishStory = () => {
-    navigate('/'); // will update later, want to add title into url first
   };
 
   return (
@@ -60,13 +66,16 @@ function StoryStudio({ user, storyBranch }) {
           <h3>{storyBranch.emotion || null}</h3>
 
           <label htmlFor="story">Previous Stories:</label>
-          {JSON.parse(storyBranch.content).map((content) => ( 
-            <div key={content.user_id}> 
-              <p>{content.text}</p>
-            </div>
-          ))}
+          {
+            storyBranch.content && Array.isArray(JSON.parse(storyBranch.content))
+              ? JSON.parse(storyBranch.content).map((contentItem, idx) => (
+                <div key={idx}>
+                  <p>{contentItem.text}</p>
+                </div>
+              )) : null
+          }
 
-          <textarea 
+          <textarea
             placeholder="Continue the story..."
             value={userContribution}
             onChange={handleStoryChange}

@@ -2,28 +2,19 @@ import React, { useState } from 'react';
 import NavStoryReader from "../NavStoryReader/NavStoryReader";
 import "./StoryReader.scss";
 
+
 function StoryReader({ storyData = {}, users = [] }) {
-    const [highlightedUserId, setHighlightedUserId] = useState(null);
+    const [highlightedUser, setHighlightedUser] = useState(null);
 
-    let stories;
-    try {
-        stories = JSON.parse(storyData.stories_data || '[]');
-    } catch (err) {
-        console.error('Error parsing stories_data:', err);
-        return <div>Error parsing stories.</div>;
-    }
+    const storyContents = storyData.content ? JSON.parse(storyData.content) : [];
 
-    const uniqueUserIdsFromStory = Array.from(new Set(stories.map(story => story.user_id)));
-    const usersFromStory = users.filter(user => uniqueUserIdsFromStory.includes(user.id));
-
-    const getUserFromId = (userId) => {
-        const foundUser = usersFromStory.find(user => user.id === userId);
-        return foundUser ? `${foundUser.pen_first_name} ${foundUser.pen_last_name}` : 'null';
-    }
-
-    const contentClassName = (userId) => {
-        return highlightedUserId === userId ? 'highlighted-content' : '';
-    }
+    const handleClick = (userId) => {
+        if (highlightedUser === userId) {
+            setHighlightedUser(null);
+        } else {
+            setHighlightedUser(userId);
+        }
+    };
 
     return (
         <div className="story-reader">
@@ -31,36 +22,37 @@ function StoryReader({ storyData = {}, users = [] }) {
                 <NavStoryReader />
             </div>
 
-            <h1>I'm story reader</h1>
+            <h1>{storyData.title}</h1>
+            <h2>{storyData.genre}</h2>
 
-            <div className="story-authors">
-                {usersFromStory.map(user => (
-                    <span key={user.id}>
-                        {getUserFromId(user.id)}
+            <div className="story-reader__authors">
+                {storyContents.map(content => {
+                    const user = users.find(u => u.id === content.user_id);
+                    return (
+                        user ? 
+                        <button 
+                            key={user.id}
+                            className={highlightedUser === user.id ? "highlighted-button" : ""}
+                            onClick={() => handleClick(user.id)}
+                        >
+                            {user.name}
+                        </button> 
+                        : null
+                    );
+                })}
+            </div>
+
+            <div className='story-reader__story'>
+                {storyContents.map((content, index) => (
+                    <span 
+                        key={index} 
+                        className={highlightedUser === content.user_id ? "highlighted-content" : ""}
+                    >
+                        {content.text}
                     </span>
                 ))}
             </div>
 
-            <div>
-                {usersFromStory.map(user => (
-                    <button
-                        key={user.id}
-                        onClick={() => setHighlightedUserId(prev => prev === user.id ? null : user.id)}
-                        className={highlightedUserId === user.id ? 'highlighted-button' : ''}
-                    >
-                        Highlight {user.pen_first_name} {user.pen_last_name || "Unknown"}'s Content
-                    </button>
-                ))}
-            </div>
-
-            <div className="story-reader__story">
-                {stories.map((story, index) => (
-                    <div key={index} className={`story-content-section ${contentClassName(story.user_id)}`}>
-                        {index === 0 && <h3>{story.title}</h3>} 
-                        <p>{story.content}</p>
-                    </div>
-                ))}
-            </div>
         </div>
     );
 }

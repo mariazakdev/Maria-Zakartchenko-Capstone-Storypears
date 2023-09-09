@@ -1,11 +1,40 @@
-.site{
-    &__content{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin: 1rem;
-        border-radius: .25rem;
-        border: .0625rem gray solid;
+@import 'animate.css';
+
+.site {
+  &__content {
+    text-align: center;
+
+    .intro {
+      font-size: 2rem;
+      color: #2c3e50;
     }
+
+    .features {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: flex-start;
+
+      p {
+        background-color: rgba(0,0,0,0.05);
+        border-left: 4px solid #2c3e50;
+        padding: 10px 20px;
+        border-radius: 5px;
+
+        &.animated {
+          animation-duration: 1.5s;
+        }
+      }
+    }
+
+    .image-container {
+      margin-top: 2rem;
+
+      img {
+        max-width: 100%;
+        border-radius: 10px;
+        box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+      }
+    }
+  }
 }

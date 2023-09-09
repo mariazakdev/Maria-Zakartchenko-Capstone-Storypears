@@ -1,13 +1,16 @@
+@use "../../styles/partials/typography" as t;
+@use "../../styles/partials/typography" as *;
+
 .story-depot {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+
   &__genre-filter {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
-  
+
     button {
       padding: 5px 15px;
       border: none;
@@ -15,71 +18,96 @@
       border-radius: 3px;
       cursor: pointer;
       transition: background-color 0.3s;
-  
+
       &.active {
         background-color: #007bff;
         color: white;
       }
-  
+
       &:hover {
         background-color: #c4d351;
       }
     }
   }
+
   img {
-      width: 1.875rem;
-      height: 1.875rem;
+    width: 1.875rem;
+    height: 1.875rem;
   }
 
   &__heading {
-      h2 {
-          font-size: 24px;
-          margin-bottom: 5px;
-      }
+    h2 {
+      font-size: 24px;
+      margin-bottom: 5px;
+      font-family: inherit;
+    }
 
-      p {
-          font-size: 14px;
-          color: #888;
-      }
+    p {
+      font-size: 14px;
+      color: #888;
+      font-family: inherit;
+    }
   }
 
   &__stories {
-      margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 
-      h3 {
-          font-size: 20px;
-          margin-bottom: 10px;
+    h3,
+    h4,
+    p,
+    li {
+      font-family: inherit;
+    }
+
+    h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    h4,
+    p {
+      color: #888;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    li {
+      background-color: white;
+      width: 18.75rem;
+      height: 20rem;
+      overflow: hidden;
+      padding: 1rem;
+      border-radius: 0.25rem;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.5s ease;
+      position: relative;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
       }
 
-      ul {
-          list-style: none;
-          padding-left: 0;
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100px;
+        background: linear-gradient(transparent, white);
       }
-
-      li {
-          background-color: white;
-          width: 18.75rem;
-          height: 20rem;
-          overflow: hidden;
-          padding: 1rem;
-          border-radius: .25rem;
-          margin-bottom: 30px;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-          transition: transform 0.3s ease, box-shadow 0.5s ease;
-          position: relative;
-          &:hover {
-              transform: translateY(-4px);
-              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-          }
-          &::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 100px; 
-            background: linear-gradient(transparent, white);
-          }
-      }
+    }
   }
 }

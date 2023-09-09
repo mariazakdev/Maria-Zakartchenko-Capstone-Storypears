@@ -6,7 +6,7 @@ import {
   getEmotions,
   getFeelingPrompts,
 } from "../ApiFunctions/ApiFunctions";
-import ShuffleArray from "../../utils/ShuffleArray";
+import ShuffleArray from "../utils/ShuffleArray";
 
 function Dashboard() {
   const [stories, setStories] = useState([]);

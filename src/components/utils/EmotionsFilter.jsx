@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-function EmotionsFilter({ emotions =[], onEmotionSelect = ()=> {}}) {
+function EmotionsFilter({ emotions =[], onEmotionSelect = ()=> {}, className = "" }) {
   const [activeEmotion, setActiveEmotion] = useState('All Emotions');
 
   return (
-    <div className="emotions-filter">
+    <div className={`emotions-filter ${className}`}>
       <button 
         className={activeEmotion === "All Emotions" ? "active" : ""}
         onClick={() => {
@@ -27,5 +27,4 @@ function EmotionsFilter({ emotions =[], onEmotionSelect = ()=> {}}) {
     </div>
   );
 }
-
 export default EmotionsFilter;

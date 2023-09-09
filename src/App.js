@@ -47,7 +47,8 @@ function App() {
         <Route path="/story/new/:id" element={<StoryCreatorPage />} />
         <Route path="/story/new" element={<StoryCreatorPage />} />
          <Route path="/storytree" element={<StoryListPage />} />
-        <Route path="/storytree/:id" element={<StoryPage />} />
+         {/* url based on story title */}
+         <Route path="/storytree/:id" element={<StoryPage />} />
 
         <Route path="/stories/depot" element={<StoryDepotPage />} /> 
 
