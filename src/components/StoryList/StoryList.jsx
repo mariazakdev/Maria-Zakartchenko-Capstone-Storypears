@@ -4,8 +4,19 @@ import { Link } from "react-router-dom";
 import ShuffleArray from "../utils/ShuffleArray";
 import GenreFilter from "../utils/GenreFilter";
 import EmotionsFilter from "../utils/EmotionsFilter";
+import { useNavigate } from "react-router-dom";
 
 function StoryList({ fullStories = [] }) { 
+
+  const navigate = useNavigate();
+  const handleStoryClick = (story) => {
+    navigate(`/storytree/${story.id}`, { 
+      state: {
+        story: story,
+        uniqueAuthors: story.contents ? new Set(story.contents.map(content => content.user_id)).size : 0
+      }
+    });
+  }
   const [selectedGenre, setSelectedGenre] = useState("All Genres");
   const [selectedEmotion, setSelectedEmotion] = useState("All Emotions");
 
@@ -32,6 +43,7 @@ function StoryList({ fullStories = [] }) {
     filteredStories = filteredStories.filter(story => story.emotion === selectedEmotion);
   }
 
+ 
   return (
     <div className="story-list">
       <GenreFilter genres={genres} onGenreSelect={handleGenreSelect} className="story-list__genre-filter" />
@@ -44,15 +56,11 @@ function StoryList({ fullStories = [] }) {
             <ul className="story-list__items">
               {shuffledStories.map(story => (
                 <li key={story.id} className="story-list__item">
-                  <Link
-                    to={{
-                      pathname: `/storytree/${story.id}`,
-                      state: {
-                        story: story,
-                        uniqueAuthors: story.contents ? new Set(story.contents.map(content => content.user_id)).size : 0
-                      }
-                    }}
+                  <div
+                    onClick={() => handleStoryClick(story)}
                     className="story-list__item-link"
+                    role="button" 
+                    tabIndex={0} 
                   >
                     <h3 className="story-list__title">{story.title}</h3>
                     {story.genre && <h4>{story.genre}</h4>}
@@ -67,7 +75,7 @@ function StoryList({ fullStories = [] }) {
                         content ? (<div key={index}><p>{content.text}</p></div>) : null
                       )}
                     </div>
-                  </Link>
+                  </div>
                 </li>
               ))}
             </ul>

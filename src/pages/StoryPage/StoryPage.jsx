@@ -7,11 +7,10 @@ import userService from '../../services/userService';
 
 function StoryPage() {
     const location = useLocation();
-    const storyData = location.state?.story || {};
+    const storyData = location.state?.story;
     
  console.log(storyData);
     const [users, setUsers] = useState([]);
-    console.log(location.state?.test);
     // Getting users 
     useEffect(() => {
         async function fetchUsers() {

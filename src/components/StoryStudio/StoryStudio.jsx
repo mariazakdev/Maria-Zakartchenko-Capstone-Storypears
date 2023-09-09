@@ -4,6 +4,12 @@ import "./StoryStudio.scss";
 
 function StoryStudio({ user, storyBranch, addContribution, createStoryTree }) {
   const [userContribution, setUserContribution] = useState('');
+  const [errors, setErrors] = useState({});
+
+  const isStoryValid = (story) => {
+    return story.trim().length >= 1 && story.trim().length <= 2000;
+  };
+
   const navigate = useNavigate();
 
   const handleStoryChange = (event) => {
@@ -15,6 +21,11 @@ function StoryStudio({ user, storyBranch, addContribution, createStoryTree }) {
   };
 
   const addToHalfStory = async () => {
+    if (!isStoryValid(userContribution)) {
+      setErrors({ userContribution: "Story must be between 1 and 2000 characters." });
+      return;
+    }
+
     const contribution = {
       user_id: user.id,
       text: userContribution || sessionStorage.getItem('storyContent')
@@ -24,6 +35,11 @@ function StoryStudio({ user, storyBranch, addContribution, createStoryTree }) {
   };
 
   const finishStory = async () => {
+    if (!isStoryValid(userContribution)) {
+      setErrors({ userContribution: "Story must be between 1 and 2000 characters." });
+      return;
+    }
+
     const combinedContent = [
       ...JSON.parse(storyBranch.content || "[]"),
       {
@@ -36,7 +52,7 @@ function StoryStudio({ user, storyBranch, addContribution, createStoryTree }) {
       title: storyBranch.title,
       genre: storyBranch.genre,
       emotion: storyBranch.emotion,
-      content: null, 
+      content: JSON.stringify(combinedContent),
       branch_id: storyBranch.id
     };
 
@@ -75,14 +91,20 @@ function StoryStudio({ user, storyBranch, addContribution, createStoryTree }) {
               )) : null
           }
 
+          {errors.userContribution && (
+            <div className="error-message">
+              {errors.userContribution}
+            </div>
+          )}
+
           <textarea
             placeholder="Continue the story..."
             value={userContribution}
             onChange={handleStoryChange}
           />
           <input type="button" value="Save" onClick={saveToSessionStorage} />
-          <input type="button" value="Add" onClick={addToHalfStory} />
-          <input type="button" value="Complete" onClick={finishStory} />
+          <input type="button" value="Add" onClick={addToHalfStory} disabled={!isStoryValid(userContribution)} />
+          <input type="button" value="Complete" onClick={finishStory} disabled={!isStoryValid(userContribution)} />
         </form>
       </div>
     </div>

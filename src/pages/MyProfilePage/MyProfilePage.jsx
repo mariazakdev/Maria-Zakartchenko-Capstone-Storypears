@@ -28,13 +28,15 @@ function ProfilePage() {
       isMounted = false;
     };
   }, []);
-
+const user = {
+  id: 67,
+}
   return (
    <div className='site'>
       <Header />
       <section className='site__content'>
-        {/* <Dashboard userData={userData} user={user}/> */}
-        {/* <MyProfile userData={userData} user={user}/> */}
+        <Dashboard userData={userData} user={user}/>
+        <MyProfile userData={userData} user={user}/>
       </section>
       <Footer />
     </div>

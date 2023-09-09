@@ -1,36 +1,46 @@
-
 .storywriter{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9; // A light background to give it a slight differentiation from white.
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); // Giving a broader shadow for a soft floating effect.
 
     &-feeling,
-    &-promt{
+    &-prompt{
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         margin-bottom: 1rem;
-        input{
-            width:18.75rem;
-            padding: 1rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-            border: none;
-            resize: none;
-            margin: 0.5rem;
+        select {
+            margin-top: 0.5rem; 
         }
+        input,
+        select,
         textarea{
             width:18.75rem;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border: 1px solid #e1e1e1; // Adding a light border for better definition.
+            border-radius: 5px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); // Soft shadow for each input element.
+            transition: box-shadow 0.3s, transform 0.3s;
+
+            &:focus {
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                transform: translateY(-2px); // Slight lifting effect when focused.
+                outline: none; 
+            }
+        }
+
+        textarea{
             height:40rem;
-            padding: 1rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-            border: none;
-            resize: none;
+            resize: vertical; // Allows vertical resizing.
         }
-        select{
-            width:18.75rem;
-            padding: 1rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-            border: none;
-            resize: none;
-        }
+        
         &__storyInputs{
             display: flex;
             flex-direction: column;
@@ -38,6 +48,7 @@
             align-items: center;
         }
     }
+
     &-pear{
         &__storyInputs{
             display: flex;
@@ -46,4 +57,6 @@
             align-items: center;
         }
     }
+
+
 }

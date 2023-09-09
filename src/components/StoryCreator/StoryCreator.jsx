@@ -1,76 +1,31 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
 import "./StoryCreator.scss";
+import { createStoryBranch } from '../../services/storyService';
+
 const { v4: uuidv4 } = require("uuid");
 
-function StoryCreator({ promptData, feelingData, user }) {
-  const [storyContent, setStoryContent] = useState(
-    promptData || feelingData || ""
-  );
+function StoryCreator({ promptData, feelingData, user, genres, emotions }) {
+  const [storyContent, setStoryContent] = useState(promptData || feelingData || "");
   const [textAreaContent, setTextAreaContent] = useState(storyContent);
   const [title, setTitle] = useState("");
   const [genreName, setGenreName] = useState("");
-  const [genreId, setGenreId] = useState("");
-  const [genres, setGenres] = useState([]);
   const [emotionName, setEmotionName] = useState("");
-  const [emotionId, setEmotionId] = useState("");
-  const [emotions, setEmotions] = useState([]);
 
   // State variables to control which select is displayed
   const [displayGenreSelect, setDisplayGenreSelect] = useState(true);
-  const [displayEmotionSelect, setDisplayEmotionSelect] = useState(false);
 
   // Ref for textarea
   const textAreaRef = useRef(null);
 
-  useEffect(() => {
-    async function fetchGenres() {
-      try {
-        const response = await axios.get("http://localhost:8080/genres");
-        setGenres(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.error("Error fetching genres:", error);
-      }
-    }
-    fetchGenres();
-  }, []);
-
-  useEffect(() => {
-    async function fetchEmotions() {
-      try {
-        const response = await axios.get("http://localhost:8080/emotions");
-        setEmotions(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.error("Error fetching emotions:", error);
-      }
-    }
-    fetchEmotions();
-  }, []);
-
   const handleEmotionChange = (event) => {
     const selectedEmotionName = event.target.value;
     setEmotionName(selectedEmotionName);
-    const selectedEmotion = emotions.find(
-      (emotion) => emotion.emotion_name === selectedEmotionName
-    );
-    if (selectedEmotion) {
-      setEmotionId(selectedEmotion.id);
-      console.log(selectedEmotion.id);
-    }
   };
 
   const handleGenreChange = (event) => {
     const selectedGenreName = event.target.value;
     setGenreName(selectedGenreName);
-    const selectedGenre = genres.find(
-      (genre) => genre.genre_name === selectedGenreName
-    );
-    if (selectedGenre) {
-      setGenreId(selectedGenre.id);
-      console.log(selectedGenre.id);
-    }
   };
 
   const handleStarterChange = (event) => {
@@ -78,58 +33,29 @@ function StoryCreator({ promptData, feelingData, user }) {
   };
 
   const saveToSessionStorage = () => {
-    if (textAreaRef.current) {
-      const userContribution = textAreaRef.current.value;
-      if (userContribution) {
-        sessionStorage.setItem("storyContent", userContribution);
-      }
+    const userContribution = textAreaRef.current.value;
+    if (userContribution) {
+      sessionStorage.setItem("storyContent", userContribution);
     }
   };
 
-  const getFromSessionStorage = () => {
-    const savedContent = sessionStorage.getItem("storyContent");
-    return savedContent || "";
-  };
-
   const startHalfStory = async () => {
-    const userContribution =
-      textAreaRef.current.value || getFromSessionStorage();
-    const id = uuidv4();
-    const storyId = uuidv4();
+    const userContribution = textAreaRef.current.value || sessionStorage.getItem("storyContent");
+
+    const postData = {
+      title: title,
+      content: JSON.stringify([{
+        user_id: user.id,
+        text: userContribution,
+      }]),
+      complete_story: 'default_value',
+      completed_at: new Date().toISOString(),
+      genre: displayGenreSelect && genreName.trim() !== "" ? genreName : null,
+      emotion: !displayGenreSelect && emotionName.trim() !== "" ? emotionName : null
+    };
 
     try {
-      let postData = {
-        id,
-        content: userContribution,
-        user_id: user.id,
-        story_id: storyId,
-        title: title,
-        timestamp: new Date().toISOString(),
-      };
-
-      if (displayGenreSelect) {
-        // Only add genre if it's the selected one
-        if (genreName.trim() !== "") {
-          postData = {
-            ...postData,
-            genre: genreName,
-          };
-        }
-      } else if (displayEmotionSelect) {
-        // Only add emotion if it's the selected one
-        if (emotionName.trim() !== "") {
-          postData = {
-            ...postData,
-            emotion: emotionName,
-          };
-        }
-      }
-
-      const response = await axios.post(
-        "http://localhost:8080/storycontents",
-        postData
-      );
-
+      const response = await createStoryBranch(postData);
       console.log("Successfully submitted half story:", response.data);
 
       // Reset the form
@@ -146,14 +72,8 @@ function StoryCreator({ promptData, feelingData, user }) {
     }
   };
 
-  const toggleGenreSelect = () => {
-    setDisplayGenreSelect(true);
-    setDisplayEmotionSelect(false);
-  };
-
-  const toggleEmotionSelect = () => {
-    setDisplayGenreSelect(false);
-    setDisplayEmotionSelect(true);
+  const toggleSelect = () => {
+    setDisplayGenreSelect(!displayGenreSelect);
   };
 
   return (
@@ -163,15 +83,15 @@ function StoryCreator({ promptData, feelingData, user }) {
         <h4>Submit your contribution so another can join and make a pair.</h4>
 
         <div className="toggle-buttons">
-          <button onClick={toggleGenreSelect}>Genre</button>
-          <button onClick={toggleEmotionSelect}>Emotion</button>
+          <button onClick={toggleSelect}>{displayGenreSelect ? 'Emotion' : 'Genre'}</button>
         </div>
 
-        {displayGenreSelect && (
+        <h3>
+          {user.pen_first_name} {user.pen_last_name}
+        </h3>
+
+        {displayGenreSelect ? (
           <div>
-            <h3>
-              {user.pen_first_name} {user.pen_last_name}
-            </h3>
             <label htmlFor="genre">Genre:</label>
             <select
               id="genre"
@@ -188,13 +108,8 @@ function StoryCreator({ promptData, feelingData, user }) {
               ))}
             </select>
           </div>
-        )}
-
-        {displayEmotionSelect && (
+        ) : (
           <div>
-            <h3>
-              {user.pen_first_name} {user.pen_last_name}
-            </h3>
             <label htmlFor="emotion">Emotion:</label>
             <select
               id="emotion"
@@ -206,7 +121,7 @@ function StoryCreator({ promptData, feelingData, user }) {
               <option value="">Select an Emotion</option>
               {emotions.map((emotion) => (
                 <option key={emotion.id} value={emotion.emotion_name}>
-                  {emotion.name}
+                  {emotion.emotion_name}
                 </option>
               ))}
             </select>
@@ -214,7 +129,6 @@ function StoryCreator({ promptData, feelingData, user }) {
         )}
 
         <label htmlFor="story">Start Typing:</label>
-        <br />
         <textarea
           id="story"
           name="story"
@@ -224,7 +138,6 @@ function StoryCreator({ promptData, feelingData, user }) {
         />
         <input type="button" value="Save" onClick={saveToSessionStorage} />
         <input type="button" value="Add" onClick={startHalfStory} />
-        <input type="button" value="Complete" onClick={startHalfStory} />
       </div>
     </div>
   );

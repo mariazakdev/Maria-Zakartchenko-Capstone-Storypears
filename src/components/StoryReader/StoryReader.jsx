@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import NavStoryReader from "../NavStoryReader/NavStoryReader";
 import "./StoryReader.scss";
 
-
 function StoryReader({ storyData = {}, users = [] }) {
     const [highlightedUser, setHighlightedUser] = useState(null);
 
     const storyContents = storyData.content ? JSON.parse(storyData.content) : [];
+
+    const uniqueContributors = [...new Set(storyContents.map(content => content.user_id))];
 
     const handleClick = (userId) => {
         if (highlightedUser === userId) {
@@ -26,21 +27,22 @@ function StoryReader({ storyData = {}, users = [] }) {
             <h2>{storyData.genre}</h2>
 
             <div className="story-reader__authors">
-                {storyContents.map(content => {
-                    const user = users.find(u => u.id === content.user_id);
-                    return (
-                        user ? 
-                        <button 
-                            key={user.id}
-                            className={highlightedUser === user.id ? "highlighted-button" : ""}
-                            onClick={() => handleClick(user.id)}
-                        >
-                            {user.name}
-                        </button> 
-                        : null
-                    );
-                })}
-            </div>
+    {uniqueContributors.map(userId => {
+        const user = users.find(u => u.id === userId);
+        console.log('User for ID', userId, ':', user);  
+        return (
+            user ? 
+            <button 
+                key={user.id}
+                className={highlightedUser === user.id ? "highlighted-button" : ""}
+                onClick={() => handleClick(user.id)}
+            >
+                {user.pen_first_name}
+            </button> 
+            : null
+        );
+    })}
+</div>
 
             <div className='story-reader__story'>
                 {storyContents.map((content, index) => (
@@ -52,7 +54,6 @@ function StoryReader({ storyData = {}, users = [] }) {
                     </span>
                 ))}
             </div>
-
         </div>
     );
 }
