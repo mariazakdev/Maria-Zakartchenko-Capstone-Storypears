@@ -3,141 +3,74 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #f3f4f6;  // A softer shade of gray for the background
+    background-color: #f3f4f6;
     padding: 2.5rem;
-    border-radius: 12px;  // A bit more rounded for softer visuals
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);  // A softer shadow with slightly increased offset and spread
-
-    h2, h3, h4 {
-        color: #333;  // Darker text for better readability
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    
+    &__title, &__subtitle, &__heading {
+        color: #333;
     }
 
-    h2 {
+    &__title {
         font-size: 2rem;
         margin-bottom: 1rem;
     }
 
-    h4 {
+    &__subtitle {
         font-size: 1.2rem;
         margin-bottom: 2rem;
-        color: #555;  // Lighter color to differentiate from h2 and h3
-    }
-}
-
-.storywriter-feeling, .storywriter-prompt {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1.5rem;  // Increased margin for better spacing
-
-    select {
-        margin-top: 0.5rem;
-        background-color: #fff;
-        color: #333;  // Darker text for better contrast
+        color: #555;
     }
 
-    input, select, textarea {
-        width: 19rem;  // Slightly increased width
-        padding: 1rem;
-        margin: 0.6rem 0;  // A bit more spacing
-        border: 1px solid #ddd;  // Lighter border for a subtle look
-        border-radius: 7px;  // Slightly more rounded corners
-        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);  // Reduced shadow for a more subtle look
-        transition: box-shadow 0.3s, transform 0.3s;
-
-        &:focus {
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transform: translateY(-3px);  // A bit more lift for better feedback
-            outline: none;
-            border: 1px solid #aaa;  // A slightly darker border on focus
-        }
-    }
-
-    textarea {
-        height: 40rem;
-        resize: vertical;
-    }
-}
-
-.storywriter-pear {
-    &__storyInputs {
+    &-feeling, &-prompt {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-    }
-}
-.storywriter {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #f3f4f6;  // A softer shade of gray for the background
-    padding: 2.5rem;
-    border-radius: 12px;  // A bit more rounded for softer visuals
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);  // A softer shadow with slightly increased offset and spread
+        margin-bottom: 1.5rem;
 
-    h2, h3, h4 {
-        color: #333;  // Darker text for better readability
-    }
+        label {
+            order: -1; // this places the label above the input or select
+            margin-bottom: 0.5rem;
+        }
 
-    h2 {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-    }
+        select, input, textarea {
+            margin-top: 0.5rem;
+            background-color: #fff;
+            color: #333;
+            width: 19rem;
+            padding: 1rem;
+            margin: 0.6rem 0;
+            border: 1px solid #ddd;
+            border-radius: 7px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+            transition: box-shadow 0.3s, transform 0.3s;
 
-    h4 {
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
-        color: #555;  // Lighter color to differentiate from h2 and h3
-    }
-}
+            &:focus {
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                transform: translateY(-3px);
+                outline: none;
+                border: 1px solid #aaa;
+            }
+        }
 
-.storywriter-feeling, .storywriter-prompt {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1.5rem;  // Increased margin for better spacing
-
-    select {
-        margin-top: 0.5rem;
-        background-color: #fff;
-        color: #333;  // Darker text for better contrast
-    }
-
-    input, select, textarea {
-        width: 19rem;  // Slightly increased width
-        padding: 1rem;
-        margin: 0.6rem 0;  // A bit more spacing
-        border: 1px solid #ddd;  // Lighter border for a subtle look
-        border-radius: 7px;  // Slightly more rounded corners
-        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);  // Reduced shadow for a more subtle look
-        transition: box-shadow 0.3s, transform 0.3s;
-
-        &:focus {
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transform: translateY(-3px);  // A bit more lift for better feedback
-            outline: none;
-            border: 1px solid #aaa;  // A slightly darker border on focus
+        textarea {
+            height: 40rem;
+            resize: vertical;
         }
     }
 
-    textarea {
-        height: 40rem;
-        resize: vertical;
+    &-pear {
+        &__storyInputs {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
     }
 }
 
-.storywriter-pear {
-    &__storyInputs {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-}
 .toggle-buttons--toggler {
     display: flex;
     justify-content: space-between;
@@ -160,7 +93,3 @@
         }
     }
 }
-
-
-
-

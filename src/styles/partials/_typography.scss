@@ -46,4 +46,21 @@
   src: url('../../assets/fonts/Exo/Exo-ThinItalic.ttf') format('truetype');
 }
 
-
+@font-face {
+  font-family: 'open';
+  font-style: normal;
+  font-weight: 400; 
+  src: url('../../assets/fonts/Open_Sans/OpenSans-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'open';
+  font-style: bold;
+  font-weight: 700; 
+  src: url('../../assets/fonts/Open_Sans/OpenSans-Bold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'open';
+  font-style: semibold;
+  font-weight: 600; 
+  src: url('../../assets/fonts/Open_Sans/OpenSans-SemiBold.ttf') format('truetype');
+}

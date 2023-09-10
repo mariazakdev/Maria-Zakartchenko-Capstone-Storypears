@@ -3,13 +3,19 @@
 
 
 .header {
+    box-sizing: border-box;
+
+    @include m.mobile{
+        margin-left: 1rem;
+        margin-right: 1rem;
+
+    }
     @include m.flex(center, center, row);
     height: 7rem;
     width: 100%;
     box-sizing: border-box;
     background: radial-gradient(circle at center, #f4f3f0 , #cfc2a5);
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    
     position: relative; 
     &__logo-container {
         display: flex;
@@ -30,3 +36,22 @@
 
 
 }
+
+
+// @mixin tablet-plus {
+//   @media (min-width: 48rem) {
+//     @content;
+//   }
+// }
+
+// 
+// @mixin tablet {
+//   @media (min-width: 48rem) and (max-width: 79.9375rem) {
+//     @content;
+//   }
+// }
+// @mixin desktop {
+//   @media (min-width: 80rem) {
+//     @content;
+//   }
+// }

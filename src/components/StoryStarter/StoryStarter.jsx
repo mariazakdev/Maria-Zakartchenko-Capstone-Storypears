@@ -34,7 +34,7 @@ function StoryStarter({ prompts, feelings, fetchPrompts, fetchFeelings }) {
       ? getPromptDataById(id) 
       : getFeelingDataById(id);
 
-    navigate(`/storytree/${id}`, { state: { data: selectedData } });
+    navigate(`/story/new`, { state: { data: selectedData } });
   };
 
   const getPromptDataById = (id) => prompts.find(prompt => prompt.id === id);

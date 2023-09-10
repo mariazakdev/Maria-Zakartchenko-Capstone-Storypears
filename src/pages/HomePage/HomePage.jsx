@@ -12,11 +12,12 @@ function HomePage() {
       <section className='site__content'>
         <div className="intro">
           <h1>Welcome to StoryPears!</h1>
-          <p>Where your words find their other half (or third, or fourth...).</p>
-        </div>
-        <div className="image-container">
+          <p>Where your words find their other half <span>or third, or fourth...</span></p>
+          <div className="image-container">
           <img src={Pears} alt="Pair of Pears celebrating creativity" />
         </div>
+        </div>
+        
         <div className="features">
           <p>Begin with a <strong>story prompt</strong> seed, let it spark your imagination, and watch a narrative sprout.</p>
           <p>Or perhaps, let an <strong>emotional sentence</strong> inspire a poetic rhythm in your soul.</p>
