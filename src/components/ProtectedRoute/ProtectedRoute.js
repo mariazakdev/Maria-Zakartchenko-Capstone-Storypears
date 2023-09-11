@@ -1,24 +1,14 @@
-import React from 'react';
-import { Route, useNavigate } from 'react-router-dom';
-import authService from '../../services/authService';
+import { Navigate, Route } from 'react-router-dom';
+import { useAuth } from './context/AuthProvider';
 
-const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const navigate = useNavigate();
+function ProtectedRoute(props) {
+  const { isLoggedIn } = useAuth();
 
-  return (
-    <Route
-      {...rest}
-      render={(props) => {
-        // Check if the user is authenticated (token exists)
-        if (authService.getToken()) {
-          return <Component {...props} />;
-        } else {
-          // Redirect to the login page if not authenticated
-          return navigate("/login");
-        }
-      }}
-    />
-  );
-};
+  if (isLoggedIn) {
+    return <Route {...props} />;
+  } else {
+    return <Navigate to="/login" />;
+  }
+}
 
 export default ProtectedRoute;

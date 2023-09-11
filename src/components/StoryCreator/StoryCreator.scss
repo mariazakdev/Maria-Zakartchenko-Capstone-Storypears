@@ -29,9 +29,14 @@
         justify-content: center;
         align-items: center;
         margin-bottom: 1.5rem;
-
+        &__input-group{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
         label {
-            order: -1; // this places the label above the input or select
+            order: -1; 
             margin-bottom: 0.5rem;
         }
 
@@ -73,8 +78,9 @@
 
 .toggle-buttons--toggler {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
+    justify-content: center;
+    align-items: center;
+flex-direction: column;    width: 100%;
     margin-bottom: 20px;
 
     button {

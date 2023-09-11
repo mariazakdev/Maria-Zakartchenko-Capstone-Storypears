@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Button from "../Button/Button";
 import "./LogIn.scss";
+import auth from "../../services/authService"
 
 function LogIn() {
   const navigate = useNavigate();
@@ -18,25 +18,7 @@ function LogIn() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const userLogIn = async () => {
-    try {
-      const response = await axios.post("http://localhost:8080/auth/login", {
-        email: formData.email,
-        password: formData.password,
-      });
-
-      if (response.status === 200) {
-        console.log("Logged in successfully:", response.data);
-        navigate(`/profile`);
-      } else {
-        console.error("Login failed");
-      }
-    } catch (error) {
-      console.error("Error logging in:", error);
-    }
-  };
-
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
     const newErrors = {};
 
@@ -51,7 +33,14 @@ function LogIn() {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      userLogIn();
+      const result = await auth.login(formData.email, formData.password);
+
+      if (result.success) {
+        console.log("Logged in successfully.");
+        navigate(`/profile`);
+      } else {
+        console.error("Error logging in:", result.error);
+      }
     } else {
       console.log("Errors found:", newErrors);
     }

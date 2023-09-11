@@ -64,3 +64,11 @@
   font-weight: 600; 
   src: url('../../assets/fonts/Open_Sans/OpenSans-SemiBold.ttf') format('truetype');
 }
+@font-face {
+  font-family: 'pacifico';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../assets/fonts/Pacifico/Pacifico-Regular.ttf') format('truetype');
+}
+
+$accentFont : cursive;

@@ -40,7 +40,6 @@ function StoryCreatorPage() {
 
   return (
     <div className="App">
-      <Header />
       <StoryCreator
         promptData={promptContent}
         feelingData={feelingContent}
@@ -48,7 +47,6 @@ function StoryCreatorPage() {
         genres={genres}
         emotions={emotions}
       />
-      <Footer />
     </div>
   );
 }

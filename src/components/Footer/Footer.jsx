@@ -1,11 +1,11 @@
 import "./Footer.scss";
-import NavFooter from '../Nav/NavFooter';
+import Nav from "../Nav/Nav";
 
 
 function Footer(){
     return(
         <div className="footer">
-            <NavFooter />
+            <Nav />
         </div>
     );
 };

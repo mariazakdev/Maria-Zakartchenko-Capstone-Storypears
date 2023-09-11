@@ -39,12 +39,10 @@ function WriterProfilePage() {
 
     return (
       <div className='site'>
-      <Header />
       <section className='site__content'>
 
             <WriterProfile writerData={writerData} />
             </section>
-            <Footer />
         </div>
     );
 }

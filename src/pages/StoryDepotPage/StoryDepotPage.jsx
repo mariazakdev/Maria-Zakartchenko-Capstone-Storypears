@@ -27,9 +27,7 @@ function StoryDepotPage() {
 
   return (
     <div>
-      <Header />
       <StoryDepot branchStories={branchStories} handleItemClick={handleItemClick} />
-      <Footer />
     </div>
   );
 }

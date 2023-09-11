@@ -19,9 +19,7 @@ function StoryWriterPage() {
 
   return (
     <div className="App">
-      <Header />
       <StoryCreatorSpace promptData={promptContent} halfStoryData={halfStoryContent} user={user} />
-      <Footer />
     </div>
   );
 }

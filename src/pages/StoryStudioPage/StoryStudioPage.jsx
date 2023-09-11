@@ -24,13 +24,11 @@ function StoryStudioPage() {
 
   return (
     <div className="App">
-      <Header />      
       <StoryStudio 
           storyBranch={selectedHalfStoryData} 
           user={user}
           onzAddContribution={handleAddContribution}
       />
-      <Footer />
     </div>
   );
 }

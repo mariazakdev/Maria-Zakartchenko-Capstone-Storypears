@@ -6,13 +6,13 @@ import './HomePage.scss';
 function HomePage() {
   return (
     <>
-    <Header />
     <div className='site'>
      
       <section className='site__content'>
         <div className="intro">
           <h1>Welcome to StoryPears!</h1>
-          <p>Where your words find their other half <span>or third, or fourth...</span></p>
+          <p >Where your words find their other half <span>or third, or fourth...</span></p>
+          <p className='intro__blurb'> "StoryPears" is a collaborative writing platform where users plant story <span>seeds</span> inspired by prompts or emotions. In the <span>branch</span>, others contribute, growing the narrative. Once fully collaborated upon, the story becomes part of a <span>Pear Tree.</span> </p>
           <div className="image-container">
           <img src={Pears} alt="Pair of Pears celebrating creativity" />
         </div>
@@ -35,7 +35,6 @@ function HomePage() {
       </section>
       
     </div>
-    <Footer />
      </>
   );
 }

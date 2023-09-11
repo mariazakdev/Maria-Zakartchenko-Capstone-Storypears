@@ -22,12 +22,10 @@ function WriterListPage() {
   }, []);
   return (
     <div className="Site">
-      <Header />
       <section className='site__content'>
 
       <WriterList writerListData={writerListData} />
       </section>
-      <Footer />
     </div>
   );
 }

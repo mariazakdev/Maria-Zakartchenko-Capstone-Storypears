@@ -1,57 +1,41 @@
-@use "../../styles/partials/colors" as c;
-@use "../../styles/partials/mixins" as m;
-
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography" as *;
 
 .header {
-    box-sizing: border-box;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 5rem; 
+  width: 100%;
+  background: radial-gradient(circle at center, #f4f3f0, #cfc2a5);
+  position: relative;
 
-    @include m.mobile{
-        margin-left: 1rem;
-        margin-right: 1rem;
+  &__logo-container {
+    flex: 1; 
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+  }
 
-    }
-    @include m.flex(center, center, row);
+  &__nav {
+    flex: 2;
+    text-align: center;
+  }
+
+  &__logout {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    margin-right: 2rem; 
+  }
+
+  @include tablet-plus {
     height: 7rem;
-    width: 100%;
-    box-sizing: border-box;
-    background: radial-gradient(circle at center, #f4f3f0 , #cfc2a5);
-    
-    position: relative; 
-    &__logo-container {
-        display: flex;
-        justify-content: center; 
-        align-items: center;
-        width: 100%;
-        height: 100%;
+    &__logout {
+      padding-right: 3rem;
     }
-    .logo {
-        z-index: 3;
-        height: auto;
-        padding: 1rem;
-        border-radius: 50%;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        background-color: white;
-        box-sizing: border-box; 
-    }
-
-
+  }
 }
-
-
-// @mixin tablet-plus {
-//   @media (min-width: 48rem) {
-//     @content;
-//   }
-// }
-
-// 
-// @mixin tablet {
-//   @media (min-width: 48rem) and (max-width: 79.9375rem) {
-//     @content;
-//   }
-// }
-// @mixin desktop {
-//   @media (min-width: 80rem) {
-//     @content;
-//   }
-// }

@@ -25,11 +25,9 @@ function StoryListPage() {
 
   return (
     <div className='site'>
-      <Header />
       <section className='site__content'>
         <StoryList fullStories={fullStories || []} />
       </section>
-      <Footer />
     </div>
   );
 }

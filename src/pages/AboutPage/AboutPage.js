@@ -6,7 +6,6 @@ import './AboutPage.scss';
 function HomePage() {
   return (
     <>
-       <Header />
     <div className='site'>
    
       <section className='site__content'>
@@ -29,7 +28,6 @@ function HomePage() {
       </section>
      
     </div> 
-     <Footer />
     </>
   );
 }

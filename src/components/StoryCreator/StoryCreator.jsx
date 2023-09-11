@@ -78,79 +78,89 @@ function StoryCreator({ promptData, feelingData, user, genres, emotions }) {
   };
 
   return (
-    <div className="story-creator-space">
-      <div className="storywriter-feeling">
-        <h2>CREATOR SPACE</h2>
-        <h4>Submit your contribution so another can join and make a pair.</h4>
+<div className="story-creator-space">
+  <div className="storywriter-feeling">
+    <h2 className="storywriter__title">CREATOR SPACE</h2>
+    <h4 className="storywriter__subtitle">Submit your contribution so another can join and make a pair.</h4>
+    <div className="storywriter-feeling__input-group"> 
+    <label >Your Name</label>
 
-        <div className="toggle-buttons toggle-buttons-toggler">
-          <button className="toggle-buttons toggle-buttons-toggler"onClick={toggleSelect}>{displayGenreSelect ? 'Emotion' : 'Genre'}</button>
-        </div>
-
-        <h3>
-          {user.pen_first_name} {user.pen_last_name}
-        </h3>
-        <div>
-  <label htmlFor="title">Title:</label>
-  <input
-    type="text"
-    id="title"
-    name="title"
-    value={title}
-    onChange={handleTitleChange}
-    required
-  />
-</div>
-        {displayGenreSelect ? (
-          <div>
-            <label htmlFor="genre">Genre:</label>
-            <select
-              id="genre"
-              name="genre"
-              value={genreName}
-              onChange={handleGenreChange}
-              required
-            >
-              <option value="">Select a Genre</option>
-              {genres.map((genre) => (
-                <option key={genre.id} value={genre.genre_name}>
-                  {genre.genre_name}
-                </option>
-              ))}
-            </select>
-          </div>
-        ) : (
-          <div>
-            <label htmlFor="emotion">Emotion:</label>
-            <select
-              id="emotion"
-              name="emotion"
-              value={emotionName}
-              onChange={handleEmotionChange}
-              required
-            >
-              <option value="">Select an Emotion</option>
-              {emotions.map((emotion) => (
-                <option key={emotion.id} value={emotion.name}>
-                  {emotion.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
-
-        <label htmlFor="story">Start Typing:</label>
-        <textarea
-          id="story"
-          name="story"
-          ref={textAreaRef}
-          value={textAreaContent}
-          onChange={handleStarterChange}
-        />
-        <input type="button" value="Save" onClick={saveToSessionStorage} />
-        <input type="button" value="Add" onClick={startHalfStory} />
-      </div>
+    <h3 className="storywriter__heading">
+      {user.pen_first_name} {user.pen_last_name}
+    </h3>
     </div>
+    <div className="storywriter-feeling__input-group">
+      <label htmlFor="title" className="storywriter-feeling__label">Title</label>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        value={title}
+        onChange={handleTitleChange}
+        required
+        className="storywriter-feeling__input"
+      />
+    </div>
+
+    <div className="toggle-buttons toggle-buttons--toggler">
+      <label >Genre or Emotion</label>
+      <button className="toggle-buttons__button" onClick={toggleSelect}>
+        {displayGenreSelect ? 'Emotion' : 'Genre'}
+      </button>
+    </div>
+    
+    {displayGenreSelect ? (
+      <div className="storywriter-feeling__input-group">
+        <label htmlFor="genre" className="storywriter-feeling__label">Genre</label>
+        <select
+          id="genre"
+          name="genre"
+          value={genreName}
+          onChange={handleGenreChange}
+          required
+          className="storywriter-feeling__select"
+        >
+          <option value="">Select a Genre</option>
+          {genres.map((genre) => (
+            <option key={genre.id} value={genre.genre_name}>
+              {genre.genre_name}
+            </option>
+          ))}
+        </select>
+      </div>
+    ) : (
+      <div className="storywriter-feeling__input-group">
+        <label htmlFor="emotion" className="storywriter-feeling__label">Emotion</label>
+        <select
+          id="emotion"
+          name="emotion"
+          value={emotionName}
+          onChange={handleEmotionChange}
+          required
+          className="storywriter-feeling__select"
+        >
+          <option value="">Select an Emotion</option>
+          {emotions.map((emotion) => (
+            <option key={emotion.id} value={emotion.name}>
+              {emotion.name}
+            </option>
+          ))}
+        </select>
+      </div>
+    )}
+
+    <textarea
+      id="story"
+      name="story"
+      ref={textAreaRef}
+      value={textAreaContent}
+      onChange={handleStarterChange}
+      className="storywriter-feeling__textarea"
+    />
+    <input type="button" value="Save" onClick={saveToSessionStorage} className="storywriter-feeling__button" />
+    <input type="button" value="Add" onClick={startHalfStory} className="storywriter-feeling__button" />
+  </div>
+</div>
   );
 }
 

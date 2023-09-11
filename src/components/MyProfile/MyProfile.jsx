@@ -1,7 +1,5 @@
-import Avatar from "../Avatar/Avatar";
 import "./MyProfile.scss";
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
 import authService from '../../services/authService';
 
 function MyProfile({userData}) {
@@ -14,7 +12,26 @@ function MyProfile({userData}) {
   const bioRef = useRef(null);
   const penFirstNameRef = useRef(null);
   const penLastNameRef = useRef(null);
-  
+  //Auth states 
+  const [profileData, setProfileData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchProfile() {
+      const result = await authService.isAuthenticated();
+      if (result.success) {
+        setProfileData(result.data);
+      } else {
+        setError(result.error);
+      }
+      setLoading(false);
+    }
+
+    fetchProfile();
+  }, []);
+
+
   useEffect(() => {
     setEditedBio(userData.bio || '');
     setEditedLinks(userData.links || []);

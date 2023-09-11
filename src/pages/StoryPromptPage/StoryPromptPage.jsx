@@ -35,7 +35,6 @@ function StoryPromptPage() {
 
   return (
       <div className="site">
-          <Header />
           <div className='site__content'>
               <StoryStarter 
                   prompts={prompts} 
@@ -43,7 +42,6 @@ function StoryPromptPage() {
                   fetchPrompts={fetchPrompts}
                   fetchFeelings={fetchFeelings}
               />
-              <Footer />
           </div>
       </div>
   );
