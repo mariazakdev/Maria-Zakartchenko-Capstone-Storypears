@@ -1,0 +1,36 @@
+@use "../src/styles/partials/typography" as *;
+@use "../src/styles/partials/colors" as *;
+@use "../src/styles/partials/mixins" as *;
+
+
+body {
+  font-family: 'open', sans-serif;   
+  margin:0;
+  padding: 0;
+  background-color:$primaryBackground ;
+   @include tablet-plus {
+        background-color:$primaryBackground ; // Temp
+    }
+}
+
+// @mixin tablet-plus {
+//   @media (min-width: 48rem) {
+//     @content;
+//   }
+// }
+
+// @mixin mobile {
+//   @media (max-width: 16.6875rem) {
+//     @content;
+//   }
+// }
+// @mixin tablet {
+//   @media (min-width: 48rem) and (max-width: 79.9375rem) {
+//     @content;
+//   }
+// }
+// @mixin desktop {
+//   @media (min-width: 80rem) {
+//     @content;
+//   }
+// }

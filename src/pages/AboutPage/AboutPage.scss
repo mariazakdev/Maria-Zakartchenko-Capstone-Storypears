@@ -1,0 +1,59 @@
+.site {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: .25rem;
+        background-color: #f7f7f7; 
+
+        .intro {
+            text-align: center;
+            padding: 0 1rem;
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            width: 80%; 
+
+            p {
+                font-size: 1rem;
+                line-height: 1.4;
+                text-align: justify;
+                border-left: none;
+                strong {
+                    color: #807745; 
+                }
+            }
+        }
+
+        .image-container {
+            margin-top: 2rem;
+            width: 100%;
+            text-align: center;
+
+            img {
+                max-width: 30%; 
+                border-radius: .5rem;
+            }
+        }
+    }
+}

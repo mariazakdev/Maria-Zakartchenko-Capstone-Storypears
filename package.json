@@ -1,5 +1,56 @@
 {
+  "name": "storypears",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "animate.css": "^4.1.1",
+    "axios": "^1.5.0",
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "formik": "^2.4.3",
+    "js-cookie": "^3.0.5",
+    "path-browserify": "^1.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.45.4",
+    "react-modal": "^3.16.1",
+    "react-router-dom": "^6.15.0",
+    "react-scripts": "5.0.1",
+    "react-svg": "^16.1.22",
+    "redux": "^4.2.1",
+    "router-dom": "^2.2.11",
+    "sass": "^1.65.1",
+    "stream-http": "^3.2.0",
+    "web-vitals": "^2.1.4",
+    "yup": "^1.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "devDependencies": {
-    "webpack-cli": "^5.1.4"
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
+    "eslint-plugin-jest": "^27.2.3"
   }
 }

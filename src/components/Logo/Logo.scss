@@ -1,0 +1,36 @@
+@use "../../styles/partials/colors" as c;
+@use "../../styles/partials/mixins" as m;
+@use "../../styles/partials/typography" as *;
+
+
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 3;
+    height: auto;
+    padding: 1.5rem;
+    margin-left: 1rem;
+    margin-top: 2rem;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: #cfc2a5;
+    box-sizing: border-box;
+  
+     width: 9rem;  
+        height: 8rem; 
+    span{
+          font-family: 'pacifico', cursive;
+    }
+    &__image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+       width: 80%;
+       height: 80%;
+        display: block; 
+        margin: auto;  
+    }
+}

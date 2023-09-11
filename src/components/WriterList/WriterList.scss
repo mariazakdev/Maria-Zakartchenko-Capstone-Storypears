@@ -1,0 +1,87 @@
+.writers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  font-family: 'Arial', sans-serif; 
+
+  h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-decoration: underline;
+    font-weight: bold;
+  }
+
+  .writers-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px; 
+
+    &__item {
+      display: flex;
+      flex-direction: column; 
+      align-items: center;
+      background-color: #ebded9;
+      width: 100%;
+      padding: 1rem;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+      }
+
+      a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        width: 100%;
+
+        .avatar__image-bg {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          margin-bottom: 10px;  
+        }
+
+        p {
+          font-size: 18px;  
+          font-weight: 600; 
+          color: #333;
+          margin-top: 5px;  
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);  
+        }
+      }
+    }
+  }
+}
+// These are temp sizes, not time to find corrent. must UPDATE !!!!!
+
+@media (min-width: 601px) {
+  .writers {
+    .writers-list {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center; 
+      max-width: 100%;
+
+      &__item {
+        width: 48%; 
+        margin-right: 4%; 
+
+        &:nth-child(2n) {
+          margin-right: 0; 
+        }
+      }
+    }
+  }
+}

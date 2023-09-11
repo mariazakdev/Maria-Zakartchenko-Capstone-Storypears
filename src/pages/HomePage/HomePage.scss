@@ -1,0 +1,60 @@
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/mixins" as *;
+@import 'animate.css';
+.site {
+      font-family: 'open', sans-serif;
+  &__content {
+    text-align: center;
+
+    .intro {
+      font-size: 2rem;
+      color: #2c3e50;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .features {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: flex-start;
+
+      p {
+        background-color: $accentedBackgroundCard ;
+        border-left: 4px solid #2c3e50;
+        border-radius: 5px;
+        padding: 1rem;
+        @include tablet-plus {
+          font-size: 2rem;
+        }
+        span {
+          font-style: italic;
+      }
+        &.animated {
+          animation-duration: 1.5s;
+        }
+      }
+    }
+
+    .image-container {
+      margin-top: 0;
+      img {
+        max-width: 100%;
+        border-radius: 10px;
+        margin-bottom: 0;  
+        padding-bottom: 0; 
+      }
+    }
+    .mission{
+      padding: 0 3rem;
+    }
+    .philosophy{
+      padding: 0 3rem;
+      
+      @include tablet-plus {
+        padding: 0 3rem 2rem 3rem;
+      }
+    }
+  }
+}

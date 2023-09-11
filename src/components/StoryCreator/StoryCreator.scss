@@ -1,0 +1,101 @@
+.storywriter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3f4f6;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    
+    &__title, &__subtitle, &__heading {
+        color: #333;
+    }
+
+    &__title {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    &__subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        color: #555;
+    }
+
+    &-feeling, &-prompt {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        &__input-group{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        label {
+            order: -1; 
+            margin-bottom: 0.5rem;
+        }
+
+        select, input, textarea {
+            margin-top: 0.5rem;
+            background-color: #fff;
+            color: #333;
+            width: 19rem;
+            padding: 1rem;
+            margin: 0.6rem 0;
+            border: 1px solid #ddd;
+            border-radius: 7px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+            transition: box-shadow 0.3s, transform 0.3s;
+
+            &:focus {
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                transform: translateY(-3px);
+                outline: none;
+                border: 1px solid #aaa;
+            }
+        }
+
+        textarea {
+            height: 40rem;
+            resize: vertical;
+        }
+    }
+
+    &-pear {
+        &__storyInputs {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+
+.toggle-buttons--toggler {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+flex-direction: column;    width: 100%;
+    margin-bottom: 20px;
+
+    button {
+        background-color: #faf2d6;
+        background: radial-gradient(circle at center, #f4f3f0, #cfc2a5);
+        width: 50%;
+        border: none;
+        padding: 8px 16px;
+        margin: 0.5rem;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #c4d351;
+        }
+    }
+}

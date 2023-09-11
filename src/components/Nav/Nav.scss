@@ -1,0 +1,34 @@
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography" as *;
+
+.nav {
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0.5rem;
+  margin: 0.5rem; 
+  &-list {
+    height: 2rem; 
+    list-style: none;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin-left: 0.5rem; 
+      text-decoration: none;
+      cursor: pointer;
+
+      a {
+        text-decoration: none;
+        font-family: $accentFont;
+        font-size: 0.8rem; 
+        color: #333; 
+      }
+    }
+  }
+}

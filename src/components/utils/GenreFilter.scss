@@ -1,0 +1,30 @@
+.genre-filter {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    button {
+      background-color: #faf2d6;
+      background: radial-gradient(circle at center, #f4f3f0, #cfc2a5);
+      border: none;
+      padding: 8px 16px;
+      margin: 0.5rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: #c4d351;
+      }
+    }
+  
+    .active {
+      background-color: #c4d351;
+      color: white;
+  
+      &:hover {
+        background-color: #c4d351; 
+      }
+    }
+  }
+  

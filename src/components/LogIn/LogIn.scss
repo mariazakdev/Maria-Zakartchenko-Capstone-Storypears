@@ -1,0 +1,143 @@
+@use "../../styles/partials/colors" as c;
+@use "../../styles/partials/mixins" as m;
+
+
+.sign-in-profile {
+    width: 18rem;
+    @include m.flex(center, center, column);
+    padding-bottom: 2rem; 
+    @include m.tablet{
+      width: 30rem;
+    }
+    &__heading {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  
+    &__form-wrapper {
+      @include m.flex(center, center, column);
+      
+      &__form {
+        display: flex;
+        flex-direction: column;
+        width:  18rem;
+        @include m.tablet{
+        width:  25rem;
+        }
+        label {
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+  
+        textarea {
+          padding: 10px;
+          margin-bottom: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px; 
+          font-family: inherit;
+          font-size: .9rem;
+          resize: none;
+          ::placeholder {
+            color: #999;
+          }
+           &:focus {
+            outline: none;
+            border: 1px solid darken(#ddd, 5%);
+            box-shadow: inset 0 0 0.5rem darken(#ddd, 5%);
+          }
+        }
+  
+        button {
+          padding: .625rem;
+          margin: 1rem;
+          border: none;
+          border-radius: .25rem;
+          font-weight: bold;
+          color: white;
+          background-color: #c4c3a7;
+          cursor: pointer;
+          transition: background-color 0.5s, color 1s;
+        
+          &:hover,
+          &:focus {
+           @include m.multi-color;
+          }
+        }
+  
+        .form__count{
+          position: relative;
+          &-num{
+            position: absolute;
+            right:.5rem;
+            bottom: -0.5em;
+            font-size: 0.7rem;
+  
+            &--warning{
+              color: lightpink;
+              font-weight: bold;
+            }
+          }
+        }
+  
+        .form__button{
+          margin-top: 1rem;
+        }
+  
+        .input-container {
+          display: flex;
+          align-items: center;
+        }
+       
+        .create-profile__form-field {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 15px;
+  
+          &--error {
+            .input {
+              outline:  rgb(132, 170, 201) 2px solid; // Will change to exact colour later. 
+            }
+          }
+        }
+  
+        .create-profile__label {
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+  
+        .input {
+          padding: 10px;
+          margin-bottom: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-family: inherit;
+          font-size: 0.9rem;
+          resize: none;
+  
+          &--error {
+            outline: rgb(132, 170, 201) 2px solid; // Will change to exact colour later. 
+          }
+  
+          &:focus {
+            outline: none;
+            border: 1px solid darken(#ddd, 5%);
+            box-shadow: inset 0 0 0.5rem darken(#ddd, 5%);
+          }
+        }
+      }
+      
+    }
+    &__sign-up{
+      width: 83%;
+      display: flex;
+      justify-content:space-around;
+        a{
+          text-decoration: none;
+      font-weight: bold;     
+      color: gray;  
+        }
+      }
+  }
+
+
+
