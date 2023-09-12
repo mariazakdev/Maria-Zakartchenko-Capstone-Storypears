@@ -1,7 +1,6 @@
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
 import Pears from '../../assets/icons/Pears.png';
 import './HomePage.scss';
+import { Link } from 'react-router-dom';
 
 function HomePage() {
   return (
@@ -12,16 +11,18 @@ function HomePage() {
         <div className="intro">
           <h1>Welcome to StoryPears!</h1>
           <p >Where your words find their other half <span>or third, or fourth...</span></p>
-          <p className='intro__blurb'> "StoryPears" is a collaborative writing platform where users plant story <span>seeds</span> inspired by prompts or emotions. In the <span>branch</span>, others contribute, growing the narrative. Once fully collaborated upon, the story becomes part of a <span>Pear Tree.</span> </p>
+          <Link to='/login' className="intro__login-btn">Login to Join the Fun!</Link>
+
           <div className="image-container">
+            
           <img src={Pears} alt="Pair of Pears celebrating creativity" />
         </div>
         </div>
         
         <div className="features">
-          <p>Begin with a <strong>story prompt</strong> seed, let it spark your imagination, and watch a narrative sprout.</p>
-          <p>Or perhaps, let an <strong>emotional sentence</strong> inspire a poetic rhythm in your soul.</p>
-          <p>Rally your fellow pears. After all, a story isn't just one-sided. It's multidimensional, just like a pear tree!</p>
+          <p>Begin with a story <strong>SEED </strong> seed, let it spark your imagination, and watch a narrative sprout into a <strong>PEAR BRANCH.</strong></p>
+          <p>A prompt , an emotional sentence to inspire a poetic rhythm, or something on your own in our <strong>GARDEN</strong>.</p>
+          <p>Rally your fellow <strong>PEARS.</strong> After all, a story isn't just one-sided. It's multidimensional, just like a <strong> pear tree!</strong></p>
           <p>Be silly. Be experimental. Be profound. But most importantly, be you and have fun!</p>
         </div>
         <div className="mission">

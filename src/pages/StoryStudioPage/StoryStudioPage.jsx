@@ -1,15 +1,9 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
 import StoryStudio from '../../components/StoryStudio/StoryStudio';
 import { addContribution } from '../../services/storyService';
 
-const user ={
-  id: 63,
-}
-
-function StoryStudioPage() {
+function StoryStudioPage({user}) {
   const location = useLocation();
   const selectedHalfStoryData = location.state?.data;
 

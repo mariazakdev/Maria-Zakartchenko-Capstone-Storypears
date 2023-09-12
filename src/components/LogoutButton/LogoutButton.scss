@@ -1,17 +1,21 @@
+@use "../../styles/partials/mixins" as *;
+
 .logout{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 1rem;
+    @include tablet-plus{
+        margin-right: 1rem;
+    }
     &-avatar-box{
         border-radius: 50%;
         background-color: bisque;
         overflow: hidden;
-        margin-right: 1rem;
         width:40px;
         display: flex;
         justify-content: center;
         align-items: center;
+     
     }
     a{
         text-decoration: none; 

@@ -39,7 +39,51 @@
             font-size: 1rem;
             margin-bottom: 1rem;
             color: #777;
+        }p{
+            margin-top: 0.5rem;
+            background-color: #fff;
+            color: #333;
+            width: 19rem;
+            padding: 1rem;
+            margin: 0.6rem 0;
+            border: 1px solid #ddd;
+            border-radius: 7px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+            transition: box-shadow 0.3s, transform 0.3s;
         }
+        textarea, 
+        input[type="button"] {
+            margin-top: 0.5rem;
+            background-color: #fff;
+            color: #333;
+            width: 19rem;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 7px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+            transition: box-shadow 0.3s, transform 0.3s;
+            font-size: 1rem; 
+
+            &:focus {
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                transform: translateY(-3px);
+                outline: none;
+                border: 1px solid #aaa;
+            }
+        }
+        textarea{
+            height: 18.75rem;
+        }
+        input[type="button"] {
+            cursor: pointer;
+            text-align: center;
+            
+            &:hover {
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                transform: translateY(-3px);
+            }
+        }
+
     }
 
     &-feeling, &-prompt, &__storyInputs {
@@ -48,21 +92,32 @@
         justify-content: center;
         align-items: center;
         margin-bottom: 1.5rem;
-
         label {
-            order: -1;
+            order: -1; 
             margin-bottom: 0.5rem;
         }
-
-        select, input, textarea {
+        textarea {
+            margin-top: 0.5rem;
+            background-color: #fff;
+            color: #333;
             width: 19rem;
             padding: 1rem;
             margin: 0.6rem 0;
             border: 1px solid #ddd;
             border-radius: 7px;
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+        select, input, textarea {
+            margin-top: 0.5rem;
             background-color: #fff;
             color: #333;
+            width: 19rem;
+            padding: 1rem;
+            margin: 0.6rem 0;
+            border: 1px solid #ddd;
+            border-radius: 7px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
             transition: box-shadow 0.3s, transform 0.3s;
 
             &:focus {
@@ -73,11 +128,9 @@
             }
         }
 
-        textarea {
-            height: 40rem;
-            resize: vertical;
-        }
+   
     }
+
 }
 
 .toggle-buttons--toggler {

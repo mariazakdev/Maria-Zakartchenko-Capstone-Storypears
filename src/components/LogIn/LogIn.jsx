@@ -3,10 +3,8 @@ import { useNavigate } from "react-router-dom";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Button from "../Button/Button";
 import "./LogIn.scss";
-import auth from "../../services/authService"
 
-function LogIn() {
-  const navigate = useNavigate();
+function LogIn({ handleLogin }) {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -18,34 +16,6 @@ function LogIn() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
-    const newErrors = {};
-
-    if (!formData.email) {
-      newErrors.email = "Please enter an email";
-    }
-
-    if (!formData.password) {
-      newErrors.password = "Please enter a password";
-    }
-
-    setErrors(newErrors);
-
-    if (Object.keys(newErrors).length === 0) {
-      const result = await auth.login(formData.email, formData.password);
-
-      if (result.success) {
-        console.log("Logged in successfully.");
-        navigate(`/profile`);
-      } else {
-        console.error("Error logging in:", result.error);
-      }
-    } else {
-      console.log("Errors found:", newErrors);
-    }
-  };
-
   return (
     <div className="sign-in-profile">
       <section className="sign-in-profile__heading">
@@ -55,9 +25,7 @@ function LogIn() {
       <section className="sign-in-profile__form-wrapper">
         <form
           className="sign-in-profile__form-wrapper__form"
-          method="post"
-          action=""
-          onSubmit={handleLogin}
+          onSubmit={(event) => handleLogin(event, formData)}
           noValidate
         >
           {/* Email */}

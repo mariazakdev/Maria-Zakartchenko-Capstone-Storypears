@@ -28,7 +28,6 @@ function StoryPage() {
 
 return(  
         <div>
-            <h1>STORY PAGE</h1>
             <StoryReader storyData={storyData} users={users} />
         </div>
     );

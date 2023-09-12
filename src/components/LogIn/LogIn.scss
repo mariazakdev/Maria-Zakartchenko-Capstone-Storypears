@@ -3,6 +3,7 @@
 
 
 .sign-in-profile {
+  margin-top: 1rem;
     width: 18rem;
     @include m.flex(center, center, column);
     padding-bottom: 2rem; 

@@ -102,7 +102,6 @@ function StoryStudio({ user, storyBranch, addContribution, createStoryTree }) {
             value={userContribution}
             onChange={handleStoryChange}
           />
-          <input type="button" value="Save" onClick={saveToSessionStorage} />
           <input type="button" value="Add" onClick={addToHalfStory} disabled={!isStoryValid(userContribution)} />
           <input type="button" value="Complete" onClick={finishStory} disabled={!isStoryValid(userContribution)} />
         </form>

@@ -1,4 +1,7 @@
 .emotions-filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
     button {
       background-color: #faf2d6;
       background: radial-gradient(circle at center, #f4f3f0, #cfc2a5);
@@ -23,4 +26,11 @@
       }
     }
   }
-  
+  @media (max-width: 320px) {
+    .emotions-filter {
+      button {
+        padding: 8px 8px; 
+        font-size: 0.8rem; 
+      }
+    }
+  }

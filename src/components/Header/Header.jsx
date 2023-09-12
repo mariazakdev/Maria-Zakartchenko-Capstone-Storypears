@@ -2,7 +2,6 @@ import "./Header.scss"
 import Logo from '../Logo/Logo';
 import Nav from '../Nav/Nav';
 import { useNavigate } from 'react-router-dom';
-import LogoutButton from "../LogoutButton/LogoutButton";
 
 function Header({ user, setUser }) {
     const navigate = useNavigate();
@@ -18,7 +17,7 @@ function Header({ user, setUser }) {
             </div>
             
             <Nav user={user} setUser={setUser} className="header__nav" />
-            {/* <LogoutButton className="header__logout"/> */}
+            
         </div>
     );
 };

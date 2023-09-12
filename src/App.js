@@ -1,5 +1,8 @@
 import "./App.scss";
-import React from "react";
+import Cookies from 'js-cookie';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import StoryListPage from "./pages/StoryListPage/StoryListPage";
 import StoryPromptPage from "./pages/StoryPromptPage/StoryPromptPage";
@@ -17,8 +20,9 @@ import StoryPage from "./pages/StoryPage/StoryPage";
 import { AuthProvider } from "./context/AuthProvider";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-
+import authService from "./services/authService"; 
 function App() {
+ 
 
   return (
     <main className="App">
@@ -32,15 +36,15 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/story/prompt" element={<StoryPromptPage />} />
-            <Route path="/story/studio/:id" element={<StoryStudioPage />} />
-            <Route path="/story/new/:id" element={<StoryCreatorPage />} />
-            <Route path="/story/new" element={<StoryCreatorPage />} />
+            <Route path="/story/studio/:id" element={<StoryStudioPage user={authService.user} />} />
+            <Route path="/story/new/:id" element={<StoryCreatorPage user={authService.user}/>} />
+            <Route path="/story/new" element={<StoryCreatorPage user={authService.user} />} />
             <Route path="/storytrees" element={<StoryListPage />} />
             <Route path="/storytrees/:id" element={<StoryPage />} />
             <Route path="/storybranches" element={<StoryDepotPage />} />
             <Route path="/writers" element={<WriterListPage />} />
             <Route path="/writers/:username" element={<WriterProfilePage />} />
-            <Route path="/profile" element={<MyProfilePage />} />
+            <Route path="/profile" element={<MyProfilePage user={authService.user}/>} />
           </Routes>
           <Footer  />
         </Router>

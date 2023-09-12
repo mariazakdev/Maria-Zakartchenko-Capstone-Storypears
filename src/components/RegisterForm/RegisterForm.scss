@@ -16,7 +16,10 @@
       display: flex;
       flex-direction: column;
       width: 400px;
-
+      label[for="bio"], 
+      label[for="pen_last_name"] {
+        text-align: left;
+      }
       label {
         font-weight: bold;
         margin-bottom: 5px;
@@ -26,7 +29,7 @@
       input[type="password"],
       input[type="email"],
      textarea {
-        width: 100%; /* Match the width of other inputs */
+        width: 100%; 
         padding: 10px;
         margin-bottom: 10px;
         border: 1px solid #ccc;
@@ -106,7 +109,7 @@
 
         &--error {
           .input {
-            outline: rgb(132, 170, 201) 2px solid; // Will change to exact colour later.
+            outline: rgb(132, 170, 201) 2px solid; 
           }
         }
       }
@@ -126,7 +129,7 @@
         resize: none;
 
         &--error {
-          outline: rgb(132, 170, 201) 2px solid; // Will change to exact colour later.
+          outline: rgb(132, 170, 201) 2px solid; 
         }
 
         &:focus {

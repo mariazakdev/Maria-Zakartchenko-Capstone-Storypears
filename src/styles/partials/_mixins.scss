@@ -13,7 +13,7 @@
 }
 
 @mixin mobile {
-  @media (max-width: 16.6875rem) {
+  @media (max-width: 20rem) {
     @content;
   }
 }
@@ -27,7 +27,12 @@
     @content;
   }
 }
-
+// Responsive size for navbar 
+@mixin navSize {
+  @media (max-width: 33.125rem) {
+    @content;
+  }
+}
 @mixin flex($justify-content, $align-items, $flex-direction) {
   display: flex;
   justify-content: $justify-content;

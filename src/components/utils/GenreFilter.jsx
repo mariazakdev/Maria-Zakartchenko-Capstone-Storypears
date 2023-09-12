@@ -14,17 +14,19 @@ function GenreFilter({ genres = [], onGenreSelect = () => {} }) {
         }}>
         All Genres
       </button>
-      {genres.map(genre => (
-        <button 
-          key={genre} 
-          className={activeGenre === genre ? "active" : ""}
-          onClick={() => {
-            setActiveGenre(genre);
-            onGenreSelect(genre);
-          }}>
-          {genre}
-        </button>
-      ))}
+      {genres
+        .filter(genre => typeof genre === 'string' && genre.trim() !== '') 
+        .map(genre => (
+          <button 
+            key={genre} 
+            className={activeGenre === genre ? "active" : ""}
+            onClick={() => {
+              setActiveGenre(genre);
+              onGenreSelect(genre);
+            }}>
+            {genre}
+          </button>
+        ))}
     </div>
   );
 }

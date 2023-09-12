@@ -3,17 +3,38 @@
 @use "../../styles/partials/mixins" as *;
 @import 'animate.css';
 .site {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
       font-family: 'open', sans-serif;
   &__content {
     text-align: center;
 
     .intro {
-      font-size: 2rem;
+   
+      font-size: 1rem;
       color: #2c3e50;
       margin-bottom: 0;
-      padding-bottom: 0;
+      padding-bottom: 0; 
+      &__login-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin-top: 20px;
+      background-color: #81786f; 
+      color: white;
+      border-radius: 25px;
+      text-align: center;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    
+      &:hover {
+        background-color: #b3a292; 
+        text-decoration: none;
+        color: white;
+      }
     }
-
+    }
+   
     .features {
       display: flex;
       flex-direction: column;

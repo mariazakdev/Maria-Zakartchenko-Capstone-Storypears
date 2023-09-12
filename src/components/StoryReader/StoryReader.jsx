@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import NavStoryReader from "../NavStoryReader/NavStoryReader";
 import "./StoryReader.scss";
 
 function StoryReader({ storyData = {}, users = [] }) {
