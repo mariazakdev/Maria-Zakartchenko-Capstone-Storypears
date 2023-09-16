@@ -10,7 +10,7 @@ function HomePage() {
       <section className='site__content'>
       <div className="intro">
     <h1>Welcome to StoryPears!</h1>
-    <p >Stuck in a narrative rut? Begin with an inspiring seed, invite the community's creativity to branch out, and watch your stories grow into mesmerizing trees. <span>Break free from writer's block today!</span></p>
+    <p >Stuck in a narrative rut? Begin with an inspiring seed, invite the community's creativity to branch out, and watch your stories grow into mesmerizing trees. <span>No more writer's block!</span></p>
     <Link to='/login' className="intro__login-btn">Start Your Creative Journey!</Link>
 
     <div className="image-container">
