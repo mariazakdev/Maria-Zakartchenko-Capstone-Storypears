@@ -5,37 +5,41 @@ import { Link } from 'react-router-dom';
 function HomePage() {
   return (
     <>
-      <div className='site'>
+    <div className='site'>
+     
+      <section className='site__content'>
+      <div className="intro">
+    <h1>Welcome to StoryPears!</h1>
+    <p >Stuck in a narrative rut? Begin with an inspiring seed, invite the community's creativity to branch out, and watch your stories grow into mesmerizing trees. <span>Break free from writer's block today!</span></p>
+    <Link to='/login' className="intro__login-btn">Start Your Creative Journey!</Link>
 
-        <section className='site__content'>
-          <div className="intro">
-            <h1>Welcome to StoryPears!</h1>
-            <p>Where stories start with an inspiring seed, branch out with community creativity, and grow into captivating trees. <span>Ready to contribute?</span></p>
-            <Link to='/login' className="intro__login-btn">Login to Begin!</Link>
-
-            <div className="image-container">
-              <img src={Pears} alt="Pair of Pears representing collective creativity" />
-            </div>
-          </div>
-          
-          <div className="features">
-            <p>A <strong>SEED</strong> is a story starter, a hint of inspiration. From a single sentence to a poetic rhythm, it’s the beginning of something wonderful.</p>
-            <p>With your story <strong>SEED</strong> planted, invite others to nurture it. As they contribute, it becomes a <strong>BRANCH</strong>, expanding in exciting, unexpected ways.</p>
-            <p>Once your story has been shaped and contributed to by the community, it stands tall as a complete <strong>TREE</strong>. Every tree in our forest is a testament to collective creativity.</p>
-            <p>Experiment, play around, dive deep, or be whimsical. Let your unique voice shine and have fun collaborating!</p>
-          </div>
-          <div className="mission">
-            <h2>Our Prime Directive:</h2>
-            <p>A story here isn't solitary. It thrives on collaboration. Partner up, or as we like to say... find your pear! Together, let's weave tales that are larger than life.</p>
-          </div>
-          <div className="philosophy">
-            <p>At StoryPears, we champion the potential of every idea. Through collaboration, these seeds of imagination grow into vast forests, where each tree embodies shared creativity. Ready to branch out with us?</p>
-          </div>
+    <div className="image-container">
+        <img src={Pears} alt="Pair of Pears symbolizing collaborative creativity" />
+    </div>
+</div>
         
-        </section>
 
-      </div>
-    </>
+<div className="features">
+    <p>A <strong>SEED</strong> is more than just a story starter. It's your way out of a writing slump. From a single evocative sentence to a poetic rhythm, embark on a fresh narrative adventure.</p>
+    <p>Plant your story <strong>SEED</strong> and watch as fellow writers nurture and expand upon it. Witness its transformation into a vibrant <strong>BRANCH</strong>, growing in thrilling and unpredictable directions.</p>
+    <p>When the community's collective creativity shapes your story, it flourishes as a majestic <strong>TREE</strong>. Each tree in our forest stands as a beacon against writer's block.</p>
+    <p>Whether you wish to experiment, dive into profound depths, or simply enjoy the whimsy of storytelling, let your voice echo and revel in the collaborative spirit!</p>
+</div>
+
+
+<div className="mission">
+    <h2>Never Alone Here</h2>
+    <p>Every writer has a story waiting to be told. StoryPears is your haven against writer's block. Collaborate, pair up, or as we playfully say... find your pear! Together, let's craft tales that resonate.</p>
+</div>
+
+<div className="philosophy">
+    <p>StoryPears isn't just about storytelling; it's a refuge for stalled imaginations. Here, every seed of thought is valued, and through united effort, we grow dense forests of creativity. Eager to reclaim your narrative prowess? Branch out with us!</p>
+</div>
+      
+      </section>
+      
+    </div>
+     </>
   );
 }
 
