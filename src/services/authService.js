@@ -1,7 +1,6 @@
 
+// Was unable to complete auth logic. Will return in the future to work on it. Hardcoded user is temporary.
 const user={
-  
-    
         id: 61,
         email: "jon@email.com",
         first_name: "Jon",
