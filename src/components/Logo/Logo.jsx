@@ -9,7 +9,7 @@ function Logo() {
                 src={PearsLogo}
                 alt="Pears logo"
             />
-            <span className="logo__text">Story Pears</span> {/* Added this line */}
+            <span className="logo__text">Story Pears</span> 
         </div>
     );
 }

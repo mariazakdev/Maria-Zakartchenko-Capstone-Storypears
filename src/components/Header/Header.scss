@@ -21,8 +21,13 @@
   }
 
   &__nav {
-    flex: 2;
+    // flex: 2;
     text-align: center;
+    @include navSize{
+      display: flex;
+      flex-direction: column-reverse;
+      position: absolute;
+    }
   }
 
   &__logout {
@@ -33,7 +38,6 @@
   }
 
   @include tablet-plus {
-    height: 7rem;
     &__logout {
       padding-right: 3rem;
     }

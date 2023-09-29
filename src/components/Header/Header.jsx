@@ -4,12 +4,15 @@ import Nav from '../Nav/Nav';
 import { useNavigate } from 'react-router-dom';
 
 function Header({ user, setUser }) {
+
     const navigate = useNavigate();
 
     const handleHome = () => {
         navigate('/');
     };
-
+  
+ 
+    
     return (
         <div className="header">
             <div className="header__logo-container" onClick={handleHome}>

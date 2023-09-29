@@ -1,33 +1,25 @@
-import "./Nav.scss";
+import "./NavFooter.scss";
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import LogoutButton from "../LogoutButton/LogoutButton";
-import LoginButton from "../LoginButton/LoginButton";
+import { ReactComponent as CloseIcon } from "../../assets/icons/icons8-close.svg";
 
 const Nav = () => {
 
+
   return (
-    <nav className="nav">
-    <ul className="nav-list">
-
+    <nav>
+        <div className="nav-footer">
+        <ul className="nav-footer-list">
+          <li><Link to="/story/prompt">SEEDS</Link></li>
+          <li><Link to="/storybranches">BRANCHES</Link></li>
+          <li><Link to="/storytrees">TREES</Link></li>
+          <li><Link to="/story/new">GARDEN</Link></li>
+          <li><Link to="/writers">WRITERS</Link></li>
      
-
-        <li>
-          <Link to="/storytree">All Stories</Link>
-        </li>
-        <li>
-          <Link to="/stories/depot">Depot</Link>
-        </li>
-        <li>
-          <Link to="/writers">Writers</Link>
-        </li>
-      
-      
-    </ul>
-    <div className="nav-user">
-       <LogoutButton /> 
-       {/* <LoginButton /> */}
-    </div>
-  </nav>
+        </ul>
+      </div>
+    </nav>
   );
 };
 

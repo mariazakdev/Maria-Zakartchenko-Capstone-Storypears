@@ -1,0 +1,59 @@
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography" as *;
+
+.nav-footer {  
+    height: auto; // Change this to auto
+    display: flex;
+    justify-content: center; // To center the content on larger screens
+    align-items: center;
+    padding: 1rem;
+  
+    &-list {
+      list-style: none;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      padding: 0;
+      gap: 1rem; // Added for spacing between list items
+  
+      @include tablet-smaller {
+        flex-direction: column; // Change to column for smaller screens
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        gap: 0.5rem; // Adjust spacing between list items
+      }
+  
+      li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 3rem;
+        margin: 0; // Reset margin to 0
+        text-decoration: none;
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        background: lighten($color: #cfc2a5, $amount: 10%);
+        border-radius: 4px;
+        transition: background-color 0.3s;
+  
+        &:hover {
+          background: darken($color: #cfc2a5, $amount: 5%);
+        }
+  
+        a {
+          text-decoration: none;
+          height: auto;
+          font-family: $accentFont;
+          font-size: 0.8rem;
+          color: #333;
+          transition: color 0.3s;
+  
+          &:hover {
+            color: darken($color: #333, $amount: 10%);
+          }
+        }
+      }
+    }
+  }

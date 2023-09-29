@@ -1,20 +1,39 @@
 import "./Nav.scss";
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import LogoutButton from "../LogoutButton/LogoutButton";
+import { ReactComponent as CloseIcon } from "../../assets/icons/icons8-close.svg";
 
 const Nav = () => {
+  const [isActive, setIsActive] = useState(false);
+
+  const toggleMenu = () => {
+    setIsActive(!isActive);
+  }
+  const closeMenu = () => {
+    setIsActive(false);
+  }
+
   return (
     <nav>
-      <div className="nav" id="myTopnav">
-        <ul className="nav-list">
-          <li><Link to="/story/prompt">Seeds</Link></li>
-           <li><Link to="/storybranches">Branches</Link></li>
-          <li><Link to="/storytrees">Trees</Link></li>
-          <li><Link to="/writers">Pears</Link></li>
-          <li><Link to="/story/new">Garden</Link></li>
-          <li><LogoutButton className="header__logout"/></li>
-         
+        <div className="nav" id="myTopnav">
+        <div className="hamburger" onClick={toggleMenu}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <ul className={`nav-list ${isActive ? 'active' : ''}`}>
+          <li onClick={closeMenu}><Link to="/story/prompt">SEEDS</Link></li>
+          <li onClick={closeMenu}><Link to="/storybranches">BRANCHES</Link></li>
+          <li onClick={closeMenu}><Link to="/storytrees">TREES</Link></li>
+          <li onClick={closeMenu}><Link to="/story/new">GARDEN</Link></li>
+
+          <li onClick={closeMenu}><Link to="/writers">WRITERS</Link></li>
+          <div className="nav-list__close">
+            <div onClick={closeMenu}><LogoutButton className="logout nav-list__close__logout"/></div>
+            <CloseIcon className="nav-list__close__icon" onClick={toggleMenu} />
+          </div>
         </ul>
       </div>
     </nav>

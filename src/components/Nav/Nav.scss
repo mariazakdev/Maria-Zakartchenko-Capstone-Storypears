@@ -2,56 +2,142 @@
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/typography" as *;
 
-.nav {
+.nav {  
   height: 2rem;
+  position: relative;
   display: flex;
-  align-items: center;
   margin: 0;
-  @include navSize{
+
+  @include mobile {
     padding-left: 1rem;
   }
+
   &-list {
-    height: 2rem; 
     list-style: none;
     font-weight: bold;
     display: flex;
     align-items: center;
     padding: 0;
     margin-right: 1rem;
-  
-  @include navSize{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
 
+    @include tablet-smaller {
+      z-index: 2;
+      display: flex;
+      flex-direction: column-reverse;
+      justify-content: center;
+      align-items: flex-start;
+      width: 100%;
+      height: 100vh;         
+      transform: translateX(110%); 
+      position: fixed;
+      top: 0;
+      right: 0;
+      background-color: #cfc2a5;        
+      transition: transform 0.3s; 
+    }
 
+    &.active {
+      transform: translateX(0%);
+      width: 100%;
+      margin-right: 0;
+      margin-top: 0;
+
+      @include desktop {
+        display: none;
       }
+    }
+
     li {
-      margin-left: 0.5rem; 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 3rem;
+      margin-left: 0.5rem;
       text-decoration: none;
       cursor: pointer;
       margin-bottom: 0.5rem;
-    
+      padding: 0.5rem 1rem;
+      background: lighten($color: #cfc2a5, $amount: 10%);
+      border-radius: 4px;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background: darken($color: #cfc2a5, $amount: 5%);
+      }
+
+      @include tablet-smaller {
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+        text-align: center;
+      }
+
       a {
         text-decoration: none;
+        height: auto;
         font-family: $accentFont;
-        font-size: 0.8rem; 
-        color: #333; 
-        @include navSize{
-        padding-left: 0;
-        background-color: #cfc2a5;
-        border-radius: 100%;
+        font-size: 0.8rem;
+        color: #333;
+        transition: color 0.3s;
 
+        &:hover {
+          color: darken($color: #333, $amount: 10%);
         }
-        @include tablet-plus{
-          font-size: 1rem; 
-          margin-left: 1rem;
-          display: flex;
-         
 
+        @include tablet-smaller {
+          padding-left: 0;
+          font-size: 2rem;
+          font-weight: 400;
+          text-align: center;
         }
       }
+    }
+
+    &__close {
+      &__icon {
+        display: none;
+        position: absolute;
+        top: 0.5rem;
+        right: 1rem;
+        cursor: pointer;
+      }
+      &__logout{
+        margin-left: 1rem;
+        margin-bottom: 0.5rem;
+      }
+      @include tablet-smaller {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 100%;
+        position: relative;
+        &__icon {
+          position: absolute;
+          top: 0.5rem;
+          right: 1rem;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .hamburger {
+    display: none;
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    cursor: pointer;
+
+    @include tablet-smaller {
+      display: block;
+    }
+
+    span {
+      display: block;
+      background: #333;
+      height: 2px;
+      width: 25px;
+      margin: 4px 0;
     }
   }
 }
