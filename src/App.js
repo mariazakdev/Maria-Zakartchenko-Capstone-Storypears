@@ -1,7 +1,5 @@
-import "./App.scss";
-import Cookies from 'js-cookie';
+import './App.scss';
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import StoryListPage from "./pages/StoryListPage/StoryListPage";
@@ -21,14 +19,18 @@ import { AuthProvider } from "./context/AuthProvider";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import authService from "./services/authService"; 
-function App() {
- 
+import { SensoryModeProvider, useSensoryMode } from "./context/SensoryModeContext";
 
+
+
+function App() {
   return (
-    <main className="App">
+    <main className="app">
       <AuthProvider>
+      <SensoryModeProvider>
         <Router>
           <Header  />
+          <div className='app-site'>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/home" element={<HomePage />} />
@@ -46,8 +48,10 @@ function App() {
             <Route path="/writers/:username" element={<WriterProfilePage />} />
             <Route path="/profile" element={<MyProfilePage user={authService.user}/>} />
           </Routes>
-          <Footer  />
+          </div>
+          <Footer className="app__footer" />
         </Router>
+        </SensoryModeProvider>
       </AuthProvider>
     </main>
   );

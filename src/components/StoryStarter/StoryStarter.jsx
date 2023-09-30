@@ -61,13 +61,15 @@ function StoryStarter({ prompts, feelings, fetchPrompts, fetchFeelings }) {
   return (
     <div className="story-starter">
       <section className="story-starter__heading">
-        <h2>Seed the pears...</h2>
+        <h3>Seed the pears</h3>
         <p>
           Plant your seed on a story prompt you like, wait for someone to join.
           Together a story pear will grow
         </p>
       </section>
       <section className="story-starter__container">
+      <p>Click prompts or emotions to get started</p>
+
         <div className="story-starter__container--toggler">
           <button onClick={() => setActiveContent("prompts")}>
             Show Prompts
@@ -81,13 +83,12 @@ function StoryStarter({ prompts, feelings, fetchPrompts, fetchFeelings }) {
           {activeContent === "prompts" && (
             <div>
               <div className="story-starter-form">
-                <label>Add a sentence prompt to help start a story:</label>
                 <textarea 
                   value={newPrompt}
                   onChange={(e) => setNewPrompt(e.target.value)}
                   placeholder="Add your own prompt..."
                 />
-                <button onClick={() => handleAdd('prompt')}>Add Prompt</button>
+                <button onClick={() => handleAdd('prompt')}>Add Your Prompt</button>
               </div>
 
               <h3>Prompts:</h3>
@@ -103,13 +104,12 @@ function StoryStarter({ prompts, feelings, fetchPrompts, fetchFeelings }) {
           {activeContent === "feelings" && (
             <div>
               <div className="story-starter-form">
-                <label>Add a feeling to help start a poem or prose:</label>
                 <textarea 
                   value={newFeeling}
                   onChange={(e) => setNewFeeling(e.target.value)}
                   placeholder="Add your own feeling..."
                 />
-                <button onClick={() => handleAdd('feeling')}>Add Feeling</button>
+                <button onClick={() => handleAdd('feeling')}>Add Your Feeling</button>
               </div>
 
               <h3>Feelings:</h3>

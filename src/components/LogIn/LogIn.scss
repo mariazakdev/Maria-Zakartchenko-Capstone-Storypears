@@ -3,11 +3,18 @@
 
 
 .sign-in-profile {
-  margin-top: 1rem;
+    margin-top: 1rem;
     width: 18rem;
+ 
+    h4{
+      font-size: 1rem;
+    }
+    h3{
+      font-size: 1.5rem;
+    }
     @include m.flex(center, center, column);
     padding-bottom: 2rem; 
-    @include m.tablet{
+    @include m.tablet-plus{
       width: 30rem;
     }
     &__heading {
@@ -22,12 +29,13 @@
         display: flex;
         flex-direction: column;
         width:  18rem;
-        @include m.tablet{
+        @include m.tablet-plus{
         width:  25rem;
         }
         label {
           font-weight: bold;
           margin-bottom: 5px;
+          font-size: 1rem;
         }
   
         textarea {

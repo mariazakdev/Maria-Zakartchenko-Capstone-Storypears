@@ -117,9 +117,6 @@ function RegisterForm() {
 
   return (
     <div className="create-profile">
-      <section className="create-profile__heading">
-        <h3>Create your writer profile</h3>
-      </section>
 
       <section className="create-profile__form-wrapper">
         <form

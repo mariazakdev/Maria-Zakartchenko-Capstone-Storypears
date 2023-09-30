@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import LogoutButton from "../LogoutButton/LogoutButton";
 import { ReactComponent as CloseIcon } from "../../assets/icons/icons8-close.svg";
+import { ReactComponent as HamburgerIcon } from "../../assets/icons/icons8-menu.svg";
+
 
 const Nav = () => {
   const [isActive, setIsActive] = useState(false);
@@ -18,9 +20,7 @@ const Nav = () => {
     <nav>
         <div className="nav" id="myTopnav">
         <div className="hamburger" onClick={toggleMenu}>
-          <span></span>
-          <span></span>
-          <span></span>
+          <HamburgerIcon/>
         </div>
 
         <ul className={`nav-list ${isActive ? 'active' : ''}`}>

@@ -9,7 +9,7 @@ function RegisterPage() {
   return (
     <div className="site">
       <section className='site__content'>
-      <h1>Welcome to Story Pears</h1>
+      <h4>Create your writer profile</h4>
           <RegisterForm />
         </section>
     

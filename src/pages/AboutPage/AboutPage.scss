@@ -1,3 +1,5 @@
+@use "../../styles/partials/colors" as *;
+
 .site {
     display: flex;
     flex-direction: column;
@@ -10,8 +12,10 @@
         align-items: center;
         margin: 1rem;
         padding: 1rem;
-        border-radius: .25rem;
-        background-color: #f7f7f7; 
+        border-radius: .35rem;
+        // background-color: $secondaryBackground; 
+
+        border: none;
 
         .intro {
             text-align: center;

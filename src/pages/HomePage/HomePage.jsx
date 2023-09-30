@@ -3,6 +3,7 @@ import './HomePage.scss';
 import { Link } from 'react-router-dom';
 
 function HomePage() {
+ 
   return (
     <>
     <div className='site'>
@@ -10,7 +11,9 @@ function HomePage() {
       <section className='site__content'>
       <div className="intro">
     <h1>Welcome to StoryPears!</h1>
-    <p >Stuck in a narrative rut? Begin with an inspiring seed, invite the community's creativity to branch out, and watch your stories grow into mesmerizing trees. <span>No more writer's block!</span></p>
+    <div></div>
+    <p >Your solution to writer's block. </p>
+    <p>Join our unpredictable collaborative writing app. Here we write in pears...or pairs</p>
     <Link to='/login' className="intro__login-btn">Start Your Creative Journey!</Link>
 
     <div className="image-container">
@@ -20,9 +23,9 @@ function HomePage() {
         
 
 <div className="features">
-    <p>A <strong>SEED</strong> is more than just a story starter. It's your way out of a writing slump. From a single evocative sentence to a poetic rhythm, embark on a fresh narrative adventure.</p>
+    <p>How does it work? Use a <strong>SEED</strong> to start your writing. It can be a story prompt, or an emotional statement for a poem of prose. Then save it and wait for someone to add to it.</p>
     <p>Plant your story <strong>SEED</strong> and watch as fellow writers nurture and expand upon it. Witness its transformation into a vibrant <strong>BRANCH</strong>, growing in thrilling and unpredictable directions.</p>
-    <p>When the community's collective creativity shapes your story, it flourishes as a majestic <strong>TREE</strong>. Each tree in our forest stands as a beacon against writer's block.</p>
+    <p>When the community's collective creativity shapes your story, it flourishes into a fun story <strong>TREE</strong>. Each tree in our forest stands as a beacon against writer's block.</p>
     <p>Whether you wish to experiment, dive into profound depths, or simply enjoy the whimsy of storytelling, let your voice echo and revel in the collaborative spirit!</p>
 </div>
 

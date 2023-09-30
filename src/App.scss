@@ -1,12 +1,27 @@
 @use "../src/styles/partials/typography" as *;
 @use "../src/styles/partials/colors" as *;
-@use "../src/styles/partials/mixins" as *;
+@use "../src/styles/partials/mixins" as m;
 
 
 body {
   font-family: 'open', sans-serif;   
   margin:0;
   padding: 0;
-  background-color:$primaryBackground ;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  // background-color:$primaryBackground ;
+  
+}
+.app{
+  background-color:$secondaryBackground ;
+  @include m.color-site-background2;
+
+  &__site{
+      height: 100vh;
+  }
+  &__footer{
+    margin-top: auto
+  }
 }
 
