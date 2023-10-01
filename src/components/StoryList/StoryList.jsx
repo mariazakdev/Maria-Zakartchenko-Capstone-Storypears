@@ -53,7 +53,7 @@ function StoryList({ fullStories = [] }) {
       <ShuffleArray items={filteredStories}>
         {shuffledStories => (
           <section className="story-list__stories">
-            <h3>Help these story branches become trees:</h3>
+            <h3>Completed Pear Trees</h3>
             <ul className="story-list__items">
               {shuffledStories.map(story => (
                 <li key={story.id} className="story-list__item">

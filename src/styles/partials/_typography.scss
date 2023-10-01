@@ -72,3 +72,9 @@
 }
 
 $accentFont : cursive;
+@font-face {
+  font-family: 'book';
+  font-style: bold;
+  font-weight: 700; 
+  src: url('../../assets/fonts/UnifrankturCook/UnifrakturCook-Bold.ttf') format('truetype');
+}

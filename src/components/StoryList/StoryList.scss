@@ -1,5 +1,5 @@
 @use "../../styles/partials/typography" as t;
-@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/mixins" as m;
 
 .story-list {
   display: flex;
@@ -19,6 +19,7 @@
     li {
       font-family: inherit;
       cursor: pointer;
+      margin-bottom: 5px;
     }
     h3 {
       font-size: 20px;
@@ -28,12 +29,20 @@
     p {
       color: #888;
     }
+    h4{
+      margin: 0;
+    }
     p {
       font-size: 0.9rem;
     }
     ul {
       list-style: none;
       padding-left: 0;
+      @include m.tablet-plus{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
     }
 
     li {
@@ -48,7 +57,10 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
       transition: transform 0.3s ease, box-shadow 0.5s ease;
       position: relative;
-
+      background-image: url("../../assets/images/brown_ice_by_darkwood67.jpg");
+      background-position: center;
+      text-align: center;
+      text-justify: inter-word;
       &:hover {
         transform: translateY(-4px);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
@@ -70,14 +82,14 @@
     color: inherit;
     display: block;
     width: 100%;
-    height: 100%;
+    height: auto;
     display: flex;
     flex-direction: column;
     
   }
   &__title {
     font-size: 24px;
-    margin-bottom: 5px;
+    margin:0px;
     color: black;
     text-decoration: none;
     &:hover,
@@ -88,6 +100,7 @@
     }
     &::first-letter {
       font-size: 40px;
+      font-family: 'book';
     }
   }
 
