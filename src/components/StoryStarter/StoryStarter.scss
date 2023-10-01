@@ -8,6 +8,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  
 
   &-form {
     display: flex;
@@ -95,7 +96,6 @@
       margin-bottom: 20px;
 
       button {
-        background-color: #faf2d6;
         background-color: c.$innerAccentColor;
         font-family: 'exo',sans-serif ;
         font-weight: 560;
@@ -110,7 +110,7 @@
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
         &:hover {
-          background-color: c.$outerAccentcolor;
+          background-color: c.$outerAccentColor;
         }
       }
     }

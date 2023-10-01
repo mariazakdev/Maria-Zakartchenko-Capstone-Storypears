@@ -26,9 +26,10 @@ function StoryDepotPage() {
   };
 
   return (
-    <div>
+    <div className='site'>
+      <div className='site__content'>
       <StoryDepot branchStories={branchStories} handleItemClick={handleItemClick} />
-    </div>
+    </div></div>
   );
 }
 

@@ -57,8 +57,9 @@ function StoryDepot({ branchStories = [] }) {
             className="story-depot__emotion-filter"
           />
           <section className="story-depot__stories">
-            <div>
-              <h3>Help these story branches become trees:</h3>
+            <div className="story-depot__stories--content">
+              <h3>Help these story branches become trees.</h3>
+              <p className="story-depot__stories--description"> Choose one and add to it. Then you can return it here for more to join or complete the story.</p>
               <ul>
                 {shuffledStories.map((story) => (
                   <li key={story.id} onClick={() => navigateToStudio(story)}>

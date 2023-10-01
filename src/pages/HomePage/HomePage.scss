@@ -2,12 +2,14 @@
 @use "../../styles/partials/colors" as *;
 @use "../../styles/partials/mixins" as *;
 @import 'animate.css';
-.site {
-  margin-top: 1rem;
+.site-homepage {
   margin-bottom: 1rem;
   font-family: 'open', sans-serif;
+  @include color-site-background2;
+
   &__content {
     text-align: center;
+    padding-top: 2rem;
     .intro {
       display: flex;
       justify-content: center;

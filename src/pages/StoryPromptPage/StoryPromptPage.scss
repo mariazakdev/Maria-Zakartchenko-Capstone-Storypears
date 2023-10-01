@@ -1,3 +1,6 @@
+@use "../../styles/partials/colors" as c;
+@use "../../styles/partials/mixins" as m;
+
 .site{
     &__content{
         display: flex;
@@ -7,6 +10,7 @@
         margin: 1rem;
         border-radius: .25rem;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        background-color: c.$secondaryBackground;
 
     }
 }

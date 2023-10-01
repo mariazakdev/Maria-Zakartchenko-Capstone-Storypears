@@ -6,9 +6,9 @@ function HomePage() {
  
   return (
     <>
-    <div className='site'>
+    <div className='site-homepage'>
      
-      <section className='site__content'>
+      <section className='site-homepage__content'>
       <div className="intro">
     <h1>Welcome to StoryPears!</h1>
     <div></div>

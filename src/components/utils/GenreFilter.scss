@@ -1,32 +1,39 @@
-.genre-filter {
-  margin-top: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 18.75rem;
+@use "../../styles/partials/typography" as t;
+@use "../../styles/partials/colors" as c;
+@use "../../styles/partials/mixins" as m;
 
+.genre-filter {
+  display: flex;
+  flex-wrap: wrap;  
+  justify-content: center;  
+  align-items: center;  
+  margin-top: 2rem;
     button {
-      background-color: #faf2d6;
-      background: radial-gradient(circle at center, #f4f3f0, #cfc2a5);
+      background-color: c.$innerAccentColor;
+      font-family: 'exo',sans-serif ;
+      font-weight: 560;
       border: none;
       padding: 8px 16px;
       margin: 0.5rem;
       border-radius: 3px;
       cursor: pointer;
+      width: 5.75rem;
+      height: 3.125rem;
       transition: background-color 0.3s ease;
-  
+      @include m.mobile{
+         padding: 8px 8px; 
+        font-size: 0.8rem; 
+      }
       &:hover {
-        background-color: #c4d351;
+        background-color: c.$outerAccentColor;
       }
     }
   
     .active {
-      background-color: #c4d351;
-      color: white;
+      background-color: c.$outerAccentColor;
   
       &:hover {
-        background-color: #c4d351; 
+        background-color: c.$outerAccentColor;
       }
     }
   }
-  

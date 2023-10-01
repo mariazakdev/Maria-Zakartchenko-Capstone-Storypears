@@ -1,8 +1,7 @@
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
 import StoryStarter from "../../components/StoryStarter/StoryStarter";
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import "./StoryPromptPage.scss";
 
 function StoryPromptPage() {
   const [prompts, setPrompts] = useState([]);
